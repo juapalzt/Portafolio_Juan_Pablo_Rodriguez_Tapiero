@@ -1,0 +1,235 @@
+/* Tipografía y Reset de Estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #000; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+    line-height: 1.6;
+  }
+  
+  /* Contenedor General */
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+  
+  /* Navegación */
+  header {
+    background-color: #111; /* Fondo de la navegación */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo a {
+    color: #1E90FF; /* Azul para el logo */
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+  }
+  
+  .nav-links li {
+    margin-left: 20px;
+  }
+  
+  .nav-links a {
+    color: #1E90FF; /* Azul para los enlaces */
+    text-decoration: none;
+    font-size: 1em;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #00BFFF; /* Cambio de color al pasar el cursor */
+  }
+  
+  /* Sección Home */
+  .section-home {
+    background-color: #000;
+    color: #fff;
+    padding: 100px 20px 60px; /* Espacio adicional para la navegación fija */
+    text-align: center;
+  }
+  
+  .section-home h1 {
+    color: #1E90FF; /* Título en azul */
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+  
+  .section-home p {
+    font-size: 1.2em;
+  }
+  
+  /* Secciones Sobre mí, Proyectos y Contacto */
+  .section-about,
+  .section-projects,
+  .section-contact {
+    padding: 60px 20px;
+  }
+  
+  .section-about h2,
+  .section-projects h2,
+  .section-contact h2 {
+    color: #1E90FF; /* Títulos en azul */
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .section-about p,
+  .section-projects p,
+  .section-contact p {
+    color: #fff; /* Texto blanco */
+    font-size: 1.1em;
+  }
+  
+  /* Proyectos */
+  .project-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .project {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1 1 calc(50% - 40px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .project h3 {
+    color: #1E90FF; /* Título del proyecto en azul */
+    margin-bottom: 10px;
+  }
+  
+  .project p {
+    color: #fff; /* Texto del proyecto en blanco */
+  }
+  
+  /* Formulario de Contacto */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form div {
+    margin-bottom: 15px;
+  }
+  
+  form label {
+    color: #1E90FF;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  form input,
+  form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #1E90FF;
+    border-radius: 4px;
+    background-color: #000;
+    color: #fff;
+  }
+  
+  form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #1E90FF;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  form button:hover {
+    background-color: #00BFFF;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #111;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+  }
+  
+  footer p {
+    color: #1E90FF; /* Texto del footer en azul */
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    .nav-links {
+      flex-direction: column;
+      background-color: #111;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 100%;
+      display: none;
+    }
+  
+    .nav-links li {
+      margin: 10px 0;
+      text-align: center;
+    }
+  
+    .nav-links.active {
+      display: flex;
+    }
+  
+    .container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .project-list {
+      flex-direction: column;
+    }
+  
+    .project {
+      flex: 1 1 100%;
+    }
+  }
+  
+  /* Botón de Menú para Móviles */
+  nav .menu-toggle {
+    display: none;
+    cursor: pointer;
+  }
+  
+  nav .menu-toggle div {
+    width: 25px;
+    height: 3px;
+    background-color: #1E90FF;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+  }
+  
+  @media (max-width: 768px) {
+    nav .menu-toggle {
+      display: block;
+    }
+  }
+  

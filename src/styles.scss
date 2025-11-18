@@ -1,0 +1,62 @@
+/* Global styles, variables and theme */
+:root {
+  --bg: #0b1226;
+  --card: #0f1724;
+  --muted: #9aa4b2;
+  --accent: #0f6fbf; /* azul oscuro */
+  --accent-2: #d95f5f; /* rojo suave */
+  --glass: rgba(255,255,255,0.06);
+  --glass-2: rgba(255,255,255,0.04);
+  --radius: 14px;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, 'Poppins', 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg, #071025 0%, #0b1226 100%);
+  color: #e6eef8;
+}
+
+main {
+  display: block;
+  min-height: calc(100vh - 120px);
+}
+
+.container {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+/* Simple utility */
+.flex { display:flex; gap:1rem; }
+.center { display:flex; align-items:center; justify-content:center; }
+
+/* Glass card */
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px);
+  padding:1rem;
+  border-radius: var(--radius);
+}
+
+/* Responsive grid */
+.grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; }
+
+/* Headings */
+h1,h2,h3 { margin:0 0 0.5rem 0; }
+
+/* Small helpers */
+.muted { color: var(--muted); }
+
+/* Links */
+a { color: var(--accent); text-decoration:none; }
+
+/* Footer */
+footer { padding: 2rem 0; color: var(--muted); }
+
+/* Dark mode toggle placeholder */
+.theme-toggle { cursor:pointer; }

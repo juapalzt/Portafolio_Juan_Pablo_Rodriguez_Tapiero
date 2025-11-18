@@ -1,0 +1,12 @@
+{
+  "hero": {
+    "title": "Juan Pablo Rodríguez Tapiero",
+    "subtitle": "QA Automation Engineer & Full Stack Developer",
+    "download_cv": "Download CV",
+    "view_cv": "View CV",
+    "contact": "Contact me"
+  },
+  "footer": {
+    "made_with": "Made with Angular"
+  }
+}

@@ -1,0 +1,19 @@
+.cv-viewer { padding: 0.6rem; }
+.cv-iframe-container { position: relative; }
+.cv-iframe-container iframe { display: block; width: 100%; height: 560px; }
+.cv-toolbar a, .cv-toolbar button { text-decoration: none; background: transparent; border: 1px solid rgba(0,0,0,0.06); border-radius: 8px; color: inherit; }
+.cv-toolbar button { cursor: pointer; }
+
+/* Modal/backdrop styles */
+.cv-backdrop { position: fixed; inset: 0; background: rgba(4,6,10,0.6); display:flex; align-items:center; justify-content:center; z-index:1200; padding:1rem; }
+.cv-modal { width: min(1000px, 96%); max-height: 92vh; overflow:auto; padding:1rem; }
+
+/* Responsive iframe heights */
+.cv-iframe-container iframe { height: 75vh; }
+@media (max-width: 900px) {
+	.cv-modal { width: 95%; }
+	.cv-iframe-container iframe { height: 60vh; }
+}
+@media (max-width: 480px) {
+	.cv-iframe-container iframe { height: 48vh; }
+}

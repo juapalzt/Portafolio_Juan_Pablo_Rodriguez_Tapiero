@@ -10,14 +10,40 @@
   --radius: 14px;
 }
 
+/* Theme variants are applied by adding a class to the <html> element:
+   - .theme-dark (default)
+   - .theme-light
+   The primary accent color (--accent) is kept the same across themes.
+*/
+
+.theme-dark {
+  --bg: #0b1226;
+  --card: #0f1724;
+  --muted: #9aa4b2;
+  --accent: #0f6fbf;
+  --accent-2: #d95f5f;
+  --glass: rgba(255,255,255,0.06);
+  --glass-2: rgba(255,255,255,0.04);
+}
+
+.theme-light {
+  --bg: #f6f8fb;
+  --card: #ffffff;
+  --muted: #6b7280; /* slightly darker muted for contrast */
+  --accent: #0f6fbf; /* keep primary accent equal to dark theme */
+  --accent-2: #d95f5f;
+  --glass: rgba(11,18,38,0.04);
+  --glass-2: rgba(11,18,38,0.02);
+}
+
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', system-ui, -apple-system, 'Poppins', 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  background: linear-gradient(180deg, #071025 0%, #0b1226 100%);
-  color: #e6eef8;
+  background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 80%, #0000) 100%);
+  color: color-mix(in srgb, var(--card) 80%, #ffffff 100%);
 }
 
 main {
@@ -58,5 +84,18 @@ a { color: var(--accent); text-decoration:none; }
 /* Footer */
 footer { padding: 2rem 0; color: var(--muted); }
 
-/* Dark mode toggle placeholder */
+/* Theme toggle styles */
 .theme-toggle { cursor:pointer; }
+.theme-toggle-btn {
+  appearance: none;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: transparent;
+  padding: 0.35rem 0.5rem;
+  border-radius: 8px;
+  color: inherit;
+}
+.theme-toggle-btn:hover { filter: brightness(0.95); }
+
+/* Smooth transition when switching themes */
+html { transition: background-color 220ms ease, color 220ms ease; }
+* { transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease; }

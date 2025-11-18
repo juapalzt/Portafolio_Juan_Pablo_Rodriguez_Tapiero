@@ -1,0 +1,19 @@
+<div class="cv-viewer card">
+  <!-- Modal backdrop -->
+  <div class="cv-backdrop" (click)="closeModal()">
+    <div class="cv-modal card" (click)="$event.stopPropagation()" role="dialog" aria-modal="true">
+      <div class="cv-toolbar" style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
+        <div style="font-weight:600">Vista previa - CV</div>
+        <div style="display:flex;gap:0.5rem;align-items:center">
+          <button (click)="fullscreen()" class="card" style="padding:0.35rem 0.6rem;">Pantalla completa</button>
+          <button (click)="closeModal()" class="card" style="padding:0.35rem 0.6rem;">Cerrar</button>
+        </div>
+      </div>
+
+      <div #containerRef class="cv-iframe-container">
+        <iframe #iframeRef [src]="safeSrc" width="100%" height="560" style="border-radius:10px;border:1px solid rgba(0,0,0,0.06);" allowfullscreen></iframe>
+        <div *ngIf="!safeSrc" class="muted">No se pudo cargar la vista previa. <a [href]="src">Descargar CV</a></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,22 @@
         <li><a routerLink="/#projects">Proyectos</a></li>
         <li><a routerLink="/#contact">Contacto</a></li>
         <li><a href="/assets/JuanPablo_CV.pdf" download class="card" style="padding:0.4rem 0.8rem;">Descargar CV</a></li>
+
+        <!-- Language selector -->
+        <li>
+          <div style="display:flex;gap:0.35rem;align-items:center">
+            <button (click)="setLanguage('es')" [class.active]="currentLanguage==='es'" class="theme-toggle-btn" aria-label="Cambiar a Español">ES</button>
+            <button (click)="setLanguage('en')" [class.active]="currentLanguage==='en'" class="theme-toggle-btn" aria-label="Change to English">EN</button>
+          </div>
+        </li>
+
+        <!-- Theme toggle -->
+        <li>
+          <button (click)="toggleTheme()" class="theme-toggle-btn" aria-label="Cambiar tema">
+            <span *ngIf="isDark">🌙</span>
+            <span *ngIf="!isDark">☀️</span>
+          </button>
+        </li>
       </ul>
     </nav>
   </div>

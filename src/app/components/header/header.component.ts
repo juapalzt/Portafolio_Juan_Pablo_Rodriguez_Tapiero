@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, HostBinding, HostListener } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LanguageService } from '../../services/language.service';
@@ -12,6 +12,10 @@ import { LanguageService } from '../../services/language.service';
 })
 export class HeaderComponent implements OnInit {
   isDark = true;
+  mobileMenuOpen = false;
+  // Debug UI state
+  devToggleVisible = false;
+  @HostBinding('class.debug') debug = false;
 
   constructor(@Inject(DOCUMENT) private document: Document, private languageService: LanguageService) {}
 
@@ -30,6 +34,17 @@ export class HeaderComponent implements OnInit {
     if (isBrowser) {
       this.applyTheme(this.isDark ? 'dark' : 'light');
     }
+
+    // Read dev toggle visibility & debug state from localStorage
+    try {
+      const showBtn = isBrowser && window.localStorage ? window.localStorage.getItem('devToggleVisible') : null;
+      const dbg = isBrowser && window.localStorage ? window.localStorage.getItem('debugOn') : null;
+      this.devToggleVisible = showBtn === '1';
+      this.debug = dbg === '1';
+    } catch {
+      this.devToggleVisible = false;
+      this.debug = false;
+    }
   }
 
   toggleTheme() {
@@ -40,6 +55,35 @@ export class HeaderComponent implements OnInit {
     }
     if (typeof window !== 'undefined') {
       this.applyTheme(t);
+    }
+  }
+
+  // Mobile menu controls
+  toggleMobileMenu() {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
+
+  closeMobileMenu() {
+    this.mobileMenuOpen = false;
+  }
+
+  // Dev helpers
+  toggleDebug() {
+    this.debug = !this.debug;
+    try { if (typeof window !== 'undefined' && window.localStorage) { window.localStorage.setItem('debugOn', this.debug ? '1' : '0'); } } catch {}
+  }
+
+  toggleDevButtonVisibility() {
+    this.devToggleVisible = !this.devToggleVisible;
+    try { if (typeof window !== 'undefined' && window.localStorage) { window.localStorage.setItem('devToggleVisible', this.devToggleVisible ? '1' : '0'); } } catch {}
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeydown(ev: KeyboardEvent) {
+    // Ctrl+D to toggle visibility of the debug button
+    if (ev.ctrlKey && (ev.key === 'd' || ev.key === 'D')) {
+      ev.preventDefault();
+      this.toggleDevButtonVisibility();
     }
   }
 

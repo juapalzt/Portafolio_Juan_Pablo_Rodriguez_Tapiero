@@ -1,31 +1,61 @@
 <header class="card" role="banner">
   <div class="container flex" style="justify-content:space-between;align-items:center;">
     <div class="logo">
-      <a routerLink="/" aria-label="Inicio" style="font-weight:700;color:var(--accent);">Juan Pablo Rodríguez</a>
+      <a routerLink="/" aria-label="Inicio" class="logo-link" style="display:flex;align-items:center;gap:0.6rem;text-decoration:none;">
+        <img src="Logo Juan.png" alt="Logo Juan Pablo" style="width:44px;height:44px;object-fit:cover;border-radius:8px;flex-shrink:0;"/>
+        <span style="font-weight:700;color:var(--text-color);">Juan Pablo Rodríguez</span>
+      </a>
     </div>
+    <!-- Dev debug toggle (hidden by default). Toggle visibility with Ctrl+D -->
+    <button *ngIf="devToggleVisible" class="dev-debug-btn" (click)="toggleDebug()" title="Toggle debug outlines">🐞</button>
     <nav>
-      <ul class="flex" style="list-style:none;margin:0;padding:0;align-items:center">
-        <li><a routerLink="/#about">Sobre mí</a></li>
-        <li><a routerLink="/#projects">Proyectos</a></li>
-        <li><a routerLink="/#contact">Contacto</a></li>
-        <li><a href="/assets/JuanPablo_CV.pdf" download class="card" style="padding:0.4rem 0.8rem;">Descargar CV</a></li>
+      <div class="nav-desktop">
+        <ul class="flex" style="list-style:none;margin:0;padding:0;align-items:center">
+          <li><a routerLink="/#about" (click)="closeMobileMenu()">Sobre mí</a></li>
+          <li><a routerLink="/#projects" (click)="closeMobileMenu()">Proyectos</a></li>
+          <li><a routerLink="/#contact" (click)="closeMobileMenu()">Contacto</a></li>
+          <li><a href="Hoja_de_vida_Juan_Pablo_Rodriguez.pdf" download class="card" style="padding:0.4rem 0.8rem;">Descargar CV</a></li>
 
-        <!-- Language selector -->
-        <li>
-          <div style="display:flex;gap:0.35rem;align-items:center">
-            <button (click)="setLanguage('es')" [class.active]="currentLanguage==='es'" class="theme-toggle-btn" aria-label="Cambiar a Español">ES</button>
-            <button (click)="setLanguage('en')" [class.active]="currentLanguage==='en'" class="theme-toggle-btn" aria-label="Change to English">EN</button>
-          </div>
-        </li>
+          <!-- Language selector -->
+          <li>
+            <div style="display:flex;gap:0.35rem;align-items:center">
+              <button (click)="setLanguage('es')" [class.active]="currentLanguage==='es'" class="theme-toggle-btn" aria-label="Cambiar a Español">ES</button>
+              <button (click)="setLanguage('en')" [class.active]="currentLanguage==='en'" class="theme-toggle-btn" aria-label="Change to English">EN</button>
+            </div>
+          </li>
 
-        <!-- Theme toggle -->
-        <li>
-          <button (click)="toggleTheme()" class="theme-toggle-btn" aria-label="Cambiar tema">
-            <span *ngIf="isDark">🌙</span>
-            <span *ngIf="!isDark">☀️</span>
-          </button>
-        </li>
-      </ul>
+          <!-- Theme toggle -->
+          <li>
+            <button (click)="toggleTheme()" class="theme-toggle-btn" aria-label="Cambiar tema">
+              <span *ngIf="isDark">🌙</span>
+              <span *ngIf="!isDark">☀️</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button class="mobile-menu-btn" (click)="toggleMobileMenu()" aria-label="Abrir menú" [attr.aria-expanded]="mobileMenuOpen">
+        ☰
+      </button>
+
+      <!-- Mobile menu overlay -->
+      <div class="mobile-menu-backdrop" *ngIf="mobileMenuOpen" (click)="closeMobileMenu()"></div>
+      <div class="mobile-menu" *ngIf="mobileMenuOpen" role="dialog" aria-modal="true">
+        <ul style="list-style:none;margin:0;padding:1rem;">
+          <li><a routerLink="/#about" (click)="closeMobileMenu()">Sobre mí</a></li>
+          <li><a routerLink="/#projects" (click)="closeMobileMenu()">Proyectos</a></li>
+          <li><a routerLink="/#contact" (click)="closeMobileMenu()">Contacto</a></li>
+          <li><a href="Hoja_de_vida_Juan_Pablo_Rodriguez.pdf" download (click)="closeMobileMenu()">Descargar CV</a></li>
+          <li style="margin-top:0.6rem;display:flex;gap:0.5rem;">
+            <button (click)="setLanguage('es'); closeMobileMenu()" [class.active]="currentLanguage==='es'" class="theme-toggle-btn">ES</button>
+            <button (click)="setLanguage('en'); closeMobileMenu()" [class.active]="currentLanguage==='en'" class="theme-toggle-btn">EN</button>
+          </li>
+          <li style="margin-top:0.6rem;">
+            <button (click)="toggleTheme(); closeMobileMenu()" class="theme-toggle-btn">{{ isDark ? '🌙' : '☀️' }}</button>
+          </li>
+        </ul>
+      </div>
     </nav>
   </div>
 </header>

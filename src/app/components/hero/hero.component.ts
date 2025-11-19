@@ -12,7 +12,7 @@ import { CvViewerComponent } from '../cv-viewer/cv-viewer.component';
 })
 export class HeroComponent {
   showCv = false;
-  cvSrc = 'Hoja de vida - Juan Pablo Rodriguez Tapiero.pdf';
+  cvSrc = 'Hoja de vida - Juan Pablo Rodriguez Tapiero.pdf  ';
 
   toggleCv() {
     this.showCv = !this.showCv;

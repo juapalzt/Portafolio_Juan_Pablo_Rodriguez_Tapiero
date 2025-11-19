@@ -1,5 +1,13 @@
 :host { display:block; padding:1rem 0; }
 header { background: transparent; border: 0; }
+/* Ensure nav participates in flex layout and doesn't collapse */
+nav {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	min-width: 0;
+}
+nav ul { display: flex; align-items: center; gap: 0.6rem; }
 nav ul li a { color: #e6eef8; padding: 0.5rem 0.8rem; display:inline-block }
 nav ul li a:hover { color: var(--accent-2); }
 .logo a { font-size:1.05rem; }
@@ -18,3 +26,75 @@ nav ul li a:hover { color: var(--accent-2); }
 	color: #fff;
 	border-color: transparent;
 }
+
+/* Mobile responsive: hide desktop nav and show a mobile menu button */
+@media (max-width: 768px) {
+	.nav-desktop { display: none; }
+	.mobile-menu-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		background: transparent;
+		border: 1px solid rgba(255,255,255,0.06);
+		padding: 0.4rem 0.6rem;
+		border-radius: 8px;
+		color: inherit;
+		font-size: 1.1rem;
+	}
+}
+
+/* Mobile menu overlay and panel */
+.mobile-menu-backdrop {
+	position: fixed;
+	inset: 0;
+	background: rgba(0,0,0,0.35);
+	z-index: 40;
+}
+.mobile-menu {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: min(320px, 90%);
+	height: 100vh;
+	background: var(--card);
+	color: var(--text-color);
+	z-index: 50;
+	box-shadow: -8px 0 24px rgba(2,6,23,0.4);
+	padding-top: 3.2rem;
+}
+.mobile-menu ul li a { display:block; padding:0.8rem 1rem; color:var(--text-color); }
+.mobile-menu .theme-toggle-btn { margin-left:0.2rem; }
+
+/* Ensure the mobile button is hidden on wider screens */
+.mobile-menu-btn { display: none; }
+
+/* Debug helper: add `debug` class to the host element to visualize layout boxes
+	 Usage (in browser console): document.querySelector('app-header')?.classList.add('debug');
+*/
+:host(.debug) nav,
+:host(.debug) .mobile-menu,
+:host(.debug) .nav-desktop {
+	outline: 2px dashed rgba(15,111,191,0.9);
+	background: linear-gradient(180deg, rgba(15,111,191,0.03), rgba(15,111,191,0.01));
+}
+
+:host(.debug) nav ul { outline: 1px dotted rgba(15,111,191,0.6); }
+
+/* Dev debug button styles */
+.dev-debug-btn {
+	position: absolute;
+	right: 0.75rem;
+	top: 0.75rem;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	border: 1px solid rgba(255,255,255,0.08);
+	background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	z-index: 120;
+	cursor: pointer;
+}
+.dev-debug-btn:hover { transform: translateY(-1px); }

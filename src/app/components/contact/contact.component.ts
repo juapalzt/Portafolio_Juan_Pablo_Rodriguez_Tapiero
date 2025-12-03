@@ -11,11 +11,17 @@ import { ContactService } from '../../services/contact.service';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
+  /**
+   * Formulario reactivo para la sección de contacto.
+   * - `form`: instancia del FormGroup creada con FormBuilder.
+   * - `sending`: indicador para deshabilitar el formulario mientras se envía.
+   */
   form: any;
 
   sending = false;
 
   constructor(private fb: FormBuilder) {
+    // Inicializa el formulario con validaciones básicas
     this.form = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -23,6 +29,11 @@ export class ContactComponent {
     });
   }
 
+  /**
+   * Envía el formulario mediante `ContactService`.
+   * - Valida que el formulario sea válido antes de enviar.
+   * - Muestra alertas simples como feedback; en producción reemplazar por toasts.
+   */
   async submit() {
     if (this.form.invalid) return;
     this.sending = true;

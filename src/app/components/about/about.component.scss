@@ -1,3 +1,66 @@
-:host { display:block }
-.card ul { margin:0.5rem 0 0 1rem; }
-.card ul li { margin:0.35rem 0 }
+:host { display: block; }
+
+/* Estilos para la sección "Sobre mí" */
+.about-section {
+  margin-top: 2rem;
+  padding: 1.25rem;
+}
+
+/* Encabezado de sección */
+.section-header {
+  margin-bottom: 1.5rem;
+  
+  h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+/* Párrafo de introducción */
+.about-intro {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Contenedor de destacados (habilidades y herramientas) */
+.about-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tarjeta individual de categoría */
+.about-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Título de categoría */
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Lista de elementos */
+.card-list {
+  list-style-position: inside;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  
+  li {
+    margin: 0.35rem 0;
+  }
+}

@@ -1,3 +1,140 @@
-:host { display:block }
+:host { display:block; }
+
+/* 
+  ========================================
+  ESTILOS: Projects Component
+  ========================================
+  Componente que muestra grid de proyectos con tarjetas interactivas.
+  Incluye efecto hover, lazy loading de imágenes y responsividad.
+*/
+
+/* Estilos para la sección de Proyectos con responsividad mejorada */
+.projects-section {
+  margin-top: 2rem;
+  padding: 0 0 1rem 0;
+}
+
+/* Encabezado de sección */
+.section-header {
+  margin-bottom: 2rem;
+  
+  h2 {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    
+    @media (max-width: 768px) {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+.section-subtitle {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* 
+  Grid de proyectos responsivo
+  Auto-fit adapta cantidad de columnas según espacio disponible
+*/
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Tarjeta individual de proyecto con interactividad */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(15,111,191,0.2);
+  }
+}
+
+/* Contenedor de imagen con overflow hidden para bordes redondeados */
+.project-image-container {
+  margin: -1rem -1rem 1rem -1rem;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+}
+
+/* Imagen del proyecto con efecto zoom en hover */
+.project-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  transition: transform 300ms ease;
+  
+  .project-card:hover & {
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 480px) {
+    height: 150px;
+  }
+}
+
+/* Contenedor de contenido que crece para llenar espacio disponible */
+.project-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.6rem;
+}
+
+.project-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.project-tech {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.project-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* Acciones del proyecto (botones/enlaces) */
+.project-actions {
+  margin-top: auto;
+  padding-top: 0.8rem;
+}
+
+/* Enlaces a repositorio con efecto hover */
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  gap: 0.4rem;
+  transition: gap 200ms ease;
+  
+  &:hover {
+    gap: 0.8rem;
+  }
+}
 .card { padding:1rem }
 .card a { color:var(--accent) }

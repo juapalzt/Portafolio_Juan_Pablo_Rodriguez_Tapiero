@@ -1,4 +1,3 @@
-/* Global styles, variables and theme */
 :root {
   --bg: #0b1226;
   --card: #0f1724;
@@ -11,10 +10,23 @@
   --radius: 14px;
 }
 
-/* Theme variants are applied by adding a class to the <html> element:
-   - .theme-dark (default)
-   - .theme-light
-   The primary accent color (--accent) is kept the same across themes.
+/* Estilos globales, variables y temas */
+:root {
+  --bg: #0b1226;
+  --card: #0f1724;
+  --muted: #9aa4b2;
+  --accent: #0f6fbf; /* azul oscuro */
+  --accent-2: #ed0909; /* rojo suave */
+  --text-color: #e6eef8;
+  --glass: rgba(255,255,255,0.06);
+  --glass-2: rgba(255,255,255,0.04);
+  --radius: 14px;
+}
+
+/* Las variantes de tema se aplican añadiendo una clase al elemento <html>:
+  - .theme-dark (por defecto)
+  - .theme-light
+  El color principal (--accent) se mantiene igual entre temas.
 */
 
 .theme-dark {
@@ -31,8 +43,8 @@
 .theme-light {
   --bg: #f6f8fb;
   --card: #ffffff;
-  --muted: #6b7280; /* slightly darker muted for contrast */
-  --accent: #0f6fbf; /* keep primary accent equal to dark theme */
+  --muted: #6b7280; /* tono de texto secundario ligeramente más oscuro para contraste */
+  --accent: #0f6fbf; /* mantener el color principal igual que en el tema oscuro */
   --text-color: #0b1226;
   --accent-2: #ed0909;
   --glass: rgba(11,18,38,0.04);
@@ -59,11 +71,11 @@ main {
   margin: 0 auto;
 }
 
-/* Simple utility */
+/* Utilidades simples */
 .flex { display:flex; gap:1rem; }
 .center { display:flex; align-items:center; justify-content:center; }
 
-/* Glass card */
+/* Tarjeta 'glass' (efecto vidrio) */
 .card {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   border: 1px solid rgba(255,255,255,0.04);
@@ -72,22 +84,22 @@ main {
   border-radius: var(--radius);
 }
 
-/* Responsive grid */
+/* Grid responsivo */
 .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; }
 
-/* Headings */
+/* Encabezados */
 h1,h2,h3 { margin:0 0 0.5rem 0; color: var(--text-color); }
 
-/* Small helpers */
+/* Auxiliares */
 .muted { color: var(--muted); }
 
-/* Links */
+/* Enlaces */
 a { color: var(--accent); text-decoration:none; }
 
-/* Footer */
+/* Pie de página */
 footer { padding: 2rem 0; color: var(--muted); }
 
-/* Theme toggle styles */
+/* Estilos del interruptor de tema (claro/oscuro) */
 .theme-toggle { cursor:pointer; }
 .theme-toggle-btn {
   appearance: none;
@@ -99,13 +111,13 @@ footer { padding: 2rem 0; color: var(--muted); }
 }
 .theme-toggle-btn:hover { filter: brightness(0.95); }
 
-/* Smooth transition when switching themes */
+/* Transición suave al cambiar de tema */
 html { transition: background-color 220ms ease, color 220ms ease; }
 * { transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease; }
 
-/* Light theme: outlines are controlled via the utility class `.show-outline`.
-   Prefer adding `class="show-outline"` to the specific `section` or wrapper
-   elements in the component templates for fine-grained control.
+/* Tema claro: los contornos se controlan mediante la clase utilitaria `.show-outline`.
+   Prefiere añadir `class="show-outline"` en las plantillas de los componentes
+   para tener control fino sobre qué elementos muestran el contorno.
 */
 .theme-light .show-outline {
   border: 1px solid var(--accent);
@@ -113,7 +125,7 @@ html { transition: background-color 220ms ease, color 220ms ease; }
   padding: 0.5rem;
 }
 
-/* Helpful small variant: outline without extra padding */
+/* Variante compacta útil: contorno sin padding extra */
 .theme-light .show-outline--compact {
   border: 1px solid var(--accent);
   border-radius: 8px;

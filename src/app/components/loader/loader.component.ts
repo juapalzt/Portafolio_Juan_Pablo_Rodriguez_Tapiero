@@ -18,3 +18,5 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class LoaderComponent {}
+// Componente de carga global (overlay).
+// Se usa para indicar operaciones en curso y bloquear la interacción mientras `loading` está activo.

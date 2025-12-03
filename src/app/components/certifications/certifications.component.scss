@@ -1,2 +1,107 @@
-:host { display:block }
-.card { padding:1rem }
+:host { display: block; }
+
+/* 
+  ========================================
+  ESTILOS: Certifications Component
+  ========================================
+  Componente que muestra certificaciones en galería responsiva.
+  Incluye efectos de escala, sombras y lazy loading de imágenes.
+*/
+
+/* Estilos para la sección de Certificaciones */
+.certifications-section {
+  margin-top: 2rem;
+}
+
+/* Encabezado de sección con tipografía responsiva */
+.section-header {
+  margin-bottom: 1.5rem;
+  
+  h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+/* 
+  Grid de certificaciones responsivo
+  Adapta columnas según espacio disponible
+*/
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Elemento individual de certificación */
+.certification-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 
+  Contenedor de insignia usando elemento semántico <figure>
+  Incluye imagen y figcaption con interactividad
+*/
+.certification-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 200ms ease;
+  width: 100%;
+  
+  /* Efectos hover: escala, color de borde y sombra */
+  &:hover {
+    background: rgba(15,111,191,0.1);
+    border-color: var(--accent);
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(15,111,191,0.2);
+  }
+  
+  /* Imagen de la insignia con lazy loading */
+  img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    transition: transform 200ms ease;
+    
+    .certification-badge:hover & {
+      transform: scale(1.1);
+    }
+    
+    @media (max-width: 480px) {
+      width: 56px;
+      height: 56px;
+    }
+  }
+}
+
+/* Título de la certificación en elemento figcaption */
+.certification-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.4;
+}

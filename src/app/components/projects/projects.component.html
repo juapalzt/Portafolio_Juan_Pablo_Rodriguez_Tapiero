@@ -1,12 +1,51 @@
-<section id="projects" class="container" style="margin-top:1rem;">
-  <h2>Proyectos</h2>
-  <div class="grid">
-    <div *ngFor="let p of projects" class="card">
-      <img [src]="p.image" alt="{{p.title}}" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:0.6rem">
-      <strong>{{ p.title }}</strong>
-      <div class="muted">{{ p.technologies.join(', ') }}</div>
-      <p class="muted">{{ p.description }}</p>
-      <div style="margin-top:0.5rem"><a [href]="p.repo" target="_blank">Repositorio</a></div>
-    </div>
+<!-- Sección de Proyectos -->
+<section id="projects" class="container projects-section">
+  <header class="section-header">
+    <h2>Proyectos</h2>
+    <p class="section-subtitle muted">Proyectos destacados y casos de éxito</p>
+  </header>
+  
+  <!-- Grid de proyectos con layout responsivo -->
+  <div class="projects-grid" role="list">
+    <article 
+      *ngFor="let p of projects" 
+      class="project-card card" 
+      role="listitem" 
+      [attr.aria-label]="'Proyecto: ' + p.title">
+      
+      <!-- Imagen del proyecto -->
+      <figure class="project-image-container">
+        <img 
+          [src]="p.image" 
+          [alt]="p.title + ' - captura del proyecto'" 
+          class="project-image" 
+          loading="lazy" />
+      </figure>
+      
+      <!-- Contenido del proyecto -->
+      <div class="project-content">
+        <h3 class="project-title">{{ p.title }}</h3>
+        
+        <!-- Tecnologías usadas -->
+        <div class="project-tech muted" role="status" aria-label="Tecnologías usadas">
+          {{ p.technologies.join(', ') }}
+        </div>
+        
+        <!-- Descripción -->
+        <p class="project-description muted">{{ p.description }}</p>
+        
+        <!-- Enlace al repositorio -->
+        <div class="project-actions">
+          <a 
+            [href]="p.repo" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="project-link" 
+            [attr.aria-label]="'Ver repositorio de ' + p.title + ' en GitHub (abre en nueva ventana)'">
+            Ver Repositorio →
+          </a>
+        </div>
+      </div>
+    </article>
   </div>
 </section>

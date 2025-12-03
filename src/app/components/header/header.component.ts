@@ -17,9 +17,21 @@ export class HeaderComponent implements OnInit {
   devToggleVisible = false;
   @HostBinding('class.debug') debug = false;
 
+  /**
+   * Componente de cabecera / navegación principal.
+   * - Gestiona el tema (claro/oscuro) y su persistencia en localStorage.
+   * - Controla el menú móvil (abrir/cerrar).
+   * - Provee helpers de depuración (botón dev) para visualizar cajas en layout.
+   */
+
+  /**
+   * @param document Inyectamos `DOCUMENT` para manipular las clases/variables CSS en el elemento raíz.
+   * @param languageService Servicio de idiomas para inicializar/cambiar el idioma.
+   */
   constructor(@Inject(DOCUMENT) private document: Document, private languageService: LanguageService) {}
 
   ngOnInit(): void {
+    // Inicialización del componente: detectar tema guardado y aplicar variables.
     const isBrowser = typeof window !== 'undefined' && !!(this.document && this.document.defaultView);
     let saved: string | null = null;
     if (isBrowser) {
@@ -35,12 +47,30 @@ export class HeaderComponent implements OnInit {
       this.applyTheme(this.isDark ? 'dark' : 'light');
     }
 
-    // Read dev toggle visibility & debug state from localStorage
+    // Leer estado del botón de depuración y del flag debug desde localStorage
     try {
       const showBtn = isBrowser && window.localStorage ? window.localStorage.getItem('devToggleVisible') : null;
       const dbg = isBrowser && window.localStorage ? window.localStorage.getItem('debugOn') : null;
       this.devToggleVisible = showBtn === '1';
       this.debug = dbg === '1';
+
+      // If the developer button has never been shown before, auto-show it briefly once
+      const devSeen = isBrowser && window.localStorage ? window.localStorage.getItem('devSeenOnce') : null;
+      if (!devSeen && showBtn === null) {
+        // show for 4 seconds then hide, and mark as seen
+        this.devToggleVisible = true;
+        const AUTO_MS = 4000;
+        try {
+          window.setTimeout(() => {
+            this.devToggleVisible = false;
+            if (typeof window !== 'undefined' && window.localStorage) {
+              try { window.localStorage.setItem('devSeenOnce', '1'); } catch {}
+            }
+          }, AUTO_MS);
+        } catch {
+          /* ignore */
+        }
+      }
     } catch {
       this.devToggleVisible = false;
       this.debug = false;
@@ -48,6 +78,7 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleTheme() {
+    // Cambia el estado de tema y lo persiste en localStorage.
     this.isDark = !this.isDark;
     const t = this.isDark ? 'dark' : 'light';
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -60,20 +91,24 @@ export class HeaderComponent implements OnInit {
 
   // Mobile menu controls
   toggleMobileMenu() {
+    // Alterna la visibilidad del menú móvil
     this.mobileMenuOpen = !this.mobileMenuOpen;
   }
 
   closeMobileMenu() {
+    // Cierra el menú móvil
     this.mobileMenuOpen = false;
   }
 
   // Dev helpers
   toggleDebug() {
+    // Alterna la clase `debug` en el host para mostrar las guías visuales.
     this.debug = !this.debug;
     try { if (typeof window !== 'undefined' && window.localStorage) { window.localStorage.setItem('debugOn', this.debug ? '1' : '0'); } } catch {}
   }
 
   toggleDevButtonVisibility() {
+    // Alterna la visibilidad del botón de depuración y persiste la preferencia.
     this.devToggleVisible = !this.devToggleVisible;
     try { if (typeof window !== 'undefined' && window.localStorage) { window.localStorage.setItem('devToggleVisible', this.devToggleVisible ? '1' : '0'); } } catch {}
   }
@@ -91,6 +126,7 @@ export class HeaderComponent implements OnInit {
   get currentLanguage() { return this.languageService?.language || 'es'; }
 
   setLanguage(lang: 'es'|'en') {
+    // Cambia el idioma a través del servicio de idiomas.
     try { this.languageService.changeLanguage(lang); } catch { /* ignore */ }
   }
 

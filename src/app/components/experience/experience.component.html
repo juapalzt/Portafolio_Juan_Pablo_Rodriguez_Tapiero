@@ -1,20 +1,44 @@
-<section class="container" style="margin-top:1rem;">
-  <h2>Experiencia</h2>
-  <div class="grid">
-    <div class="card">
-      <strong>Empresa A — QA Automation Engineer</strong>
-      <div class="muted">2022 - Presente</div>
-      <ul class="muted">
+<!-- 
+  ===================================
+  COMPONENTE: Experience (Experiencia Profesional)
+  ===================================
+  Muestra el historial profesional en formato timeline con:
+  - Nombre de empresa y cargo
+  - Período de empleo (fechas)
+  - Responsabilidades principales
+  Utiliza estructura semántica y línea visual para timeline.
+-->
+
+<!-- Sección de Experiencia Profesional -->
+<section id="experience" class="experience-section" role="region" aria-labelledby="exp-title">
+  <!-- Encabezado principal -->
+  <header class="section-header">
+    <h2 id="exp-title">Experiencia</h2>
+  </header>
+
+  <!-- Lista de experiencias (timeline) con línea visual -->
+  <div class="experience-timeline" role="list">
+    <!-- Experiencia 1 -->
+    <article class="experience-item" role="listitem">
+      <header class="experience-header">
+        <h3 class="experience-title">Empresa A — QA Automation Engineer</h3>
+        <time class="experience-date" datetime="2022">2022 - Presente</time>
+      </header>
+      <ul class="experience-details">
         <li>Diseño de frameworks de automatización con Selenium y Appium.</li>
         <li>Implementación de pipelines CI/CD para pruebas automáticas.</li>
       </ul>
-    </div>
-    <div class="card">
-      <strong>Empresa B — Full Stack Developer</strong>
-      <div class="muted">2019 - 2022</div>
-      <ul class="muted">
+    </article>
+
+    <!-- Experiencia 2 -->
+    <article class="experience-item" role="listitem">
+      <header class="experience-header">
+        <h3 class="experience-title">Empresa B — Full Stack Developer</h3>
+        <time class="experience-date" datetime="2019">2019 - 2022</time>
+      </header>
+      <ul class="experience-details">
         <li>Desarrollo de microservicios en Spring y frontends en Angular.</li>
       </ul>
-    </div>
+    </article>
   </div>
 </section>

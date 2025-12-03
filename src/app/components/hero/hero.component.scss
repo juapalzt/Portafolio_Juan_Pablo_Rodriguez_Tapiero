@@ -1,4 +1,111 @@
 :host { display:block; }
+
+/* Estilos para la sección Hero con responsividad mejorada */
+.hero-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  margin-top: 1rem;
+  
+  /* Responsividad: en tablets y móviles, cambiar a columna */
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
+
+/* Contenedor de texto del hero */
+.hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.hero-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+  }
+}
+
+/* Grupo de acciones (botones/enlaces) */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 0.6rem;
+    
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+/* Contenedor de imagen del hero */
+.hero-image {
+  width: 220px;
+  flex-shrink: 0;
+  
+  @media (max-width: 768px) {
+    width: 180px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 150px;
+  }
+}
+
+.profile-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+/* Sección del visor de CV */
+.cv-preview-section {
+  margin-top: 1.5rem;
+}
 h1 { font-size:1.6rem; }
 h3 { margin-top:0.25rem; color:var(--muted); }
 @media (max-width:720px){

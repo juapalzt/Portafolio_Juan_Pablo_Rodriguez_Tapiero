@@ -19,6 +19,13 @@ export class CvViewerComponent {
 
   constructor(private sanitizer: DomSanitizer) {}
 
+  /**
+   * Componente para mostrar el CV en un iframe seguro.
+   * - `src`: URL o ruta local del PDF (entrada requerida).
+   * - `safeSrc`: versión sanitizada para usar en `iframe`.
+   * - Permite acciones: imprimir, fullscreen y cerrar (emitir evento `close`).
+   */
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['src'] && this.src) {
       // sanitize only for browser usage; safe for SSR to have undefined

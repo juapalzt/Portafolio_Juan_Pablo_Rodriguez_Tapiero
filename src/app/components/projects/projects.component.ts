@@ -10,5 +10,9 @@ import { ProjectsService } from '../../services/projects.service';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent {
+  /**
+   * Lista de proyectos a mostrar en la sección 'Proyectos'.
+   * Actualmente proviene de `ProjectsService.sample()` para datos de ejemplo.
+   */
   projects = ProjectsService.sample();
 }

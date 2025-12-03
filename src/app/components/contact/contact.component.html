@@ -1,20 +1,69 @@
-<section id="contact" class="container card" style="margin-top:1rem;padding:1rem;">
-  <h2>Contacto</h2>
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-      <input formControlName="name" placeholder="Nombre" required />
-      <input formControlName="email" placeholder="Correo electrónico" required />
+<!-- Sección de Contacto -->
+<section id="contact" class="container contact-section card">
+  <header class="section-header">
+    <h2>Contacto</h2>
+    <p class="section-subtitle muted">¡Hablemos! Envíame un mensaje o conéctate por redes sociales</p>
+  </header>
+  
+  <!-- Formulario de contacto -->
+  <form [formGroup]="form" (ngSubmit)="submit()" class="contact-form" novalidate>
+    <!-- Campo de nombre -->
+    <div class="form-group">
+      <label for="contact-name" class="form-label">Nombre</label>
+      <input 
+        id="contact-name" 
+        type="text" 
+        formControlName="name" 
+        class="form-input" 
+        placeholder="Tu nombre" 
+        required 
+        aria-required="true" />
     </div>
-    <div style="margin-top:0.6rem">
-      <textarea formControlName="message" rows="6" placeholder="Mensaje"></textarea>
+    
+    <!-- Campo de correo -->
+    <div class="form-group">
+      <label for="contact-email" class="form-label">Correo electrónico</label>
+      <input 
+        id="contact-email" 
+        type="email" 
+        formControlName="email" 
+        class="form-input" 
+        placeholder="tu@email.com" 
+        required 
+        aria-required="true" />
     </div>
-    <div style="margin-top:0.6rem">
-      <button type="submit" [disabled]="sending" class="card" style="padding:.6rem 1rem">Enviar</button>
+    
+    <!-- Campo de mensaje -->
+    <div class="form-group">
+      <label for="contact-message" class="form-label">Mensaje</label>
+      <textarea 
+        id="contact-message" 
+        formControlName="message" 
+        rows="6" 
+        class="form-textarea" 
+        placeholder="Tu mensaje aquí..." 
+        required 
+        aria-required="true"></textarea>
+    </div>
+    
+    <!-- Botón de envío -->
+    <div class="form-actions">
+      <button 
+        type="submit" 
+        [disabled]="sending" 
+        class="btn btn-primary" 
+        [attr.aria-busy]="sending" 
+        aria-label="Enviar formulario de contacto">
+        {{ sending ? 'Enviando...' : 'Enviar Mensaje' }}
+      </button>
     </div>
   </form>
-
-  <div style="margin-top:1rem">
-    <strong>Redes</strong>
-    <div class="muted">GitHub · LinkedIn · Email</div>
+  
+  <!-- Enlaces de redes sociales -->
+  <div class="contact-links" role="region" aria-label="Enlaces de contacto y redes sociales">
+    <p class="contact-links-title">O conéctate directamente:</p>
+    <nav class="social-links" role="navigation" aria-label="Redes sociales">
+      <!-- Los enlaces específicos se añaden aquí -->
+    </nav>
   </div>
 </section>

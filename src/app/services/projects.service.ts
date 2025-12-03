@@ -1,4 +1,12 @@
+/**
+ * Servicio sencillo para proyectos. Provee datos de ejemplo (método `sample`).
+ * En una implementación real estos datos vendrían de un archivo JSON o una API.
+ */
 export class ProjectsService {
+  /**
+   * Retorna una lista de proyectos de ejemplo.
+   * Útil para desarrollo y vistas de demostración.
+   */
   static sample() {
     return [
       {

@@ -9,3 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./experience.component.scss']
 })
 export class ExperienceComponent {}
+// Componente 'Experiencia'.
+// Presenta la experiencia laboral / proyectos relevantes. Mantiene la lógica en la plantilla.

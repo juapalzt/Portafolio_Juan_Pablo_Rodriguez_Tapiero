@@ -9,5 +9,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
+  /**
+   * Año dinámico mostrado en el pie de página.
+   * Se calcula en tiempo de ejecución para mantener el copyright actualizado.
+   */
   year = new Date().getFullYear();
 }

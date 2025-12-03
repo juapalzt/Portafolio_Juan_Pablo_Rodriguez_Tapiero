@@ -19,10 +19,26 @@ import { LanguageService } from './services/language.service';
 export class AppComponent implements OnInit {
   title = 'mi-portafolio';
   loading = false;
-
+  /**
+   * Componente raíz de la aplicación.
+   * - `title`: nombre del proyecto
+   * - `loading`: indicador global de carga (puede vincularse a un loader)
+   *
+   * Este componente inicializa el servicio de idioma al arrancar la app.
+   */
   constructor(private languageService: LanguageService) {}
 
+  /**
+   * Inicialización del componente raíz.
+   * Intenta inicializar la configuración de idioma mediante `LanguageService`.
+   * Se envuelve en try/catch porque la inicialización puede fallar en entornos
+   * donde `window`/`localStorage` no esté disponible (SSR).
+   */
   ngOnInit(): void {
-    try { this.languageService.initLanguage(); } catch { /* ignore */ }
+    try {
+      this.languageService.initLanguage();
+    } catch {
+      // Ignorar errores en la inicialización de idioma (fallback silencioso)
+    }
   }
 }

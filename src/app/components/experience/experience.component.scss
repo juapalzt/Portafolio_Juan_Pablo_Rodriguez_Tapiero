@@ -1,3 +1,121 @@
-:host { display:block }
-.card { padding:1rem }
-.card:hover { transform:translateY(-4px); transition:transform .2s }
+:host { display: block; }
+
+/* 
+  ========================================
+  ESTILOS: Experience Component
+  ========================================
+  Componente que muestra historial laboral en formato timeline.
+  Incluye efectos visuales, responsividad y accesibilidad.
+*/
+
+/* Estilos para la sección de Experiencia */
+.experience-section {
+  margin-top: 2rem;
+}
+
+/* Encabezado de sección con tipografía responsiva */
+.section-header {
+  margin-bottom: 1.5rem;
+  
+  h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+/* 
+  Timeline contenedor: flex column + línea visual opcional
+  La línea visual se crea con ::before pseudo-elemento
+*/
+.experience-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: relative;
+}
+
+/* Línea vertical visual para el timeline (decorativa, oculta en móvil) */
+.experience-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  opacity: 0.3;
+  
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+/* Elemento individual de experiencia con borde izquierdo destacado */
+.experience-item {
+  padding: 1rem;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid var(--accent);
+  transition: all 200ms ease;
+  
+  &:hover {
+    background: rgba(255,255,255,0.06);
+    transform: translateX(4px);
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0.8rem;
+  }
+}
+
+/* Encabezado del elemento de experiencia: fecha y título alineados */
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+
+/* Título de experiencia (empresa - puesto) */
+.experience-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+  flex: 1;
+  
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
+}
+
+/* Fecha de experiencia en elemento <time> semántico */
+.experience-date {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  white-space: nowrap;
+  
+  @media (max-width: 480px) {
+    width: 100%;
+    display: block;
+    margin-top: 0.4rem;
+  }
+}
+
+/* Lista de detalles/responsabilidades */
+.experience-details {
+  list-style-position: inside;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  
+  li {
+    margin: 0.35rem 0;
+  }
+}

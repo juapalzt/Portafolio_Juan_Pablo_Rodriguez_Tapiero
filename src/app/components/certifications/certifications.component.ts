@@ -9,3 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./certifications.component.scss']
 })
 export class CertificationsComponent {}
+// Componente 'Certificaciones'.
+// Muestra certificados, cursos o credenciales relevantes.

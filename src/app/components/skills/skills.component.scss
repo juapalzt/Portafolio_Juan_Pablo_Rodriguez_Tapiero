@@ -1,2 +1,86 @@
-:host { display:block }
-.card { padding:1rem }
+:host { display: block; }
+
+/* 
+  ========================================
+  ESTILOS: Skills Component
+  ========================================
+  Componente que muestra habilidades técnicas en grid responsivo.
+  Incluye hover effects, accesibilidad y diseño adaptable.
+*/
+
+/* Estilos para la sección de Habilidades */
+.skills-section {
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+/* Encabezado de sección con tipografía responsiva */
+.section-header {
+  margin-bottom: 1.5rem;
+  
+  h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+/* 
+  Grid de categorías de habilidades
+  Auto-fit adapta columnas según disponibilidad de espacio
+*/
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Categoría individual de habilidad con interactividad */
+.skill-category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 200ms ease;
+  min-height: 100px;
+  
+  /* Efectos hover: cambio de color, elevación y sombra */
+  &:hover {
+    background: rgba(15,111,191,0.1);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(15,111,191,0.15);
+  }
+}
+
+/* Título de habilidad destacado con color de acento */
+.skill-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--accent);
+}
+
+/* Contenido descriptivo de la habilidad */
+.skill-content {
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.4;
+  opacity: 0.9;
+}

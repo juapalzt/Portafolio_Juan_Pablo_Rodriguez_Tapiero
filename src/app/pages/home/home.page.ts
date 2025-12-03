@@ -15,3 +15,6 @@ import { ContactComponent } from '../../components/contact/contact.component';
   templateUrl: './home.page.html'
 })
 export class HomePage {}
+
+// Página principal que agrupa las secciones del portafolio:
+// Hero, About, Experience, Projects, Skills, Certifications y Contact.

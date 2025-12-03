@@ -9,3 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent {}
+// Componente 'Sobre mí'.
+// La plantilla contiene la biografía y elementos visuales; este componente
+// se mantiene ligero y sirve como punto de anclaje para la sección 'about'.

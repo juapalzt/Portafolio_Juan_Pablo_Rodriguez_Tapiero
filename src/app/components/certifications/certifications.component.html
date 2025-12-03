@@ -1,10 +1,39 @@
-<section class="container" style="margin-top:1rem;">
-  <h2>Certificaciones</h2>
-  <div class="grid">
-    <div class="card center">
-      <img src="/assets/img/postman-badge.svg" alt="Postman" style="width:64px;height:64px;margin-bottom:.5rem">
-      <div><strong>Postman API Fundamentals Student Expert</strong></div>
-    </div>
-    <!-- Agregar más certificaciones aquí -->
+<!-- 
+  ===================================
+  COMPONENTE: Certifications (Certificaciones)
+  ===================================
+  Muestra certificaciones profesionales en formato galería con:
+  - Insignia de certificación
+  - Título de la certificación
+  - Efectos hover interactivos
+  - Lazy loading para optimización
+-->
+
+<!-- Sección de Certificaciones Profesionales -->
+<section id="certifications" class="certifications-section" role="region" aria-labelledby="cert-title">
+  <!-- Encabezado principal -->
+  <header class="section-header">
+    <h2 id="cert-title">Certificaciones</h2>
+  </header>
+
+  <!-- Grid de certificaciones con elemento semántico figure -->
+  <div class="certifications-grid" role="list">
+    <!-- Certificación: Postman API Fundamentals Student Expert -->
+    <article class="certification-item" role="listitem" aria-labelledby="cert-postman-title">
+      <figure class="certification-badge">
+        <!-- Imagen con lazy loading para optimizar rendimiento -->
+        <img 
+          src="/assets/img/postman-badge.svg" 
+          alt="Insignia de certificación Postman API Fundamentals Student Expert"
+          loading="lazy"
+        >
+        <!-- Título de certificación como figcaption semántico -->
+        <figcaption id="cert-postman-title" class="certification-title">
+          Postman API Fundamentals Student Expert
+        </figcaption>
+      </figure>
+    </article>
+
+    <!-- Nota: Agregar más certificaciones aquí siguiendo el mismo patrón figure/figcaption -->
   </div>
 </section>

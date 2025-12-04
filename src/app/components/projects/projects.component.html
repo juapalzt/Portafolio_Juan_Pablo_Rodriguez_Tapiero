@@ -1,48 +1,74 @@
-<!-- Sección de Proyectos -->
-<section id="projects" class="container projects-section">
+<!-- 
+  ===================================
+  COMPONENTE: Projects (Proyectos)
+  ===================================
+  Galería de proyectos destacados en formato grid responsivo con:
+  - Imágenes con overlay y efecto zoom en hover
+  - Tarjetas con sombras y animaciones suaves
+  - Tecnologías destacadas con badges
+  - Descripción y enlace al repositorio
+  - Responsive: 3 columnas (desktop) → 2 (tablet) → 1 (móvil)
+  - Tema claro/oscuro compatible
+  - Accesibilidad: ARIA labels, semantic HTML, keyboard navigation
+-->
+
+<!-- Sección principal de Proyectos -->
+<section id="projects" class="container projects-section" role="region" aria-labelledby="projects-title">
+  <!-- Encabezado de sección -->
   <header class="section-header">
-    <h2>Proyectos</h2>
-    <p class="section-subtitle muted">Proyectos destacados y casos de éxito</p>
+    <h2 id="projects-title">Proyectos Destacados</h2>
+    <p class="section-subtitle muted">Portafolio de proyectos y casos de éxito</p>
   </header>
   
-  <!-- Grid de proyectos con layout responsivo -->
-  <div class="projects-grid" role="list">
+  <!-- Grid de proyectos con diseño responsivo: auto-fit adapta columnas -->
+  <div class="projects-grid" role="list" aria-label="Lista de proyectos">
+    <!-- Tarjeta individual de proyecto (repetida con *ngFor) -->
     <article 
       *ngFor="let p of projects" 
-      class="project-card card" 
+      class="project-card" 
       role="listitem" 
       [attr.aria-label]="'Proyecto: ' + p.title">
       
-      <!-- Imagen del proyecto -->
+      <!-- Contenedor de imagen con overlay y efecto hover -->
       <figure class="project-image-container">
+        <!-- Imagen del proyecto con lazy loading -->
         <img 
           [src]="p.image" 
           [alt]="p.title + ' - captura del proyecto'" 
           class="project-image" 
-          loading="lazy" />
+          loading="lazy"
+          decoding="async" />
+        
+        <!-- Overlay gradiente oscuro (aparece en hover) -->
+        <div class="project-overlay" aria-hidden="true"></div>
       </figure>
       
-      <!-- Contenido del proyecto -->
+      <!-- Contenido: título, tecnologías, descripción y CTA -->
       <div class="project-content">
+        <!-- Título del proyecto -->
         <h3 class="project-title">{{ p.title }}</h3>
         
-        <!-- Tecnologías usadas -->
-        <div class="project-tech muted" role="status" aria-label="Tecnologías usadas">
-          {{ p.technologies.join(', ') }}
+        <!-- Badges de tecnologías: stack técnico usado -->
+        <div class="project-tech-stack" role="list" aria-label="Tecnologías utilizadas">
+          <span 
+            *ngFor="let tech of p.technologies" 
+            class="tech-badge" 
+            role="listitem">{{ tech }}</span>
         </div>
         
-        <!-- Descripción -->
-        <p class="project-description muted">{{ p.description }}</p>
+        <!-- Descripción breve del proyecto -->
+        <p class="project-description">{{ p.description }}</p>
         
-        <!-- Enlace al repositorio -->
-        <div class="project-actions">
+        <!-- Llamada a la acción: enlace al repositorio -->
+        <div class="project-footer">
           <a 
             [href]="p.repo" 
             target="_blank" 
             rel="noopener noreferrer" 
             class="project-link" 
             [attr.aria-label]="'Ver repositorio de ' + p.title + ' en GitHub (abre en nueva ventana)'">
-            Ver Repositorio →
+            <span>Ver en GitHub</span>
+            <span class="link-icon" aria-hidden="true">↗</span>
           </a>
         </div>
       </div>

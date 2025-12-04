@@ -1,26 +1,45 @@
-:host { display:block; }
-
-/* 
-  ========================================
-  ESTILOS: Projects Component
-  ========================================
-  Componente que muestra grid de proyectos con tarjetas interactivas.
-  Incluye efecto hover, lazy loading de imágenes y responsividad.
-*/
-
-/* Estilos para la sección de Proyectos con responsividad mejorada */
-.projects-section {
-  margin-top: 2rem;
-  padding: 0 0 1rem 0;
+:host {
+  display: block;
 }
 
-/* Encabezado de sección */
+/* ============================================================================
+   ESTILOS: Projects Component
+   ============================================================================
+   Componente que muestra galería de proyectos en grid responsivo.
+   Características:
+   - Tarjetas con imagen, overlay gradiente y hover animations
+   - Badges de tecnologías (stack técnico)
+   - Efecto zoom en imagen + elevación de tarjeta
+   - Grid auto-adaptable: 3 cols (desktop) → 2 cols (tablet) → 1 col (móvil)
+   - Soporta tema claro y oscuro
+   - Lazy loading de imágenes
+   - Accesibilidad completa: ARIA, semantic HTML, keyboard navigation
+   ========================================================================== */
+
+/* ============================================================================
+   SECCIÓN PRINCIPAL
+   ========================================================================== */
+
+/* Contenedor principal de proyectos */
+.projects-section {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  padding: 0;
+}
+
+/* Encabezado: título y subtítulo */
 .section-header {
   margin-bottom: 2rem;
   
   h2 {
-    margin-bottom: 0.5rem;
     font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-color);
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     
     @media (max-width: 768px) {
       font-size: 1.6rem;
@@ -28,113 +47,278 @@
   }
 }
 
+/* Subtítulo descriptivo */
 .section-subtitle {
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 400;
+  color: var(--muted);
+  margin: 0.25rem 0 0 0;
 }
 
-/* 
-  Grid de proyectos responsivo
-  Auto-fit adapta cantidad de columnas según espacio disponible
-*/
+/* ============================================================================
+   GRID DE PROYECTOS
+   ========================================================================== */
+
+/* Grid responsivo: auto-fit adapta número de columnas según espacio */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
   
   @media (max-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+    gap: 1.5rem;
   }
   
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 }
 
-/* Tarjeta individual de proyecto con interactividad */
+/* ============================================================================
+   TARJETA DE PROYECTO
+   ========================================================================== */
+
+/* Tarjeta individual: contenedor flex que crece */
 .project-card {
   display: flex;
   flex-direction: column;
   height: 100%;
-  transition: transform 200ms ease, box-shadow 200ms ease;
+  background: var(--card);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 111, 191, 0.1);
+  transition: all 280ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(15, 111, 191, 0.05);
   
+  /* Efecto hover: elevación y sombra mejorada */
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(15,111,191,0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(15, 111, 191, 0.15);
+    border-color: var(--accent);
+  }
+  
+  /* Focus accesible: contorno visible */
+  &:focus-within {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
   }
 }
 
-/* Contenedor de imagen con overflow hidden para bordes redondeados */
-.project-image-container {
-  margin: -1rem -1rem 1rem -1rem;
-  overflow: hidden;
-  border-radius: 14px 14px 0 0;
-}
+/* ============================================================================
+   IMAGEN Y OVERLAY
+   ========================================================================== */
 
-/* Imagen del proyecto con efecto zoom en hover */
-.project-image {
+/* Contenedor de imagen: figura semántica con posicionamiento relativo */
+.project-image-container {
+  position: relative;
   width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
-  transition: transform 300ms ease;
+  height: 200px;
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a2e, #0f3460);
   
-  .project-card:hover & {
-    transform: scale(1.05);
+  @media (max-width: 768px) {
+    height: 180px;
   }
   
   @media (max-width: 480px) {
-    height: 150px;
+    height: 160px;
   }
 }
 
-/* Contenedor de contenido que crece para llenar espacio disponible */
+/* Imagen del proyecto: object-fit cover para mantener aspect ratio */
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 320ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  
+  /* Efecto zoom en hover de la tarjeta */
+  .project-card:hover & {
+    transform: scale(1.08);
+  }
+}
+
+/* Overlay gradiente oscuro: aparece en hover para mejorar contraste */
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 111, 191, 0.2), rgba(237, 9, 9, 0.1));
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+  
+  /* Mostrar overlay en hover */
+  .project-card:hover & {
+    opacity: 1;
+  }
+}
+
+/* ============================================================================
+   CONTENIDO DE LA TARJETA
+   ========================================================================== */
+
+/* Contenedor del contenido: flex column que crece */
 .project-content {
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 0.6rem;
+  gap: 0.75rem;
+  padding: 1.25rem;
 }
 
+/* Título del proyecto */
 .project-title {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   margin: 0;
+  color: var(--text-color);
+  line-height: 1.3;
+  
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
 }
 
-.project-tech {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+/* ============================================================================
+   BADGES DE TECNOLOGÍAS
+   ========================================================================== */
+
+/* Contenedor de badges: flex wrap */
+.project-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
+/* Badge individual: pequeño, redondeado, con background sutil */
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.75rem;
+  background: linear-gradient(90deg, rgba(15, 111, 191, 0.1), rgba(237, 9, 9, 0.05));
+  border: 1px solid var(--accent);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+  transition: all 150ms ease;
+  
+  /* Efecto hover: fondo más sólido */
+  &:hover {
+    background: linear-gradient(90deg, rgba(15, 111, 191, 0.15), rgba(237, 9, 9, 0.1));
+    transform: translateY(-2px);
+  }
+}
+
+/* ============================================================================
+   DESCRIPCIÓN Y FOOTER
+   ========================================================================== */
+
+/* Descripción del proyecto */
 .project-description {
   font-size: 0.95rem;
-  line-height: 1.5;
-  flex: 1;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--text-color);
+  flex: 1; /* Crece para dejar espacio para el footer */
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 }
 
-/* Acciones del proyecto (botones/enlaces) */
-.project-actions {
+/* Footer: contiene el enlace al repositorio */
+.project-footer {
   margin-top: auto;
-  padding-top: 0.8rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(15, 111, 191, 0.1);
 }
 
-/* Enlaces a repositorio con efecto hover */
+/* Enlace al repositorio: CTA con icono animado */
 .project-link {
   display: inline-flex;
   align-items: center;
+  gap: 0.5rem;
   color: var(--accent);
   font-weight: 600;
+  font-size: 0.95rem;
   text-decoration: none;
-  gap: 0.4rem;
-  transition: gap 200ms ease;
+  transition: all 200ms ease;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
   
+  /* Efecto hover: separación aumentada y texto subrayado */
   &:hover {
     gap: 0.8rem;
+    background: rgba(15, 111, 191, 0.05);
+    
+    span:last-child {
+      transform: translateX(2px) translateY(-2px);
+    }
+  }
+  
+  /* Focus accesible: contorno visible */
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 }
-.card { padding:1rem }
-.card a { color:var(--accent) }
+
+/* Icono del enlace: rotado 45 grados para indicar apertura en nueva ventana */
+.link-icon {
+  display: inline-block;
+  transition: transform 220ms ease;
+  font-size: 1.1rem;
+}
+
+/* ============================================================================
+   RESPONSIVE: Adaptaciones para pantallas pequeñas
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .projects-section {
+    margin-top: 1.75rem;
+    margin-bottom: 1.75rem;
+  }
+  
+  .project-content {
+    padding: 1rem;
+    gap: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-content {
+    padding: 0.9rem;
+  }
+  
+  .tech-badge {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* ============================================================================
+   TEMA LIGHT: Asegurar opacity en contenedores
+   ========================================================================== */
+
+:host-context(.theme-light) .project-card {
+  background: var(--card);
+  backdrop-filter: none;
+}
+
+:host-context(.theme-light) .project-image-container {
+  background: linear-gradient(135deg, #f0f4ff, #e0e7ff);
+}

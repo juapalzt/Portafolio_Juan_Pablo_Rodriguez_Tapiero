@@ -1,107 +1,346 @@
 :host { display: block; }
 
 /* 
-  ========================================
-  ESTILOS: Certifications Component
-  ========================================
-  Componente que muestra certificaciones en galería responsiva.
-  Incluye efectos de escala, sombras y lazy loading de imágenes.
+  ============================================================
+  ESTILOS: Certifications Component (Certificaciones)
+  ============================================================
+  
+  Componente que muestra certificaciones profesionales en grid
+  responsivo con diseño moderno, animaciones suaves y efectos
+  interactivos. Similar a Skills pero enfocado en credenciales.
+  
+  SECCIONES:
+  - SECCIÓN PRINCIPAL: Estilos del contenedor externo
+  - ENCABEZADO: Título y subtítulo
+  - GRID: Sistema de columnas responsivo
+  - TARJETAS: Estilos de certificaciones individuales
+  - ICONOS: Contenedores de emojis con animaciones
+  - TÍTULOS Y DESCRIPCIONES: Tipografía y colores
+  - BADGES DE ETIQUETAS: Tags descriptivos
+  - EFECTOS HOVER: Transiciones y transformaciones
+  - RESPONSIVE: Breakpoints para mobile, tablet, desktop
+  - ACCESIBILIDAD: Focus states, aria-labels, semantic HTML
+  - TEMA LIGHT: Estilos para modo claro
 */
 
-/* Estilos para la sección de Certificaciones */
+/* 
+  ============================================================
+  SECCIÓN PRINCIPAL
+  ============================================================
+  Contenedor del componente con espaciado y alineación
+*/
 .certifications-section {
   margin-top: 2rem;
+  padding: 1.5rem;
 }
 
-/* Encabezado de sección con tipografía responsiva */
+/* 
+  ============================================================
+  ENCABEZADO
+  ============================================================
+  Título principal con subt ítulo descriptivo y gradiente
+*/
 .section-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
   
+  /* Título principal con gradient de acento1 a acento2 */
   h2 {
-    font-size: 1.8rem;
-    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     
     @media (max-width: 768px) {
       font-size: 1.5rem;
     }
   }
+  
+  /* Subt ítulo descriptivo con color muted */
+  .section-subtitle {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.5;
+  }
 }
 
 /* 
-  Grid de certificaciones responsivo
-  Adapta columnas según espacio disponible
+  ============================================================
+  GRID
+  ============================================================
+  Sistema de columnas responsivo con auto-fit y minmax
+  Adapta dinámicamente el número de columnas según espacio disponible
+  Mínimo 200px por celda, máximo distribuido equitativamente
 */
 .certifications-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   
+  /* Tablet: 2 columnas */
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
   
+  /* Mobile: 1 columna */
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
-    gap: 1rem;
   }
 }
 
-/* Elemento individual de certificación */
+/* 
+  ============================================================
+  TARJETAS (CERTIFICATION ITEM)
+  ============================================================
+  Contenedor de cada certificación
+  Incluye estructura flexbox, bordes, fondos y transiciones suaves
+*/
 .certification-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 1.5rem 1rem;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid rgba(15, 111, 191, 0.1);
+  transition: all 280ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  min-height: 240px;
+  position: relative;
+  overflow: hidden;
+  
+  /* Pseudo-elemento con gradiente de fondo sutil en hover */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(15, 111, 191, 0.1), rgba(237, 9, 9, 0.05));
+    opacity: 0;
+    transition: opacity 280ms ease;
+    pointer-events: none;
+  }
+  
+  /* EFECTOS HOVER: Elevación, cambio de borde, sombra animada */
+  &:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 32px rgba(15, 111, 191, 0.15);
+    
+    /* Mostrar gradiente de fondo */
+    &::before {
+      opacity: 1;
+    }
+    
+    /* Animar icono en hover */
+    .cert-icon-container {
+      transform: scale(1.15) rotate(-5deg);
+    }
+  }
+  
+  /* FOCUS-VISIBLE: Estado de foco para accesibilidad (keyboard navigation) */
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 }
 
 /* 
-  Contenedor de insignia usando elemento semántico <figure>
-  Incluye imagen y figcaption con interactividad
+  ============================================================
+  CONTENEDOR DE ICONOS
+  ============================================================
+  Estilos para el contenedor de emojis/iconos representativos
+  Incluye animaciones y transiciones suaves
 */
-.certification-badge {
+.cert-icon-container {
+  width: 3.5rem;
+  height: 3.5rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(15, 111, 191, 0.15), rgba(237, 9, 9, 0.1));
+  border: 2px solid var(--accent);
+  transition: all 280ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  flex-shrink: 0;
+}
+
+/* Icono emoji responsivo */
+.cert-icon {
+  font-size: 1.8rem;
+  display: block;
+  line-height: 1;
+}
+
+/* 
+  ============================================================
+  TÍTULOS Y DESCRIPCIONES
+  ============================================================
+  Tipografía y colores del título y descripción de certificación
+*/
+
+/* Título de certificación destacado */
+.cert-title {
+  font-size: 1.1rem;
+  font-weight: 700;
   margin: 0;
-  padding: 1rem;
-  text-align: center;
+  color: var(--accent);
+  z-index: 1;
+  position: relative;
+}
+
+/* Descripción de la certificación */
+.cert-description {
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+  opacity: 0.9;
+  color: var(--text-color);
+  z-index: 1;
+  position: relative;
+}
+
+/* 
+  ============================================================
+  BADGES DE ETIQUETAS (CERT TAGS)
+  ============================================================
+  Lista de tags descriptivos bajo cada certificación
+  Dise ño de pills con gradientes y bordes
+*/
+
+/* Contenedor de tags */
+.cert-tags {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0.5rem 0 0 0;
+  padding: 0;
+  z-index: 1;
+  position: relative;
+}
+
+/* Tag individual estilizado como pill/badge */
+.cert-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
   border-radius: 12px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(90deg, rgba(15, 111, 191, 0.15), rgba(237, 9, 9, 0.1));
+  border: 1px solid rgba(15, 111, 191, 0.3);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   transition: all 200ms ease;
-  width: 100%;
+  white-space: nowrap;
   
-  /* Efectos hover: escala, color de borde y sombra */
+  /* Efecto hover en tags */
   &:hover {
-    background: rgba(15,111,191,0.1);
+    background: linear-gradient(90deg, rgba(15, 111, 191, 0.25), rgba(237, 9, 9, 0.15));
     border-color: var(--accent);
     transform: scale(1.05);
-    box-shadow: 0 12px 24px rgba(15,111,191,0.2);
-  }
-  
-  /* Imagen de la insignia con lazy loading */
-  img {
-    width: 64px;
-    height: 64px;
-    object-fit: contain;
-    transition: transform 200ms ease;
-    
-    .certification-badge:hover & {
-      transform: scale(1.1);
-    }
-    
-    @media (max-width: 480px) {
-      width: 56px;
-      height: 56px;
-    }
   }
 }
 
-/* Título de la certificación en elemento figcaption */
-.certification-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin: 0;
-  line-height: 1.4;
+/* 
+  ============================================================
+  RESPONSIVE DESIGN
+  ============================================================
+  Ajustes visuales para diferentes tamaños de pantalla
+*/
+
+/* Tablet: Reduce tamaño de elementos */
+@media (max-width: 768px) {
+  .section-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .cert-icon-container {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .cert-icon {
+    font-size: 1.5rem;
+  }
+  
+  .cert-title {
+    font-size: 1rem;
+  }
 }
+
+/* Mobile: Ajustes adicionales para pantallas peque ñas */
+@media (max-width: 480px) {
+  .certifications-section {
+    padding: 1rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .certification-item {
+    min-height: 200px;
+    padding: 1rem;
+  }
+  
+  .cert-tags {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cert-tag {
+    width: 100%;
+  }
+}
+
+/* 
+  ============================================================
+  ACCESIBILIDAD
+  ============================================================
+  Focus states, high contrast, semantic HTML
+*/
+
+/* Asegurar suficiente contraste en focus */
+.certification-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.cert-tag:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* 
+  ============================================================
+  TEMA LIGHT
+  ============================================================
+  Estilos específicos para el tema claro
+  Ajusta colores de fondo, texto y bordes para legibilidad
+*/
+
+:host-context(.theme-light) {
+  .cert-icon-container {
+    background: linear-gradient(135deg, rgba(15, 111, 191, 0.08), rgba(237, 9, 9, 0.05));
+    border-color: rgba(15, 111, 191, 0.4);
+  }
+  
+  .cert-tag {
+    background: linear-gradient(90deg, rgba(15, 111, 191, 0.1), rgba(237, 9, 9, 0.08));
+    border-color: rgba(15, 111, 191, 0.25);
+    color: #0f6fbf;
+  }
+  
+  .certification-item::before {
+    background: linear-gradient(135deg, rgba(15, 111, 191, 0.08), rgba(237, 9, 9, 0.04));
+  }
+}
+

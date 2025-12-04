@@ -1,47 +1,126 @@
 <!-- 
-  ===================================
+  ================================================
   COMPONENTE: About (Sobre mí)
-  ===================================
-  Muestra información profesional resumida, incluyendo:
-  - Descripción principal del perfil
-  - Habilidades técnicas principales
-  - Herramientas y tecnologías utilizadas
-  Utiliza estructura semántica con roles ARIA para accesibilidad.
+  ================================================
+  Muestra información profesional resumida con diseño
+  moderno similar a Experience: tarjetas grandes con
+  iconos, descripciones y badges de especialidades.
+  
+  CARACTERÍSTICAS:
+  - Grid responsivo con auto-fit y minmax
+  - Tarjetas grandes con iconos emoji destacados
+  - Descripciones con lista de puntos de especialidad
+  - Badges con áreas clave y expertises
+  - Hover effects con elevación y sombra
+  - Lazy loading para imágenes
+  - Accesibilidad: role="region", role="list", role="listitem", aria-labelledby
+  - Diseño tema-aware: usa CSS custom properties
+  - Responsive: columnas adaptables en mobile/tablet
 -->
 
-<!-- Sección "Sobre mí" con información profesional y habilidades destacadas -->
+<!-- Sección "Sobre mí" con información profesional -->
 <section id="about" class="about-section card" role="region" aria-labelledby="about-title">
-  <!-- Encabezado principal -->
+  <!-- Encabezado: título con subtítulo descriptivo -->
   <header class="section-header">
     <h2 id="about-title">Sobre mí</h2>
+    <p class="section-subtitle">Desarrollador Full Stack y especialista en QA Automation con pasión por la calidad</p>
   </header>
 
-  <!-- Descripción principal del perfil -->
+  <!-- Descripción principal: párrafo ejecutivo -->
   <p class="about-intro">
-    Soy QA Automation Engineer y Full Stack Developer con experiencia en pruebas automatizadas, 
-    integración continua y desarrollo web. Me especializo en crear pipelines de calidad que 
-    permiten entregas rápidas y seguras.
+    Soy <strong>QA Automation Engineer</strong> y <strong>Full Stack Developer</strong> apasionado por garantizar la calidad 
+    en cada línea de código. Con experiencia en pruebas automatizadas, integración continua y desarrollo web, 
+    me especializo en crear pipelines de QA robustos que permiten entregas rápidas, seguras y confiables.
   </p>
 
-  <!-- Contenedor de habilidades y herramientas con lista semántica -->
-  <div class="about-highlights" role="list">
-    <!-- Tarjeta de habilidades técnicas -->
-    <article class="about-card" role="listitem" aria-labelledby="skills-title">
-      <h3 id="skills-title" class="card-title">Habilidades</h3>
-      <ul class="card-list">
-        <li>QA Automation (Selenium, Appium, Postman, JMeter)</li>
-        <li>Lenguajes: Java, JavaScript, Python, Swift</li>
-        <li>Frameworks: Angular, Spring, Node.js</li>
-      </ul>
+  <!-- Grid de especialidades: cards grandes con iconos y detalles -->
+  <div class="about-grid" role="list">
+    <!-- Card 1: QA Automation Specialist -->
+    <article class="about-item" role="listitem" aria-labelledby="qa-title">
+      <!-- Icono representativo con contenedor destacado -->
+      <div class="item-icon-container">
+        <span class="item-icon" aria-hidden="true">🤖</span>
+      </div>
+      
+      <!-- Título y descripción -->
+      <div class="item-content">
+        <h3 id="qa-title" class="item-title">QA Automation Specialist</h3>
+        <p class="item-description">
+          Especialista en diseño e implementación de estrategias de testing automatizado. 
+          Experto en frameworks como Selenium, Appium, Postman y JMeter. Creo pipelines 
+          de CI/CD robustos que garantizan la calidad sin sacrificar velocidad.
+        </p>
+        
+        <!-- Lista de puntos clave -->
+        <ul class="item-features" aria-label="Especialidades en QA Automation">
+          <li><strong>Pruebas Automatizadas:</strong> E2E, API, Performance</li>
+          <li><strong>Frameworks:</strong> Selenium, Appium, Postman, JMeter</li>
+          <li><strong>Estrategia:</strong> Test Pyramid, BDD, Page Object Model</li>
+        </ul>
+        
+        <!-- Badges con áreas de expertise -->
+        <ul class="item-tags" aria-label="Tags de QA Automation">
+          <li class="item-tag">Testing</li>
+          <li class="item-tag">Automation</li>
+          <li class="item-tag">CI/CD</li>
+        </ul>
+      </div>
     </article>
 
-    <!-- Tarjeta de herramientas -->
-    <article class="about-card" role="listitem" aria-labelledby="tools-title">
-      <h3 id="tools-title" class="card-title">Herramientas</h3>
-      <ul class="card-list">
-        <li>Docker, Git, CI/CD (GitHub Actions)</li>
-        <li>Observabilidad y logs</li>
-      </ul>
+    <!-- Card 2: Full Stack Developer -->
+    <article class="about-item" role="listitem" aria-labelledby="fullstack-title">
+      <div class="item-icon-container">
+        <span class="item-icon" aria-hidden="true">💻</span>
+      </div>
+      
+      <div class="item-content">
+        <h3 id="fullstack-title" class="item-title">Full Stack Developer</h3>
+        <p class="item-description">
+          Desarrollo de aplicaciones web completas desde frontend hasta backend. 
+          Experto en Angular para interfaces modernas y responsivas, Java/Spring y Node.js 
+          para backends robustos. Apasionado por escribir código limpio y mantenible.
+        </p>
+        
+        <ul class="item-features" aria-label="Especialidades en Full Stack">
+          <li><strong>Frontend:</strong> Angular, TypeScript, SCSS, RWD</li>
+          <li><strong>Backend:</strong> Java Spring, Node.js, Databases</li>
+          <li><strong>DevOps:</strong> Docker, GitHub Actions, CI/CD</li>
+        </ul>
+        
+        <ul class="item-tags" aria-label="Tags de Full Stack">
+          <li class="item-tag">Frontend</li>
+          <li class="item-tag">Backend</li>
+          <li class="item-tag">DevOps</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- Card 3: Quality & Best Practices -->
+    <article class="about-item" role="listitem" aria-labelledby="quality-title">
+      <div class="item-icon-container">
+        <span class="item-icon" aria-hidden="true">⭐</span>
+      </div>
+      
+      <div class="item-content">
+        <h3 id="quality-title" class="item-title">Quality & Best Practices</h3>
+        <p class="item-description">
+          Compromiso absoluto con la excelencia técnica. Implemento SOLID principles, 
+          arquitecturas limpias y metodologías ágiles. Creo documentación clara y código 
+          autodocumentado que facilita la colaboración y el mantenimiento del proyecto.
+        </p>
+        
+        <ul class="item-features" aria-label="Especialidades en Calidad">
+          <li><strong>Código Limpio:</strong> SOLID, Design Patterns, Code Review</li>
+          <li><strong>Documentación:</strong> README, API Docs, Arquitectura</li>
+          <li><strong>Metodología:</strong> Agile, Scrum, Kanban, Git Flow</li>
+        </ul>
+        
+        <ul class="item-tags" aria-label="Tags de Calidad">
+          <li class="item-tag">Quality</li>
+          <li class="item-tag">Best Practices</li>
+          <li class="item-tag">Mentoring</li>
+        </ul>
+      </div>
     </article>
   </div>
 </section>

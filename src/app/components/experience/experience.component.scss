@@ -1,121 +1,326 @@
-:host { display: block; }
-
-/* 
-  ========================================
-  ESTILOS: Experience Component
-  ========================================
-  Componente que muestra historial laboral en formato timeline.
-  Incluye efectos visuales, responsividad y accesibilidad.
-*/
-
-/* Estilos para la sección de Experiencia */
-.experience-section {
-  margin-top: 2rem;
+:host {
+  display: block;
 }
 
-/* Encabezado de sección con tipografía responsiva */
+/* ============================================================================
+   ESTILOS: Experience Component
+   ============================================================================
+   Componente que muestra el historial laboral en formato timeline moderno.
+   Características:
+   - Timeline visual con indicadores (círculos)
+   - Línea conectora vertical (decorativa)
+   - Cards de experiencia con hover effects
+   - Soporta tema oscuro (.theme-dark) y tema claro (.theme-light)
+   - Responsivo: layout desktop → mobile stack
+   - Accesibilidad: ARIA labels, semantic HTML, focus-visible states
+   ========================================================================== */
+
+/* ============================================================================
+   SECCIÓN PRINCIPAL
+   ========================================================================== */
+
+/* Contenedor principal de la sección */
+.experience-section {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Encabezado de sección: título y subtítulo */
 .section-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   
   h2 {
-    font-size: 1.8rem;
-    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-color);
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     
     @media (max-width: 768px) {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
     }
   }
 }
 
-/* 
-  Timeline contenedor: flex column + línea visual opcional
-  La línea visual se crea con ::before pseudo-elemento
-*/
+/* Subtítulo descriptivo */
+.section-subtitle {
+  margin: 0.25rem 0 0 0;
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* ============================================================================
+   TIMELINE: Contenedor y línea visual
+   ========================================================================== */
+
+/* Contenedor del timeline: flex column + línea vertical */
 .experience-timeline {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.5rem;
   position: relative;
+  padding-left: 2rem;
 }
 
-/* Línea vertical visual para el timeline (decorativa, oculta en móvil) */
+/* Línea vertical visual que conecta los items (decorativa) */
 .experience-timeline::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 0.5rem; /* Centrada en el marcador */
+  top: 1.5rem;
   bottom: 0;
   width: 2px;
-  background: var(--accent);
-  opacity: 0.3;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  opacity: 0.2;
+  
+  @media (max-width: 768px) {
+    left: 0.35rem;
+  }
   
   @media (max-width: 480px) {
-    display: none;
+    display: none; /* Ocultar línea en pantallas muy pequeñas */
   }
 }
 
-/* Elemento individual de experiencia con borde izquierdo destacado */
+/* ============================================================================
+   ELEMENTOS DE EXPERIENCIA (ITEMS)
+   ========================================================================== */
+
+/* Elemento individual del timeline */
 .experience-item {
-  padding: 1rem;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.03);
-  border-left: 3px solid var(--accent);
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  transition: all 220ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+/* Marcador visual (círculo) del timeline */
+.timeline-marker {
+  flex: 0 0 1rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  position: relative;
+  margin-top: 0.25rem;
+  box-shadow: 0 0 0 4px rgba(15, 111, 191, 0.1);
   transition: all 200ms ease;
   
-  &:hover {
-    background: rgba(255,255,255,0.06);
-    transform: translateX(4px);
-  }
-  
   @media (max-width: 480px) {
-    padding: 0.8rem;
+    margin-top: 0;
   }
 }
 
-/* Encabezado del elemento de experiencia: fecha y título alineados */
+/* Efecto hover en el marcador */
+.experience-item:hover .timeline-marker {
+  transform: scale(1.3);
+  box-shadow: 0 0 0 8px rgba(15, 111, 191, 0.2);
+}
+
+/* Contenedor del contenido (empresa, cargo, detalles) */
+.experience-content {
+  flex: 1;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 1px solid rgba(15, 111, 191, 0.1);
+  transition: all 220ms ease;
+  
+  .experience-item:hover & {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(15, 111, 191, 0.15);
+    transform: translateY(-4px);
+  }
+}
+
+/* ============================================================================
+   ENCABEZADO: Empresa, cargo y duración
+   ========================================================================== */
+
+/* Encabezado del item: flexbox justificado */
 .experience-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  margin-bottom: 0.8rem;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
   flex-wrap: wrap;
 }
 
-/* Título de experiencia (empresa - puesto) */
-.experience-title {
-  font-size: 1.1rem;
+/* Grupo de título y cargo */
+.experience-title-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Nombre de la empresa */
+.experience-company {
+  font-size: 1.2rem;
   font-weight: 700;
   margin: 0;
-  flex: 1;
-  
-  @media (max-width: 480px) {
-    font-size: 1rem;
-  }
+  color: var(--text-color);
+  line-height: 1.2;
 }
 
-/* Fecha de experiencia en elemento <time> semántico */
-.experience-date {
-  font-size: 0.9rem;
-  opacity: 0.8;
+/* Rol/puesto de trabajo */
+.experience-role {
+  font-size: 0.95rem;
+  margin: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Duración del trabajo: elemento <time> semántico */
+.experience-duration {
+  display: flex;
+  align-items: center;
+}
+
+/* Badge con duración visual */
+.duration-badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background: linear-gradient(90deg, rgba(15, 111, 191, 0.1), rgba(237, 9, 9, 0.1));
+  border: 1px solid var(--accent);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
   white-space: nowrap;
   
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     width: 100%;
-    display: block;
-    margin-top: 0.4rem;
+    text-align: center;
+    padding: 0.4rem 0.6rem;
   }
 }
 
-/* Lista de detalles/responsabilidades */
-.experience-details {
-  list-style-position: inside;
+/* ============================================================================
+   CUERPO: Descripción y tareas/responsabilidades
+   ========================================================================== */
+
+/* Contenedor del cuerpo (descripción + tasks) */
+.experience-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Descripción general del rol */
+.experience-description {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Lista de tareas/responsabilidades principales */
+.experience-tasks {
+  list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   font-size: 0.9rem;
   line-height: 1.6;
   
   li {
-    margin: 0.35rem 0;
+    margin: 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-color);
+    
+    /* Punto decorativo personalizado */
+    &::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      color: var(--accent-2);
+      font-size: 0.6rem;
+      font-weight: bold;
+    }
   }
+}
+
+/* ============================================================================
+   RESPONSIVE: Adaptación a pantallas pequeñas
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .experience-section {
+    margin-top: 1.75rem;
+    margin-bottom: 1.75rem;
+  }
+  
+  .experience-timeline {
+    gap: 1.25rem;
+  }
+  
+  .experience-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .experience-content {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience-timeline {
+    padding-left: 0;
+    gap: 1rem;
+  }
+  
+  .timeline-marker {
+    display: none; /* Ocultar marcador en móvil ultra pequeño */
+  }
+  
+  .experience-content {
+    padding: 0.9rem;
+    border-radius: 10px;
+  }
+  
+  .experience-company {
+    font-size: 1.1rem;
+  }
+  
+  .experience-tasks li {
+    padding-left: 1.25rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* ============================================================================
+   ACCESIBILIDAD: Focus states y outline visible
+   ========================================================================== */
+
+.experience-content:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+/* Tema light: asegurar que el contenido es opaco */
+:host-context(.theme-light) .experience-content {
+  background: var(--card);
+  backdrop-filter: none;
+}
+
+:host-context(.theme-light) .experience-tasks li::before {
+  color: var(--accent-2);
 }

@@ -1,100 +1,336 @@
-:host { display:block; padding:1rem 0; }
-header { background: transparent; border: 0; }
-/* Ensure nav participates in flex layout and doesn't collapse */
+/* ============================================================================
+   HEADER COMPONENT STYLES
+   ============================================================================
+   Encabezado responsivo con navegación desktop/móvil, selector de tema,
+   y menú de acciones. Utiliza variables de tema (--accent, --accent-2, etc.)
+   para soportar temas oscuro y claro. 
+   ========================================================================== */
+
+:host {
+  display: block;
+  padding: 1rem 0;
+}
+
+header {
+  background: 0;
+  border: 0;
+}
+
+/* --- NAVEGACIÓN DESKTOP (nav desktop en pantallas > 768px) --- */
 nav {
-	display: flex;
-	align-items: center;
-	gap: 0.6rem;
-	min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
 }
-nav ul { display: flex; align-items: center; gap: 0.6rem; }
-nav ul li a { color: #e6eef8; padding: 0.5rem 0.8rem; display:inline-block }
-nav ul li a:hover { color: var(--accent-2); }
-.logo a { font-size:1.05rem; }
 
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+nav ul li a {
+  color: var(--text-color);
+  padding: .5rem .8rem;
+  transition: color 150ms ease;
+}
+
+nav ul li a:hover {
+  color: var(--accent-2); /* Usar variable para cambio de color al pasar */
+}
+
+.logo a {
+  font-size: 1.05rem;
+}
+
+/* --- SELECTOR DE TEMA (Theme Toggle Button) --- */
 .theme-toggle-btn {
-	appearance: none;
-	border: 1px solid rgba(255,255,255,0.06);
-	background: transparent;
-	padding: 0.35rem 0.5rem;
-	border-radius: 8px;
-	color: inherit;
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, .06);
+  background: 0;
+  padding: .35rem .5rem;
+  border-radius: 8px;
+  color: inherit;
+  transition: all 150ms ease;
 }
-.theme-toggle-btn:hover { filter: brightness(0.95); }
+
+.theme-toggle-btn:hover {
+  filter: brightness(.95);
+}
+
 .theme-toggle-btn.active {
-	background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 60%, #fff 40%), var(--accent));
-	color: #fff;
-	border-color: transparent;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 60%, #fff 40%), var(--accent));
+  color: #fff;
+  border: 0;
 }
 
-/* Mobile responsive: hide desktop nav and show a mobile menu button */
-@media (max-width: 768px) {
-	.nav-desktop { display: none; }
-	.mobile-menu-btn {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		background: transparent;
-		border: 1px solid rgba(255,255,255,0.06);
-		padding: 0.4rem 0.6rem;
-		border-radius: 8px;
-		color: inherit;
-		font-size: 1.1rem;
-	}
+.mobile-menu-btn {
+  display: none;
 }
 
-/* Mobile menu overlay and panel */
+/* --- RESPONSIVE: PANTALLAS <= 768px --- */
+@media(max-width: 768px) {
+  .nav-desktop {
+    display: none;
+  }
+
+  /* Botón para abrir/cerrar menú móvil */
+  .mobile-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: 0;
+    border: 1px solid var(--accent-2); /* Usar variable de acento rojo */
+    padding: .4rem .6rem;
+    border-radius: 8px;
+    color: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 200ms ease;
+  }
+
+  .mobile-menu-btn:hover {
+    background: rgba(255, 255, 255, .08);
+  }
+
+  /* Cuando el menú está abierto, cambiar estilo del botón */
+  .mobile-menu-btn[aria-expanded="true"] {
+    background: rgba(15, 111, 191, .2);
+    border-color: var(--accent);
+  }
+}
+
+/* --- MENÚ MÓVIL: Fondo oscuro (backdrop) --- */
 .mobile-menu-backdrop {
-	position: fixed;
-	inset: 0;
-	background: rgba(0,0,0,0.35);
-	z-index: 40;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .35);
+  z-index: 40;
+  animation: fadeIn 200ms ease;
 }
+
+/* --- MENÚ MÓVIL: Panel deslizable desde la derecha --- */
 .mobile-menu {
-	position: fixed;
-	top: 0;
-	right: 0;
-	width: min(320px, 90%);
-	height: 100vh;
-	background: var(--card);
-	color: var(--text-color);
-	z-index: 50;
-	box-shadow: -8px 0 24px rgba(2,6,23,0.4);
-	padding-top: 3.2rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(320px, 90%);
+  height: 100vh;
+  background: var(--card);
+  color: var(--text-color);
+  z-index: 50;
+  box-shadow: -8px 0 24px rgba(2, 6, 23, .4);
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  animation: slideIn 300ms ease cubic-bezier(.34, 1.56, .64, 1);
 }
-.mobile-menu ul li a { display:block; padding:0.8rem 1rem; color:var(--text-color); }
-.mobile-menu .theme-toggle-btn { margin-left:0.2rem; }
 
-/* Ensure the mobile button is hidden on wider screens */
-.mobile-menu-btn { display: none; }
+/* Animación: desvanecimiento de fondo */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
-/* Debug helper: add `debug` class to the host element to visualize layout boxes
-	 Usage (in browser console): document.querySelector('app-header')?.classList.add('debug');
-*/
+/* Animación: deslizamiento desde la derecha */
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* --- Botón para cerrar menú móvil --- */
+.mobile-menu-close {
+  align-self: flex-end;
+  margin: .5rem 1rem 1rem 0;
+  background: 0;
+  border: 0;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: all 200ms ease;
+  padding: .25rem .5rem;
+  border-radius: 6px;
+}
+
+.mobile-menu-close:hover {
+  background: rgba(255, 255, 255, .1);
+}
+
+/* --- Lista de navegación móvil --- */
+.mobile-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-nav-item {
+  border-bottom: 1px solid rgba(255, 255, 255, .05);
+}
+
+.mobile-nav-item:last-child {
+  border: 0;
+}
+
+/* --- Enlaces de navegación móvil --- */
+.mobile-nav-link {
+  display: block;
+  padding: 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 200ms ease;
+  font-weight: 500;
+}
+
+.mobile-nav-link:hover {
+  background: rgba(15, 111, 191, .1);
+  color: var(--accent);
+  padding-left: 1.3rem;
+}
+
+/* --- DIVISOR dentro del menú móvil --- */
+.mobile-menu-divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+  margin: .8rem 0;
+}
+
+/* --- CONTROLES del menú móvil (tema, idioma) --- */
+.mobile-menu-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+  margin-top: auto;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+}
+
+.control-label {
+  font-size: .9rem;
+  font-weight: 600;
+  opacity: .8;
+}
+
+.language-buttons {
+  display: flex;
+  gap: .5rem;
+}
+
+/* --- BOTÓN MÓVIL DE ACCIONES (si existe panel desplegable) --- */
+.mobile-actions-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: 0;
+  border: 1px solid var(--accent-2); /* Usar variable de acento rojo en lugar de hardcoded */
+  padding: .35rem .5rem;
+  border-radius: 8px;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin-left: .25rem;
+  transition: all 200ms ease;
+}
+
+.mobile-actions-btn:hover {
+  background: rgba(255, 255, 255, .06);
+}
+
+/* --- FONDO OSCURO (backdrop) del panel de acciones --- */
+.mobile-actions-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .2);
+  z-index: 45;
+  animation: fadeIn 180ms ease;
+}
+
+/* --- PANEL DE ACCIONES MÓVIL (desliza desde abajo) --- */
+.mobile-actions-panel {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: min(260px, 90%);
+  background: var(--card);
+  color: var(--text-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, .3);
+  z-index: 60;
+  padding: .5rem .6rem;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  animation: slideUp 220ms cubic-bezier(.2, .9, .3, 1);
+}
+
+/* Animación: deslizamiento ascendente */
+@keyframes slideUp {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* --- LISTA DE ACCIONES MÓVIL --- */
+.actions-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.actions-list li {
+  border-bottom: 1px solid rgba(255, 255, 255, .04);
+}
+
+.actions-list li:last-child {
+  border: 0;
+}
+
+.actions-list a {
+  display: block;
+  padding: .9rem 1rem;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 600;
+  transition: all 150ms ease;
+  border-radius: 6px;
+  margin: 0 .25rem;
+}
+
+.actions-list a:hover {
+  background: rgba(15, 111, 191, .06);
+  color: var(--accent);
+  padding-left: 1.2rem;
+}
+
+/* --- RESPONSIVE: Mostrar botón de acciones en móviles --- */
+@media(max-width: 768px) {
+  .mobile-actions-btn {
+    display: inline-flex;
+  }
+}
+
+/* --- MODO DEBUG: mostrar contornos de elementos --- */
 :host(.debug) nav,
 :host(.debug) .mobile-menu,
 :host(.debug) .nav-desktop {
-	outline: 2px dashed rgba(15,111,191,0.9);
-	background: linear-gradient(180deg, rgba(15,111,191,0.03), rgba(15,111,191,0.01));
+  outline: 2px dashed rgba(15, 111, 191, .9);
+  background: linear-gradient(180deg, rgba(15, 111, 191, .03), rgba(15, 111, 191, .01));
 }
 
-:host(.debug) nav ul { outline: 1px dotted rgba(15,111,191,0.6); }
-
-/* Dev debug button styles */
-.dev-debug-btn {
-	position: absolute;
-	right: 0.75rem;
-	top: 0.75rem;
-	width: 36px;
-	height: 36px;
-	border-radius: 50%;
-	border: 1px solid rgba(255,255,255,0.08);
-	background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 16px;
-	z-index: 120;
-	cursor: pointer;
+:host(.debug) nav ul {
+  outline: 1px dotted rgba(15, 111, 191, .6);
 }
-.dev-debug-btn:hover { transform: translateY(-1px); }

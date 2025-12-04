@@ -1,69 +1,113 @@
-<!-- Sección de Contacto -->
-<section id="contact" class="container contact-section card">
+<!-- ========================================
+  Sección de Contacto
+  Componente que gestiona el formulario de contacto con validación reactiva,
+  integración con WhatsApp y redes sociales.
+======================================== -->
+<section id="contact" class="container contact-section card" role="region" aria-labelledby="contact-title">
+  <!-- Encabezado de la sección -->
   <header class="section-header">
-    <h2>Contacto</h2>
+    <h2 id="contact-title">Contacto</h2>
     <p class="section-subtitle muted">¡Hablemos! Envíame un mensaje o conéctate por redes sociales</p>
   </header>
-  
-  <!-- Formulario de contacto -->
-  <form [formGroup]="form" (ngSubmit)="submit()" class="contact-form" novalidate>
-    <!-- Campo de nombre -->
-    <div class="form-group">
-      <label for="contact-name" class="form-label">Nombre</label>
-      <input 
-        id="contact-name" 
-        type="text" 
-        formControlName="name" 
-        class="form-input" 
-        placeholder="Tu nombre" 
-        required 
-        aria-required="true" />
+
+  <!-- Grid: formulario + tarjeta lateral de contacto rápido -->
+  <div class="contact-grid">
+    <!-- Columna principal: Formulario de contacto -->
+    <div class="contact-form-col">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="contact-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contact-name" class="form-label"><span class="form-icon">👤</span> Nombre</label>
+            <input
+              id="contact-name"
+              #contactName
+              type="text"
+              formControlName="name"
+              class="form-input"
+              placeholder="Tu nombre"
+              required
+              aria-required="true"
+              [attr.aria-invalid]="form.get('name')?.invalid && form.get('name')?.touched" />
+            <div class="field-error" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">El nombre es obligatorio.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-email" class="form-label"><span class="form-icon">✉️</span> Correo</label>
+            <input
+              id="contact-email"
+              type="email"
+              formControlName="email"
+              class="form-input"
+              placeholder="tu@email.com"
+              required
+              aria-required="true"
+              [attr.aria-invalid]="form.get('email')?.invalid && form.get('email')?.touched" />
+            <div class="field-error" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+              <span *ngIf="form.get('email')?.errors?.['required']">El correo es obligatorio.</span>
+              <span *ngIf="form.get('email')?.errors?.['email']">Introduce un correo válido.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="contact-message" class="form-label"><span class="form-icon">💬</span> Mensaje</label>
+          <textarea
+            id="contact-message"
+            formControlName="message"
+            rows="6"
+            minlength="10"
+            class="form-textarea"
+            placeholder="Tu mensaje aquí..."
+            required
+            aria-required="true"
+            [attr.aria-invalid]="form.get('message')?.invalid && form.get('message')?.touched"></textarea>
+          <div class="field-error" *ngIf="form.get('message')?.invalid && form.get('message')?.touched">
+            <span *ngIf="form.get('message')?.errors?.['required']">El mensaje es obligatorio.</span>
+            <span *ngIf="form.get('message')?.errors?.['minlength']">El mensaje es demasiado corto.</span>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="submit"
+            [disabled]="sending"
+            class="btn btn-primary submit-btn"
+            [attr.aria-busy]="sending"
+            aria-label="Enviar formulario de contacto">
+            <span *ngIf="!sending">📤 Enviar Mensaje</span>
+            <span *ngIf="sending">⏳ Enviando...</span>
+          </button>
+          <a class="btn whatsapp-cta" [href]="whatsappHref" target="_blank" rel="noopener noreferrer" aria-label="Escribirme por WhatsApp" [attr.aria-disabled]="sending" [class.disabled]="sending">💬 WhatsApp</a>
+        </div>
+
+        <!-- Estado del formulario -->
+        <div class="form-status" aria-live="polite">
+          <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+          <div *ngIf="errorMessage" class="field-error">{{ errorMessage }}</div>
+        </div>
+      </form>
     </div>
-    
-    <!-- Campo de correo -->
-    <div class="form-group">
-      <label for="contact-email" class="form-label">Correo electrónico</label>
-      <input 
-        id="contact-email" 
-        type="email" 
-        formControlName="email" 
-        class="form-input" 
-        placeholder="tu@email.com" 
-        required 
-        aria-required="true" />
-    </div>
-    
-    <!-- Campo de mensaje -->
-    <div class="form-group">
-      <label for="contact-message" class="form-label">Mensaje</label>
-      <textarea 
-        id="contact-message" 
-        formControlName="message" 
-        rows="6" 
-        class="form-textarea" 
-        placeholder="Tu mensaje aquí..." 
-        required 
-        aria-required="true"></textarea>
-    </div>
-    
-    <!-- Botón de envío -->
-    <div class="form-actions">
-      <button 
-        type="submit" 
-        [disabled]="sending" 
-        class="btn btn-primary" 
-        [attr.aria-busy]="sending" 
-        aria-label="Enviar formulario de contacto">
-        {{ sending ? 'Enviando...' : 'Enviar Mensaje' }}
-      </button>
-    </div>
-  </form>
-  
-  <!-- Enlaces de redes sociales -->
-  <div class="contact-links" role="region" aria-label="Enlaces de contacto y redes sociales">
-    <p class="contact-links-title">O conéctate directamente:</p>
-    <nav class="social-links" role="navigation" aria-label="Redes sociales">
-      <!-- Los enlaces específicos se añaden aquí -->
-    </nav>
+
+    <!-- Columna secundaria: tarjeta de contacto rápido y detalles -->
+    <aside class="contact-side-col" aria-label="Contacto rápido">
+      <div class="contact-card">
+        <div class="contact-card-header">
+          <div class="avatar">📬</div>
+          <div>
+            <h3 class="card-title">Contacto Rápido</h3>
+            <p class="card-sub">WhatsApp o correo directo</p>
+          </div>
+        </div>
+
+        <div class="contact-quick">
+          <a class="quick-btn whatsapp-quick" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+          <a class="quick-btn mail-quick" href="mailto:juapalzt@gmail.com">✉️ Enviar correo</a>
+        </div>
+
+        <div class="contact-note">
+          <p>Normalmente respondo en 24-48 horas. Adjunta detalles y enlace si corresponde.</p>
+        </div>
+      </div>
+    </aside>
   </div>
 </section>

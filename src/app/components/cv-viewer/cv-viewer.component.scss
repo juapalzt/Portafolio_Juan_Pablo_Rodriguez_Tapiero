@@ -17,3 +17,10 @@
 @media (max-width: 480px) {
 	.cv-iframe-container iframe { height: 48vh; }
 }
+
+/* Fullscreen styles: ensure iframe or modal occupy full screen and remove backdrop overlay */
+.cv-modal:-webkit-full-screen, .cv-modal:fullscreen { width:100% !important; height:100% !important; max-height: none !important; padding:0 !important; border-radius:0 !important; box-shadow:none !important; }
+.cv-iframe-container iframe:-webkit-full-screen, .cv-iframe-container iframe:fullscreen { width:100% !important; height:100% !important; border-radius:0 !important; }
+
+/* When the iframe is fullscreen browsers ignore the backdrop, but if the modal is fullscreen hide the backdrop visual */
+.cv-backdrop.fullscreen-hidden { background: transparent !important; }

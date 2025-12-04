@@ -1,220 +1,186 @@
-:host { display:block; }
-
-/* 
-  ========================================
-  ESTILOS: Contact Component
-  ========================================
-  Componente que contiene formulario de contacto + información de contacto.
-  Incluye formulario con validación, efectos visuales y responsividad.
-*/
-
-/* Estilos para la sección de Contacto con formulario responsivo */
-.contact-section {
-  margin-top: 2rem;
-  padding: 0 0 1rem 0;
-}
-
-/* Encabezado de sección */
-.section-header {
-  margin-bottom: 2rem;
+/* ========================================
+  Estilos del Componente de Contacto
   
-  h2 {
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
-    
-    @media (max-width: 768px) {
-      font-size: 1.6rem;
-    }
-  }
+  Incluye:
+  - Formulario reactivo con validaciones visuales
+  - Animaciones suaves (slideDown)
+  - Gradientes y glass-morphism
+  - Responsivo para móviles
+  - Accesibilidad (aria-invalid, focus states)
+======================================== */
+
+/* Host del componente - asegura display:block */
+:host{display:block}
+
+/* ========== Sección Principal de Contacto ========== */
+/* Contenedor con gradiente de fondo sutil y bordes redondeados */
+.contact-section{
+  margin-top:2rem;
+  padding:1.5rem;
+  background:linear-gradient(135deg,rgba(15,111,191,0.02),rgba(15,111,191,0.01));
+  border-radius:12px;
 }
 
-.section-subtitle {
-  font-size: 0.95rem;
-  font-weight: 500;
+/* ========== Encabezado de Sección ========== */
+.section-header{margin-bottom:2rem}
+/* Título con gradiente azul: acepto → acepto-2 */
+.section-header h2{margin-bottom:.8rem;font-size:2rem;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+@media(max-width:768px){.section-header h2{font-size:1.6rem}}
+/* Subtítulo con opacidad reducida */
+.section-subtitle{font-size:.95rem;font-weight:500;opacity:.9}
+
+/* ========== Formulario de Contacto ========== */
+/* Contenedor del formulario con efecto glass-morphism */
+.contact-form{
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+  background:rgba(255,255,255,.02);
+  padding:2rem;
+  border-radius:12px;
+  border:1px solid rgba(15,111,191,.08);
+  backdrop-filter:blur(10px);
+  max-width:820px;
 }
 
-/* 
-  Contenedor principal: grid de dos columnas en desktop
-  Cambia a una sola columna en tablet/mobile
-*/
-.contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
+/* ========== Campos del Formulario ========== */
+/* Contenedor de cada campo (label + input + error) */
+.form-group{display:flex;flex-direction:column;gap:.7rem}
+/* Etiqueta del campo con icono */
+.form-label{font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:.5rem;color:var(--text-color)}
+/* Icono dentro de la etiqueta (emoji) */
+.form-icon{font-size:1.1rem;opacity:.8}
+
+/* ========== Inputs y Textareas ========== */
+/* Estilos base: bordes 2px, background semi-transparente, transiciones suaves */
+.form-input,.form-textarea{
+  padding:1rem;
+  border:2px solid rgba(15,111,191,.12);
+  border-radius:10px;
+  background:rgba(255,255,255,.04);
+  color:var(--text-color);
+  font-family:inherit;
+  font-size:.95rem;
+  transition:all 250ms cubic-bezier(.4,0,.2,1);
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
 }
 
-/* Formulario de contacto */
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+/* Estados de focus: levanta el elemento, cambia color de borde, añade glow */
+.form-input:focus,.form-textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+  background:rgba(255,255,255,.08);
+  box-shadow:0 0 0 5px rgba(15,111,191,.10),0 4px 18px rgba(0,0,0,.07);
+  transform:translateY(-1px);
 }
 
-/* Grupo de formulario (label + input) */
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+/* Estado aria-invalid para errores de validación: rojo con sombra sutil */
+.form-input[aria-invalid="true"],.form-textarea[aria-invalid="true"]{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,.08)}
+
+/* Textarea específico: altura mínima con soporte responsive */
+.form-textarea{resize:vertical;min-height:140px}
+@media(max-width:480px){.form-textarea{min-height:110px}}
+
+/* ========== Acciones del Formulario ========== */
+/* Contenedor para botones: flex con gap, responsive en móvil */
+.form-actions{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+@media(max-width:480px){.form-actions{flex-direction:column}}
+
+/* ========== Botones Generales ========== */
+/* Estilos base para todos los botones: padding, radio, sombra, transiciones */
+.btn{padding:.7rem 1.2rem;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:600;cursor:pointer;border:none;transition:all 200ms ease;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+
+/* Hover: levanta el botón, aumenta sombra */
+.btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.12)}
+
+/* Active: presiona el botón sin transformación */
+.btn:active:not(:disabled){transform:translateY(0)}
+
+/* Botón de envío: gradiente azul, ancho mínimo para legibilidad */
+.submit-btn{background:linear-gradient(135deg,var(--accent),#0a4a8f);color:#fff;min-width:180px}
+.submit-btn:hover{background:linear-gradient(135deg,#0f6fbf,#0a4a8f);filter:brightness(1.05)}
+
+/* Botón WhatsApp: gradiente verde característico de WhatsApp */
+.whatsapp-cta{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none}
+.whatsapp-cta:hover:not(.disabled){filter:brightness(.95)}
+
+/* ===================== Nueva estructura: grid y columna lateral ===================== */
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:1.25rem;
+  align-items:start;
 }
 
-.form-label {
-  font-weight: 600;
-  font-size: 0.95rem;
+.contact-form-col{display:flex;justify-content:flex-start}
+
+.contact-side-col{display:flex;justify-content:flex-end}
+
+.contact-card{
+  width:100%;
+  background:var(--card);
+  border-radius:12px;
+  padding:1.25rem;
+  border:1px solid rgba(15,111,191,.06);
+  box-shadow:0 8px 24px rgba(0,0,0,.04);
 }
 
-/* 
-  Inputs y textareas con estilos consistentes
-  Includes focus states y validación visual
-*/
-.form-input,
-.form-textarea {
-  padding: 0.8rem 1rem;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px;
-  background: rgba(255,255,255,0.05);
-  color: var(--text-color);
-  font-family: inherit;
-  font-size: 0.95rem;
-  transition: all 200ms ease;
-  
-  .theme-dark & {
-    color: #e6eef8;
-    &::placeholder { color: rgba(230,238,248,0.5); }
-  }
-  
-  .theme-light & {
-    color: #0b1226;
-    &::placeholder { color: rgba(11,18,38,0.5); }
-  }
-  
-  /* Efecto focus: borde resaltado y sombra */
-  &:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(15,111,191,0.1);
-    background: rgba(255,255,255,0.08);
-  }
-  
-  /* Validación: borde rojo para campos inválidos */
-  &[aria-invalid="true"] {
-    border-color: #e74c3c;
-  }
-}
+.contact-card-header{display:flex;gap:0.75rem;align-items:center;margin-bottom:1rem}
+.avatar{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:linear-gradient(135deg,rgba(15,111,191,.08),rgba(237,9,9,.06));border:1px solid rgba(15,111,191,.08)}
+.card-title{margin:0;font-size:1.05rem;font-weight:700}
+.card-sub{margin:0;color:var(--muted);font-size:.9rem}
 
-/* Textarea con altura mínima */
-.form-textarea {
-  resize: vertical;
-  min-height: 120px;
-  
-  @media (max-width: 480px) {
-    min-height: 100px;
-  }
-}
+.contact-quick{display:flex;flex-direction:column;gap:0.6rem;margin-top:0.5rem}
+.quick-btn{display:inline-flex;align-items:center;justify-content:center;padding:.65rem 0.9rem;border-radius:10px;font-weight:700;text-decoration:none}
+.whatsapp-quick{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff}
+.mail-quick{background:rgba(15,111,191,.06);color:var(--text-color);border:1px solid rgba(15,111,191,.06)}
 
-/* Acciones del formulario (botones) */
-.form-actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 0.5rem;
-  
-  @media (max-width: 480px) {
-    flex-direction: column;
-  }
-}
+.contact-note{margin-top:0.9rem;color:var(--muted);font-size:.92rem}
 
-/* Sección de enlaces de contacto (derecha en desktop) */
-.contact-links {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
+/* ========== Sección de Enlaces de Contacto ========== */
+/* Contenedor de contacto rápido: separado por borde superior */
+.contact-links{margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(15,111,191,.1)}
+/* Título de la sección */
+.contact-links-title{font-size:1.1rem;font-weight:700;margin-bottom:1.2rem;color:var(--text-color)}
 
-/* Información individual de contacto */
-.contact-info {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
+/* ========== Enlaces de Redes Sociales ========== */
+/* Contenedor de enlaces: flex con wrap para responsividad */
+.social-links{display:flex;gap:1rem;flex-wrap:wrap}
 
-.contact-icon {
-  font-size: 1.5rem;
-  margin-top: 0.2rem;
-  min-width: 1.5rem;
-}
+/* Estilo individual para cada enlace social */
+.social-link{display:inline-flex;align-items:center;justify-content:center;padding:.6rem 1rem;border-radius:10px;background:rgba(15,111,191,.1);color:var(--text-color);text-decoration:none;transition:all 200ms ease;font-weight:600;border:1px solid rgba(15,111,191,.15);cursor:pointer}
 
-.contact-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
+/* Hover en enlaces sociales: aumenta background, levanta elemento */
+.social-link:hover{background:rgba(15,111,191,.2);border-color:rgba(15,111,191,.3);transform:translateY(-2px)}
 
-.contact-label {
-  font-weight: 600;
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
+/* Enlace WhatsApp: gradiente verde con brillo en hover */
+.whatsapp-link{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none}
+.whatsapp-link:hover{filter:brightness(1.08);transform:translateY(-2px)}
 
-.contact-value {
-  font-size: 0.95rem;
-  word-break: break-word;
-}
+/* Enlace de correo: fondo azul suave */
+.mail-link{background:rgba(15,111,191,.08)}
+.mail-link:hover{background:rgba(15,111,191,.15)}
 
-/* 
-  Enlaces sociales: flex row con wrapping
-  Mantiene espaciado consistente
-*/
-.social-links {
-  display: flex;
-  gap: 0.8rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-}
+/* ========== Mensajes de Error ========== */
+/* Mensaje de error inline: texto rojo, animación slideDown */
+.field-error{color:var(--accent-2);font-size:.9rem;margin-top:.4rem;display:flex;align-items:center;gap:.4rem;animation:slideDown 200ms ease}
 
-/* Botón individual de red social */
-.social-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.1);
-  color: var(--text-color);
-  text-decoration: none;
-  transition: all 200ms ease;
-  font-size: 1.1rem;
-  
-  &:hover {
-    background: var(--accent);
-    color: #fff;
-    transform: translateY(-2px);
-  }
-}
+/* Animación slideDown: aparece deslizando hacia abajo */
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 
-/* 
-  Mensajes de estado: éxito o error
-  Se muestra después de envío de formulario
-*/
-.sending-message {
-  font-size: 0.9rem;
-  padding: 0.8rem;
-  border-radius: 6px;
-  margin-top: 0.5rem;
-  
-  &.success {
-    background: rgba(46, 213, 115, 0.1);
-    color: #2ed573;
-  }
-  
-  &.error {
-    background: rgba(231, 76, 60, 0.1);
-    color: #e74c3c;
-  }
-}
-input, textarea { width:100%; padding:0.6rem; background:transparent; border:1px solid rgba(255,255,255,0.06); color:inherit; border-radius:8px }
-button[disabled] { opacity:0.6 }
+/* ========== Mensajes de Estado ========== */
+/* Contenedor de mensajes de estado (éxito/error) */
+.form-status{margin-top:1.5rem}
+/* Mensaje de éxito: verde con borde-izquierdo verde */
+.success-message{background:rgba(46,213,115,.12);color:#22c55e;padding:1rem;border-radius:10px;border-left:4px solid #22c55e;animation:slideDown 300ms ease}
+
+/* ========== Estados Deshabilitados ========== */
+/* Clase disabled: reduce opacidad y desactiva interacción */
+.disabled{opacity:.5;pointer-events:none;cursor:not-allowed}
+
+/* Botones deshabilitados: opacidad reducida */
+button[disabled]{opacity:.6;cursor:not-allowed}
+
+/* ========== Estilos Globales de Inputs ========== */
+/* Inputs y textareas: 100% de ancho dentro de su contenedor */
+input,textarea{width:95%;border-radius:8px}

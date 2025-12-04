@@ -1,26 +1,119 @@
-<!-- Sección Hero: presentación principal -->
-<section class="container hero-section card" id="home" role="banner" aria-label="Sección principal">
-  <!-- Contenido de texto -->
+<!-- 
+  ================================================
+  SECCIÓN: Hero (Presentación Principal)
+  ================================================
+  Sección de bienvenida con información principal,
+  foto de perfil clickeable que muestra vista previa,
+  y acciones principales (CV, contacto, etc).
+  
+  CARACTERÍSTICAS:
+  - Layout flexbox responsive (row en desktop, column en mobile)
+  - Foto de perfil grande con hover effects y cursor clickeable
+  - Modal de vista previa de imagen al hacer clic
+  - Botones con gradientes y animaciones suaves
+  - Accesibilidad: role="banner", aria-labels, keyboard navigation
+  - Diseño tema-aware: usa CSS custom properties
+  - Responsive: adapta a mobile, tablet, desktop
+-->
+
+<!-- Sección Hero: presentación principal con contenido e imagen -->
+<section class="container hero-section card" id="home" role="banner" aria-label="Sección principal de bienvenida">
+  <!-- Contenido de texto: título, subtítulo, descripción y acciones -->
   <div class="hero-content">
+    <!-- Título principal: nombre del desarrollador -->
     <h1 class="hero-title">Juan Pablo Rodríguez Tapiero</h1>
-    <h3 class="muted hero-subtitle">QA Automation Engineer & Full Stack Developer</h3>
-    <p class="muted hero-description">Diseño y desarrollo soluciones robustas con enfoque en calidad, automatización y despliegue continuo.</p>
     
-    <!-- Grupo de acciones (botones y enlaces) -->
+    <!-- Subtítulo: profesión y especialidades -->
+    <h2 class="hero-subtitle">QA Automation Engineer &amp; Full Stack Developer</h2>
+    
+    <!-- Descripción: propuesta de valor breve -->
+    <p class="hero-description">
+      Diseño y desarrollo soluciones robustas con enfoque en calidad, automatización 
+      y despliegue continuo. Combinando testing avanzado, arquitectura limpia y best practices.
+    </p>
+    
+    <!-- Grupo de acciones (botones y enlaces) con roles ARIA -->
     <div class="hero-actions" role="toolbar" aria-label="Acciones principales">
-      <a href="Hoja de vida - Juan Pablo Rodriguez Tapiero.pdf" download class="btn btn-primary" aria-label="Descargar CV en PDF">Descargar CV</a>
-      <a href="#contact" class="btn btn-secondary" aria-label="Ir a sección de contacto">Contáctame</a>
-      <button (click)="toggleCv()" class="btn btn-secondary" aria-label="Ver CV en visor integrado">Ver CV</button>
+      <!-- Botón: Descargar CV en PDF -->
+      <a 
+        href="Hoja de vida - Juan Pablo Rodriguez Tapiero.pdf" 
+        download 
+        class="btn btn-primary" 
+        aria-label="Descargar CV en PDF">
+        📥 Descargar CV
+      </a>
+      
+      <!-- Botón: Ir a sección de contacto -->
+      <a 
+        href="#contact" 
+        class="btn btn-secondary" 
+        aria-label="Ir a sección de contacto">
+        💬 Contáctame
+      </a>
+      
+      <!-- Botón: Ver CV en visor integrado -->
+      <button 
+        (click)="toggleCv()" 
+        class="btn btn-secondary" 
+        aria-label="Ver CV en visor integrado">
+        📄 Ver CV
+      </button>
     </div>
   </div>
   
-  <!-- Foto de perfil -->
-  <div class="hero-image">
-    <img src="Foto.jpg" alt="Foto de perfil de Juan Pablo Rodríguez" class="profile-img" />
+  <!-- Foto de perfil: clickeable para abrir vista previa con animaciones -->
+  <div class="hero-image-wrapper">
+    <!-- Contenedor de imagen con efectos hover y overlay -->
+    <figure class="hero-image-container">
+      <!-- Imagen de perfil con lazy loading -->
+      <img 
+        src="Foto.jpg" 
+        alt="Foto de perfil de Juan Pablo Rodríguez Tapiero"
+        class="profile-img" 
+        loading="lazy"
+        decoding="async"
+        (click)="openImagePreview()"
+        role="button"
+        tabindex="0"
+        (keydown.enter)="openImagePreview()"
+        (keydown.space)="openImagePreview()"
+        aria-label="Foto de perfil - clic para ver vista previa"
+      />
+      
+      <!-- Overlay con icono de zoom que aparece en hover -->
+      <div class="image-overlay" (click)="openImagePreview()" role="button" tabindex="0" (keydown.enter)="openImagePreview()" (keydown.space)="openImagePreview()" aria-label="Expandir foto de perfil">
+        <span class="zoom-icon" aria-hidden="true">🔍</span>
+        <span class="zoom-text">Ver más grande</span>
+      </div>
+    </figure>
   </div>
 </section>
 
 <!-- Visor de CV integrado (se muestra al hacer clic en "Ver CV") -->
-<section class="container cv-preview-section" *ngIf="showCv">
+<section class="container cv-preview-section" *ngIf="showCv" role="region" aria-label="Sección de visor de CV">
   <app-cv-viewer [src]="cvSrc" (close)="showCv = false"></app-cv-viewer>
 </section>
+
+<!-- Modal de vista previa de imagen (se muestra al hacer clic en la foto) -->
+<div class="image-preview-modal" *ngIf="showImagePreview" (click)="closeImagePreview()" role="dialog" aria-modal="true" aria-label="Vista previa de foto de perfil">
+  <!-- Contenedor del modal con la imagen ampliada -->
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- Botón de cerrar (X) en la esquina superior derecha -->
+    <button 
+      class="modal-close-btn" 
+      (click)="closeImagePreview()" 
+      aria-label="Cerrar vista previa"
+      type="button">
+      ✕
+    </button>
+    
+    <!-- Imagen ampliada en el modal -->
+    <img 
+      src="Foto.jpg" 
+      alt="Vista previa ampliada de foto de perfil" 
+      class="modal-image"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</div>

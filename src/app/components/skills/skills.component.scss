@@ -1,86 +1,344 @@
 :host { display: block; }
 
 /* 
-  ========================================
-  ESTILOS: Skills Component
-  ========================================
-  Componente que muestra habilidades técnicas en grid responsivo.
-  Incluye hover effects, accesibilidad y diseño adaptable.
+  ============================================================
+  ESTILOS: Skills Component (Habilidades Técnicas)
+  ============================================================
+  
+  Componente que muestra habilidades técnicas en grid responsivo
+  con diseño moderno, animaciones suaves y efectos interactivos.
+  
+  SECCIONES:
+  - SECCIÓN PRINCIPAL: Estilos del contenedor externo
+  - ENCABEZADO: Título y subtítulo
+  - GRID: Sistema de columnas responsivo con auto-fit
+  - TARJETAS: Estilos de categorías individuales
+  - ICONOS: Contenedores de emojis con animaciones
+  - TÍTULO Y CONTENIDO: Tipografía y colores
+  - BADGES DE ETIQUETAS: Tags descriptivos
+  - EFECTOS HOVER: Transiciones y transformaciones
+  - RESPONSIVE: Breakpoints para mobile, tablet, desktop
+  - ACCESIBILIDAD: Focus states, aria-labels, semantic HTML
+  - TEMA LIGHT: Estilos para modo claro
 */
 
-/* Estilos para la sección de Habilidades */
+/* 
+  ============================================================
+  SECCIÓN PRINCIPAL
+  ============================================================
+  Contenedor del componente con espaciado y alineación
+*/
 .skills-section {
   margin-top: 2rem;
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
-/* Encabezado de sección con tipografía responsiva */
+/* 
+  ============================================================
+  ENCABEZADO
+  ============================================================
+  Título principal con subtítulo descriptivo
+*/
 .section-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
   
+  /* Título principal responsivo */
   h2 {
-    font-size: 1.8rem;
-    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     
     @media (max-width: 768px) {
       font-size: 1.5rem;
     }
   }
+  
+  /* Subtítulo descriptivo con muted color */
+  .section-subtitle {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.5;
+  }
 }
 
 /* 
-  Grid de categorías de habilidades
-  Auto-fit adapta columnas según disponibilidad de espacio
+  ============================================================
+  GRID
+  ============================================================
+  Sistema de columnas responsivo con auto-fit y minmax
+  Adapta dinámicamente el número de columnas según espacio disponible
+  Mínimo 200px por celda, máximo disponible distribuido equitativamente
 */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
   
+  /* Tablet: 2 columnas */
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
   
+  /* Mobile: 1 columna */
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
   }
 }
 
-/* Categoría individual de habilidad con interactividad */
+/* 
+  ============================================================
+  TARJETAS (SKILL CATEGORY)
+  ============================================================
+  Contenedor de cada categoría de habilidad
+  Incluye estructura flexbox, bordes, fondos y transiciones suaves
+*/
 .skill-category {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
-  padding: 1rem;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  transition: all 200ms ease;
-  min-height: 100px;
+  gap: 0.75rem;
+  padding: 1.5rem 1rem;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid rgba(15, 111, 191, 0.1);
+  transition: all 280ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  min-height: 240px;
+  position: relative;
+  overflow: hidden;
   
-  /* Efectos hover: cambio de color, elevación y sombra */
+  /* Pseudo-elemento con gradiente de fondo sutil en hover */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(15, 111, 191, 0.1), rgba(237, 9, 9, 0.05));
+    opacity: 0;
+    transition: opacity 280ms ease;
+    pointer-events: none;
+  }
+  
+  /* EFECTOS HOVER: Elevación, cambio de borde, sombra animada */
   &:hover {
-    background: rgba(15,111,191,0.1);
+    transform: translateY(-6px);
     border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(15,111,191,0.15);
+    box-shadow: 0 12px 32px rgba(15, 111, 191, 0.15);
+    
+    /* Mostrar gradiente de fondo */
+    &::before {
+      opacity: 1;
+    }
+    
+    /* Animar icono en hover */
+    .skill-icon-container {
+      transform: scale(1.15) rotate(-5deg);
+    }
+  }
+  
+  /* FOCUS-VISIBLE: Estado de foco para accesibilidad (keyboard navigation) */
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 }
 
-/* Título de habilidad destacado con color de acento */
-.skill-title {
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 0 0 0.5rem 0;
-  color: var(--accent);
+/* 
+  ============================================================
+  CONTENEDOR DE ICONOS
+  ============================================================
+  Estilos para el contenedor de emojis/iconos
+  Incluye animaciones y transiciones suaves
+*/
+.skill-icon-container {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(15, 111, 191, 0.15), rgba(237, 9, 9, 0.1));
+  border: 2px solid var(--accent);
+  transition: all 280ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  flex-shrink: 0;
 }
 
-/* Contenido descriptivo de la habilidad */
-.skill-content {
-  font-size: 0.85rem;
+/* Ícono emoji responsivo */
+.skill-icon {
+  font-size: 1.8rem;
+  display: block;
+  line-height: 1;
+}
+
+/* 
+  ============================================================
+  TÍTULO Y CONTENIDO
+  ============================================================
+  Tipografía y colores del título y descripción
+*/
+
+/* Título de habilidad destacado con gradient */
+.skill-title {
+  font-size: 1.1rem;
+  font-weight: 700;
   margin: 0;
-  line-height: 1.4;
+  color: var(--accent);
+  z-index: 1;
+  position: relative;
+}
+
+/* Contenido descriptivo: lista de tecnologías */
+.skill-content {
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
   opacity: 0.9;
+  color: var(--text-color);
+  z-index: 1;
+  position: relative;
+}
+
+/* 
+  ============================================================
+  BADGES DE ETIQUETAS (SKILL TAGS)
+  ============================================================
+  Lista de tags descriptivos bajo cada habilidad
+  Diseño de pills con gradientes y bordes
+*/
+
+/* Contenedor de tags */
+.skill-tags {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0.5rem 0 0 0;
+  padding: 0;
+  z-index: 1;
+  position: relative;
+}
+
+/* Tag individual estilizado como pill/badge */
+.skill-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(15, 111, 191, 0.15), rgba(237, 9, 9, 0.1));
+  border: 1px solid rgba(15, 111, 191, 0.3);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 200ms ease;
+  white-space: nowrap;
+  
+  /* Efecto hover en tags */
+  &:hover {
+    background: linear-gradient(90deg, rgba(15, 111, 191, 0.25), rgba(237, 9, 9, 0.15));
+    border-color: var(--accent);
+    transform: scale(1.05);
+  }
+}
+
+/* 
+  ============================================================
+  RESPONSIVE DESIGN
+  ============================================================
+  Ajustes visuales para diferentes tamaños de pantalla
+*/
+
+/* Tablet: Reduce tamaño de elementos */
+@media (max-width: 768px) {
+  .section-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .skill-icon-container {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .skill-icon {
+    font-size: 1.5rem;
+  }
+  
+  .skill-title {
+    font-size: 1rem;
+  }
+}
+
+/* Mobile: Ajustes adicionales para pantallas pequeñas */
+@media (max-width: 480px) {
+  .skills-section {
+    padding: 1rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .skill-category {
+    min-height: 200px;
+    padding: 1rem;
+  }
+  
+  .skill-tags {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .skill-tag {
+    width: 100%;
+  }
+}
+
+/* 
+  ============================================================
+  ACCESIBILIDAD
+  ============================================================
+  Focus states, high contrast, semantic HTML
+*/
+
+/* Asegurar suficiente contraste en focus */
+.skill-category:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.skill-tag:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* 
+  ============================================================
+  TEMA LIGHT
+  ============================================================
+  Estilos específicos para el tema claro
+  Ajusta colores de fondo, texto y bordes para legibilidad
+*/
+
+:host-context(.theme-light) {
+  .skill-icon-container {
+    background: linear-gradient(135deg, rgba(15, 111, 191, 0.08), rgba(237, 9, 9, 0.05));
+    border-color: rgba(15, 111, 191, 0.4);
+  }
+  
+  .skill-tag {
+    background: linear-gradient(90deg, rgba(15, 111, 191, 0.1), rgba(237, 9, 9, 0.08));
+    border-color: rgba(15, 111, 191, 0.25);
+    color: #0f6fbf;
+  }
+  
+  .skill-category::before {
+    background: linear-gradient(135deg, rgba(15, 111, 191, 0.08), rgba(237, 9, 9, 0.04));
+  }
 }

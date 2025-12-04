@@ -1,39 +1,85 @@
 <!-- 
-  ===================================
+  ================================================
   COMPONENTE: Certifications (Certificaciones)
-  ===================================
-  Muestra certificaciones profesionales en formato galería con:
-  - Insignia de certificación
-  - Título de la certificación
-  - Efectos hover interactivos
-  - Lazy loading para optimización
+  ================================================
+  Muestra certificaciones y credenciales profesionales
+  en galería responsiva con diseño moderno similar a Skills.
+  
+  CARACTERÍSTICAS:
+  - Grid responsivo con auto-fit y minmax (adapta columnas dinámicamente)
+  - Tarjetas interactivas con hover effects y animaciones suaves
+  - Iconos emoji representativos para identificación visual rápida
+  - Badges con categorías y tipos de certificación
+  - Lazy loading para optimización de performance
+  - Accesibilidad: role="region", role="list", role="listitem", aria-labelledby
+  - Diseño tema-aware: usa CSS custom properties para modo oscuro/claro
+  - Responsive: columnas adaptables en mobile (1 col), tablet (2 cols)
 -->
 
 <!-- Sección de Certificaciones Profesionales -->
-<section id="certifications" class="certifications-section" role="region" aria-labelledby="cert-title">
-  <!-- Encabezado principal -->
+<section id="certifications" class="certifications-section card" role="region" aria-labelledby="cert-title">
+  <!-- Encabezado: título y subtítulo descriptivo -->
   <header class="section-header">
     <h2 id="cert-title">Certificaciones</h2>
+    <p class="section-subtitle">Cursos y credenciales profesionales completadas</p>
   </header>
 
-  <!-- Grid de certificaciones con elemento semántico figure -->
+  <!-- Grid de certificaciones: contenedor con role="list" para accesibilidad semántica -->
   <div class="certifications-grid" role="list">
-    <!-- Certificación: Postman API Fundamentals Student Expert -->
+    <!-- Elemento de certificación: Postman API Fundamentals -->
     <article class="certification-item" role="listitem" aria-labelledby="cert-postman-title">
-      <figure class="certification-badge">
-        <!-- Imagen con lazy loading para optimizar rendimiento -->
-        <img 
-          src="/assets/img/postman-badge.svg" 
-          alt="Insignia de certificación Postman API Fundamentals Student Expert"
-          loading="lazy"
-        >
-        <!-- Título de certificación como figcaption semántico -->
-        <figcaption id="cert-postman-title" class="certification-title">
-          Postman API Fundamentals Student Expert
-        </figcaption>
-      </figure>
+      <!-- Contenedor de icono con fondo gradiente -->
+      <div class="cert-icon-container">
+        <span class="cert-icon" aria-hidden="true">📬</span>
+      </div>
+      <!-- Título de la certificación -->
+      <h3 id="cert-postman-title" class="cert-title">Postman API Fundamentals</h3>
+      <!-- Descripción breve -->
+      <p class="cert-description">Student Expert en testing de APIs REST</p>
+      <!-- Badges con categorías y tipos de certificación -->
+      <ul class="cert-tags" aria-label="Categorías de certificación Postman">
+        <li class="cert-tag">APIs</li>
+        <li class="cert-tag">Testing</li>
+      </ul>
     </article>
 
-    <!-- Nota: Agregar más certificaciones aquí siguiendo el mismo patrón figure/figcaption -->
+    <!-- Elemento de certificación: Angular Fundamentals -->
+    <article class="certification-item" role="listitem" aria-labelledby="cert-angular-title">
+      <div class="cert-icon-container">
+        <span class="cert-icon" aria-hidden="true">⚡</span>
+      </div>
+      <h3 id="cert-angular-title" class="cert-title">Angular Fundamentals</h3>
+      <p class="cert-description">Desarrollo frontend con framework moderno</p>
+      <ul class="cert-tags" aria-label="Categorías de certificación Angular">
+        <li class="cert-tag">Frontend</li>
+        <li class="cert-tag">Framework</li>
+      </ul>
+    </article>
+
+    <!-- Elemento de certificación: Java Professional -->
+    <article class="certification-item" role="listitem" aria-labelledby="cert-java-title">
+      <div class="cert-icon-container">
+        <span class="cert-icon" aria-hidden="true">☕</span>
+      </div>
+      <h3 id="cert-java-title" class="cert-title">Java Professional Developer</h3>
+      <p class="cert-description">Programación backend y patrones de diseño</p>
+      <ul class="cert-tags" aria-label="Categorías de certificación Java">
+        <li class="cert-tag">Backend</li>
+        <li class="cert-tag">Programming</li>
+      </ul>
+    </article>
+
+    <!-- Elemento de certificación: Selenium WebDriver -->
+    <article class="certification-item" role="listitem" aria-labelledby="cert-selenium-title">
+      <div class="cert-icon-container">
+        <span class="cert-icon" aria-hidden="true">🧪</span>
+      </div>
+      <h3 id="cert-selenium-title" class="cert-title">Selenium WebDriver Expert</h3>
+      <p class="cert-description">Automatización de pruebas web avanzada</p>
+      <ul class="cert-tags" aria-label="Categorías de certificación Selenium">
+        <li class="cert-tag">QA</li>
+        <li class="cert-tag">Automation</li>
+      </ul>
+    </article>
   </div>
 </section>

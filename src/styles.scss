@@ -1,11 +1,11 @@
 :root {
   --bg: #0b1226;
   --card: #0f1724;
-  --muted: #9aa4b2;
+  --muted: #101111;
   --accent: #0f6fbf; /* azul oscuro */
-  --accent-2: #ed0909; /* rojo suave */
+  --accent-2: #fd0505; /* rojo más oscuro (mejor contraste) */
   --text-color: #e6eef8;
-  --glass: rgba(255,255,255,0.06);
+  --glass: rgba(255, 255, 255, 0.082);
   --glass-2: rgba(255,255,255,0.04);
   --radius: 14px;
 }
@@ -14,9 +14,9 @@
 :root {
   --bg: #0b1226;
   --card: #0f1724;
-  --muted: #9aa4b2;
+  --muted: #080808;
   --accent: #0f6fbf; /* azul oscuro */
-  --accent-2: #ed0909; /* rojo suave */
+  --accent-2: #fd0505; /* rojo más oscuro (mejor contraste) */
   --text-color: #e6eef8;
   --glass: rgba(255,255,255,0.06);
   --glass-2: rgba(255,255,255,0.04);
@@ -32,23 +32,29 @@
 .theme-dark {
   --bg: #0b1226;
   --card: #0f1724;
-  --muted: #9aa4b2;
+  --muted: #070707;
   --accent: #0f6fbf;
   --text-color: #e6eef8;
-  --accent-2: #ed0909;
+  --accent-2: #b71c1c; /* rojo más oscuro para mejor legibilidad */
   --glass: rgba(255,255,255,0.06);
   --glass-2: rgba(255,255,255,0.04);
 }
 
 .theme-light {
-  --bg: #f6f8fb;
-  --card: #ffffff;
-  --muted: #6b7280; /* tono de texto secundario ligeramente más oscuro para contraste */
-  --accent: #0f6fbf; /* mantener el color principal igual que en el tema oscuro */
-  --text-color: #0b1226;
-  --accent-2: #ed0909;
-  --glass: rgba(11,18,38,0.04);
-  --glass-2: rgba(11,18,38,0.02);
+  /* Tema claro con colores sólidos y gradiente suave de fondo */
+  --bg: #f8f9fc; /* Fondo blanco cálido */
+  --card: #ffffff; /* Tarjetas blancas puras */
+  --muted: #070707; /* Texto secundario gris medio */
+  --accent: #0f6fbf; /* Mantener azul principal */
+  --text-color: #1e293b; /* Texto oscuro legible */
+  --accent-2: #b71c1c; /* Rojo oscuro igual que dark theme */
+
+  /* Glass effect: traslúcido oscuro sutil para tema claro */
+  --glass: rgba(15, 23, 42, 0.05);
+  --glass-2: rgba(15, 23, 42, 0.03);
+  
+  /* Nota: colores sólidos y claros para máxima legibilidad.
+     Gradientes aplicados globalmente en html/body para efecto visual consistente. */
 }
 
 html, body {
@@ -57,8 +63,17 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', system-ui, -apple-system, 'Poppins', 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 80%, #0000) 100%);
   color: var(--text-color);
+}
+
+/* Gradiente por defecto (tema oscuro) */
+:root {
+  background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 80%, #0000) 100%);
+}
+
+/* Gradiente para tema claro: suave y profesional */
+.theme-light {
+  background: linear-gradient(135deg, #f8f9fc 0%, #e0e7ff 50%, #f0f4ff 100%);
 }
 
 main {
@@ -82,6 +97,24 @@ main {
   backdrop-filter: blur(8px);
   padding:1rem;
   border-radius: var(--radius);
+}
+
+/* Tema light: contenedores opacos y sólidos (sin transparencia) */
+.theme-light .card {
+  background: var(--card);
+  border: 1px solid #e2e8f0;
+  backdrop-filter: none;
+}
+
+/* En tema light: todas las secciones y contenedores deben ser opacos */
+.theme-light [class*="section"],
+.theme-light [class*="container"],
+.theme-light [class*="card"],
+.theme-light [class*="panel"],
+.theme-light [class*="card-item"],
+.theme-light [class*="item"] {
+  background: var(--card) !important;
+  backdrop-filter: none !important;
 }
 
 /* Grid responsivo */

@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, ViewChild, OnChanges, SimpleChanges, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild, OnChanges, SimpleChanges, Output, EventEmitter, HostListener, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
@@ -9,12 +9,13 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   templateUrl: './cv-viewer.component.html',
   styleUrls: ['./cv-viewer.component.scss']
 })
-export class CvViewerComponent {
+export class CvViewerComponent implements AfterViewInit, OnDestroy {
   @Input({ required: true }) src!: string;
   safeSrc?: SafeResourceUrl;
 
   @ViewChild('iframeRef', { static: false }) iframeRef?: ElementRef<HTMLIFrameElement>;
   @ViewChild('containerRef', { static: false }) containerRef?: ElementRef<HTMLElement>;
+  @ViewChild('backdropRef', { static: false }) backdropRef?: ElementRef<HTMLElement>;
   @Output() close = new EventEmitter<void>();
 
   constructor(private sanitizer: DomSanitizer) {}
@@ -37,6 +38,30 @@ export class CvViewerComponent {
     }
   }
 
+  ngAfterViewInit(): void {
+    // Move the backdrop to document.body so the modal is outside any stacking context
+    try {
+      const el = this.backdropRef?.nativeElement;
+      if (el && el.parentElement !== document.body) {
+        document.body.appendChild(el);
+      }
+      // focus the modal container for accessibility
+      setTimeout(() => {
+        try { this.containerRef?.nativeElement?.focus(); } catch {}
+      }, 0);
+    } catch {}
+  }
+
+  ngOnDestroy(): void {
+    // cleanup: remove element from body if still present
+    try {
+      const el = this.backdropRef?.nativeElement;
+      if (el && el.parentElement === document.body) {
+        el.remove();
+      }
+    } catch {}
+  }
+
   print() {
     try {
       const frame = this.iframeRef?.nativeElement;
@@ -53,17 +78,37 @@ export class CvViewerComponent {
 
   async fullscreen() {
     try {
-      const el = this.containerRef?.nativeElement;
+      // Prefer requesting fullscreen on the iframe (PDF viewer) so it occupies full screen
+      const frame = this.iframeRef?.nativeElement;
+      const el = frame ?? this.containerRef?.nativeElement;
       if (el) {
-        if ((el as any).requestFullscreen) await (el as any).requestFullscreen();
+        const req: any = (el as any).requestFullscreen || (el as any).webkitRequestFullscreen || (el as any).mozRequestFullScreen || (el as any).msRequestFullscreen;
+        if (req) {
+          await req.call(el);
+        }
       }
     } catch {
       // ignore fullscreen errors
     }
   }
 
+  // optional: keep backdrop transparent when entering fullscreen on the modal
+  @HostListener('document:fullscreenchange', [])
+  onFullScreenChange() {
+    try {
+      const doc: any = document as any;
+      const isFs = !!(doc.fullscreenElement || doc.webkitFullscreenElement || doc.mozFullScreenElement || doc.msFullscreenElement);
+      const backdrop = this.backdropRef?.nativeElement;
+      if (backdrop) {
+        if (isFs) backdrop.classList.add('fullscreen-hidden'); else backdrop.classList.remove('fullscreen-hidden');
+      }
+    } catch {}
+  }
+
   // Close modal and notify parent
   closeModal() {
+    // remove backdrop from body immediately to avoid being obstructed
+    try { const el = this.backdropRef?.nativeElement; if (el && el.parentElement === document.body) el.remove(); } catch {}
     this.close.emit();
   }
 

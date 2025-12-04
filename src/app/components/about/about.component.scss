@@ -1,66 +1,452 @@
 :host { display: block; }
 
-/* Estilos para la sección "Sobre mí" */
+/* 
+  ============================================================
+  ESTILOS: About Component (Sobre mí)
+  ============================================================
+  
+  Componente que muestra información profesional resumida
+  con diseño moderno, cards interactivas y animaciones suaves.
+  
+  SECCIONES:
+  - SECCIÓN PRINCIPAL: Contenedor externo y espaciado
+  - ENCABEZADO: Título y subtítulo
+  - PÁRRAFO DE INTRODUCCIÓN: Descripción del perfil
+  - GRID: Sistema de columnas responsivo
+  - CARDS: Contenedores con iconos y contenido
+  - ICONOS: Emojis animados
+  - TÍTULOS Y LISTAS: Tipografía y estilos
+  - EFECTOS HOVER: Transiciones y transformaciones
+  - RESPONSIVE: Breakpoints para mobile, tablet, desktop
+  - ACCESIBILIDAD: Focus states, aria-labels
+  - TEMA LIGHT: Estilos para modo claro
+*/
+
+/* 
+  ============================================================
+  SECCIÓN PRINCIPAL
+  ============================================================
+  Contenedor del componente con espaciado y alineación
+*/
 .about-section {
   margin-top: 2rem;
-  padding: 1.25rem;
+  padding: 1.5rem;
 }
 
-/* Encabezado de sección */
+/* 
+  ============================================================
+  ENCABEZADO
+  ============================================================
+  Título principal con subtítulo descriptivo
+*/
 .section-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+/* 
+  ============================================================
+  PÁRRAFO DE INTRODUCCIÓN
+  ============================================================
+  Descripción ejecutiva del perfil profesional
+*/
+.about-intro {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+  opacity: 0.95;
   
-  h2 {
-    font-size: 1.8rem;
-    margin: 0;
-    
-    @media (max-width: 768px) {
-      font-size: 1.5rem;
-    }
+  /* Destaca palabras clave con bold y color de acento */
+  strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
   }
 }
 
-/* Párrafo de introducción */
-.about-intro {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-/* Contenedor de destacados (habilidades y herramientas) */
-.about-highlights {
+/* 
+  ============================================================
+  GRID
+  ============================================================
+  Sistema de columnas responsivo con auto-fit y minmax
+  Adapta dinámicamente el número de columnas según espacio disponible
+  Mínimo 300px por celda, máximo distribuido equitativamente
+*/
+.about-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
   
+  /* Tablet: 2 columnas */
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  /* Mobile: 1 columna */
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
   }
 }
 
-/* Tarjeta individual de categoría */
-.about-card {
+/* 
+  ============================================================
+  CARDS (TARJETAS GRANDES)
+  ============================================================
+  Contenedores principales de especialidades - LAYOUT VERTICAL
+  Icono arriba centrado, contenido debajo en columna (flex-column)
+  Incluye bordes suaves, fondos y transiciones modernas
+*/
+.about-item {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
-
-/* Título de categoría */
-.card-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin: 0;
-}
-
-/* Lista de elementos */
-.card-list {
-  list-style-position: inside;
-  margin: 0;
-  padding: 0;
-  font-size: 0.9rem;
-  line-height: 1.5;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+  padding: 2rem 1.75rem;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid rgba(15, 111, 191, 0.08);
+  transition: all 280ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   
-  li {
-    margin: 0.35rem 0;
+  /* Pseudo-elemento con gradiente de fondo sutil en hover */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(15, 111, 191, 0.12), rgba(237, 9, 9, 0.06));
+    opacity: 0;
+    transition: opacity 280ms ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  /* EFECTOS HOVER: Elevación, cambio de borde, sombra animada */
+  &:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 16px 40px rgba(15, 111, 191, 0.18);
+    
+    /* Mostrar gradiente de fondo */
+    &::before {
+      opacity: 1;
+    }
+    
+    /* Animar icono en hover */
+    .item-icon-container {
+      transform: scale(1.12) rotate(5deg);
+      box-shadow: 0 8px 24px rgba(15, 111, 191, 0.2);
+    }
+  }
+  
+  /* FOCUS-VISIBLE: Estado de foco para accesibilidad (keyboard navigation) */
+  &:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
   }
 }
+
+  /* 
+    ============================================================
+    CONTENEDOR DE ICONOS
+    ============================================================
+    Estilos para el contenedor de emojis/iconos representativos
+    Incluye animaciones y transiciones suaves
+  */
+  .item-icon-container {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(15, 111, 191, 0.18), rgba(237, 9, 9, 0.12));
+    border: 2px solid rgba(15, 111, 191, 0.25);
+    transition: all 280ms cubic-bezier(0.2, 0.9, 0.3, 1);
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(15, 111, 191, 0.12);
+    z-index: 1;
+  }
+
+  /* Icono emoji responsivo */
+  .item-icon {
+    font-size: 1.8rem;
+    display: block;
+    line-height: 1;
+  }
+
+  /* 
+    ============================================================
+    CONTENEDOR DE CONTENIDO
+    ============================================================
+    Wrapper flexbox para título, descripción, features y tags
+    Organiza verticalmente el contenido de la tarjeta
+  */
+  .item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 1;
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+  }
+
+  /* 
+    ============================================================
+    TÍTULO DE TARJETA
+    ============================================================
+    Título principal de cada especialidad con color de acento
+  */
+  .item-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--accent);
+    line-height: 1.3;
+  }
+
+  /* 
+    ============================================================
+    DESCRIPCIÓN DE TARJETA
+    ============================================================
+    Párrafo descriptivo con detalles de cada especialidad
+  */
+  .item-description {
+    font-size: 0.95rem;
+    margin: 0.25rem 0 0 0;
+    line-height: 1.6;
+    opacity: 0.9;
+    color: var(--text-color);
+  }
+
+  /* 
+    ============================================================
+    LISTA DE FEATURES
+    ============================================================
+    Puntos clave y detalles técnicos de cada especialidad
+    Estilizada como lista con elementos destacados
+  */
+  .item-features {
+    list-style: none;
+    margin: 0.75rem 0 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+  
+    /* Elementos de lista con viñetas personalizadas */
+    li {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--text-color);
+      opacity: 0.88;
+      padding: 0;
+    
+      /* Destaca palabras clave en bold con color de acento */
+      strong {
+        color: var(--accent);
+        font-weight: 700;
+      }
+    
+      /* Viñeta personalizada */
+      &::before {
+        content: '▪';
+        display: inline-block;
+        margin-right: 0.6rem;
+        color: var(--accent);
+        font-weight: bold;
+        font-size: 0.7rem;
+      }
+    }
+  }
+
+  /* 
+    ============================================================
+    BADGES DE TAGS
+    ============================================================
+    Lista de tags descriptivos bajo cada tarjeta
+    Diseño de pills con gradientes y bordes
+  */
+
+  /* Contenedor de tags */
+  .item-tags {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0.75rem 0 0 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  /* Tag individual estilizado como pill/badge */
+  .item-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.35rem 0.65rem;
+    border-radius: 12px;
+    background: linear-gradient(90deg, rgba(15, 111, 191, 0.15), rgba(237, 9, 9, 0.1));
+    border: 1px solid rgba(15, 111, 191, 0.3);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 200ms ease;
+    white-space: nowrap;
+  
+    /* Efecto hover en tags */
+    &:hover {
+      background: linear-gradient(90deg, rgba(15, 111, 191, 0.25), rgba(237, 9, 9, 0.15));
+      border-color: var(--accent);
+      transform: scale(1.05);
+    }
+  }
+
+  /* 
+    ============================================================
+    RESPONSIVE DESIGN
+    ============================================================
+    Ajustes visuales para diferentes tamaños de pantalla
+  */
+
+  /* Tablet: Reduce tamaño de elementos y ajusta layout */
+  @media (max-width: 768px) {
+    .about-section {
+      padding: 1.25rem;
+    }
+  
+    .section-header {
+      margin-bottom: 1.5rem;
+    }
+  
+    .about-item {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem 1.25rem;
+    }
+  
+    .item-icon-container {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+  
+    .item-icon {
+      font-size: 1.5rem;
+    }
+  
+    .item-title {
+      font-size: 1.1rem;
+    }
+  }
+
+  /* Mobile: Ajustes adicionales para pantallas pequeñas */
+  @media (max-width: 480px) {
+    .about-section {
+      padding: 1rem;
+    }
+  
+    .section-header h2 {
+      font-size: 1.3rem;
+    }
+  
+    .about-intro {
+      font-size: 0.9rem;
+    }
+  
+    .about-item {
+      padding: 1.25rem 1rem;
+      gap: 0.75rem;
+    }
+  
+    .item-icon-container {
+      width: 3rem;
+      height: 3rem;
+    }
+  
+    .item-icon {
+      font-size: 1.3rem;
+    }
+  
+    .item-title {
+      font-size: 1rem;
+    }
+  
+    .item-description {
+      font-size: 0.9rem;
+    }
+  
+    .item-features li {
+      font-size: 0.85rem;
+    }
+  
+    .item-tags {
+      justify-content: center;
+    }
+  
+    .item-tag {
+      font-size: 0.7rem;
+      padding: 0.3rem 0.55rem;
+    }
+  }
+
+  /* 
+    ============================================================
+    ACCESIBILIDAD
+    ============================================================
+    Focus states, high contrast, semantic HTML
+  */
+
+  /* Asegurar suficiente contraste en focus */
+  .about-item:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .item-tag:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  /* 
+    ============================================================
+    TEMA LIGHT
+    ============================================================
+    Estilos específicos para el tema claro
+    Ajusta colores de fondo, texto y bordes para legibilidad
+  */
+
+  :host-context(.theme-light) {
+    .item-icon-container {
+      background: linear-gradient(135deg, rgba(15, 111, 191, 0.08), rgba(237, 9, 9, 0.05));
+      border-color: rgba(15, 111, 191, 0.4);
+    }
+  
+    .item-tag {
+      background: linear-gradient(90deg, rgba(15, 111, 191, 0.1), rgba(237, 9, 9, 0.08));
+      border-color: rgba(15, 111, 191, 0.25);
+      color: #0f6fbf;
+    }
+  
+    .about-item::before {
+      background: linear-gradient(135deg, rgba(15, 111, 191, 0.08), rgba(237, 9, 9, 0.04));
+      transition: all 280ms cubic-bezier(0.2, 0.9, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+  }
+  
+  /* Nota: el pseudo-elemento y hover se gestionan por tarjeta .about-item arriba. */
+

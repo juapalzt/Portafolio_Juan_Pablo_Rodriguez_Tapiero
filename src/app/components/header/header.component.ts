@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, HostBinding, HostListener } from '@angular/core';
+import { Component, Inject, OnInit, HostBinding, HostListener, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LanguageService } from '../../services/language.service';
@@ -10,9 +10,16 @@ import { LanguageService } from '../../services/language.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   isDark = true;
   mobileMenuOpen = false;
+  actionsMenuOpen = false;
+  @ViewChild('mobileMenuRef', { static: false }) mobileMenuRef?: ElementRef<HTMLElement>;
+  @ViewChild('mobileBackdropRef', { static: false }) mobileBackdropRef?: ElementRef<HTMLElement>;
+
+  // DOM nodes moved to document.body when menu opens to avoid stacking-context issues
+  private _movedMenuEl?: HTMLElement;
+  private _movedBackdropEl?: HTMLElement;
   // Debug UI state
   devToggleVisible = false;
   @HostBinding('class.debug') debug = false;
@@ -93,11 +100,66 @@ export class HeaderComponent implements OnInit {
   toggleMobileMenu() {
     // Alterna la visibilidad del menú móvil
     this.mobileMenuOpen = !this.mobileMenuOpen;
+    // cerrar panel de acciones si está abierto
+    if (this.mobileMenuOpen) { this.actionsMenuOpen = false; }
+
+    // If opened, move elements to document.body so they are not clipped by parent stacking contexts
+    if (this.mobileMenuOpen) {
+      setTimeout(() => this._moveMobileMenuToBody(), 0);
+    } else {
+      // when closing, ensure moved nodes are removed from body
+      this._removeMovedMobileNodes();
+    }
+  }
+
+  // Panel de acciones secundarias (4 items)
+  toggleActionsMenu() {
+    this.actionsMenuOpen = !this.actionsMenuOpen;
+    // cerrar menú principal si se abre el panel de acciones
+    if (this.actionsMenuOpen) { this.mobileMenuOpen = false; }
+  }
+
+  closeActionsMenu() {
+    this.actionsMenuOpen = false;
   }
 
   closeMobileMenu() {
     // Cierra el menú móvil
     this.mobileMenuOpen = false;
+    this._removeMovedMobileNodes();
+  }
+
+  private _moveMobileMenuToBody() {
+    try {
+      // Prefer template refs if available
+      const menu = this.mobileMenuRef?.nativeElement ?? this.document.getElementById('mobile-menu') as HTMLElement | null;
+      const backdrop = this.mobileBackdropRef?.nativeElement ?? this.document.querySelector('.mobile-menu-backdrop') as HTMLElement | null;
+
+      if (backdrop && backdrop.parentElement !== this.document.body) {
+        this._movedBackdropEl = backdrop;
+        this.document.body.appendChild(backdrop);
+      }
+
+      if (menu && menu.parentElement !== this.document.body) {
+        this._movedMenuEl = menu;
+        this.document.body.appendChild(menu);
+      }
+    } catch {
+      // ignore DOM errors
+    }
+  }
+
+  private _removeMovedMobileNodes() {
+    try {
+      if (this._movedMenuEl && this._movedMenuEl.parentElement === this.document.body) {
+        this._movedMenuEl.remove();
+        this._movedMenuEl = undefined;
+      }
+      if (this._movedBackdropEl && this._movedBackdropEl.parentElement === this.document.body) {
+        this._movedBackdropEl.remove();
+        this._movedBackdropEl = undefined;
+      }
+    } catch {}
   }
 
   // Dev helpers
@@ -120,6 +182,11 @@ export class HeaderComponent implements OnInit {
       ev.preventDefault();
       this.toggleDevButtonVisibility();
     }
+  }
+
+  ngOnDestroy(): void {
+    // cleanup moved nodes if component is destroyed
+    this._removeMovedMobileNodes();
   }
 
   // Language helpers

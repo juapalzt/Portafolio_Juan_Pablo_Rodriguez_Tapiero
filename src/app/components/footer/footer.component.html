@@ -1,19 +1,40 @@
-<footer>
+<!-- ========================================
+  Pie de Página (Footer)
+  
+  Sección final del portafolio que incluye:
+  - Marca personal (nombre, subtítulo profesional)
+  - Copyright dinámico con año actualizado
+  - Enlaces a redes sociales (GitHub, Instagram, WhatsApp)
+  - Información de contacto (teléfono, emails)
+  - Políticas de privacidad y términos
+  - Responsive: stack vertical en pantallas pequeñas
+======================================== -->
+<footer role="contentinfo">
   <div class="container">
+    <!-- Contenedor principal: flexbox que se adapta a pantalla pequeña -->
     <div class="footer-inner">
+      <!-- Sección de marca: nombre y subtítulo profesional -->
       <div class="branding">
         <strong>Juan Pablo Rodríguez Tapiero</strong>
+        <!-- Subtítulo: profesión/especialidad -->
         <div class="muted">QA Automation Engineer & Full Stack Developer</div>
       </div>
 
+      <!-- Metadata: copyright y herramientas usadas (Angular) con aria-live para actualizaciones dinámicas -->
       <div class="meta muted" aria-live="polite">
+        <!-- Copyright: año dinámico -->
         <span class="copyright">© {{ year }}</span>
+        <!-- Separador visual -->
         <span class="sep">—</span>
-        <span>Hecho con <a href="https://angular.io/" target="_blank" rel="noopener noreferrer" aria-label="Angular website" class="link">Angular</a></span>
+        <!-- Herramienta usada -->
+        <span>Hecho con <a href="https://angular.io/" target="_blank" rel="noopener noreferrer" aria-label="Sitio web de Angular" class="link">Angular</a></span>
       </div>
 
+      <!-- Sección de políticas: privacidad y términos -->
       <div class="policies muted" aria-hidden="false">
+        <!-- Declaración de derechos de autor -->
         <small>Todos los derechos reservados.</small>
+        <!-- Enlaces a políticas: privacidad y términos -->
         <small class="policy-links">&nbsp;·&nbsp;
           <a routerLink="/privacy" class="link">Política de privacidad</a>
           &nbsp;·&nbsp;
@@ -21,23 +42,26 @@
         </small>
       </div>
       
-      <div class="contact muted" style="margin-top:0.6rem;">
+      <!-- Sección de contacto: redes sociales y datos de comunicación -->
+      <div class="contact muted">
+        <!-- Primera línea: redes sociales -->
         <div class="contact-lines">
-          <a href="https://github.com/juapalzt" target="_blank" rel="noopener noreferrer" class="link">GitHub</a>
+          <a href="https://github.com/juapalzt" target="_blank" rel="noopener noreferrer" class="link" aria-label="Perfil GitHub">GitHub</a>
           <span class="sep">·</span>
-          <a href="https://instagram.com/juapalzt" target="_blank" rel="noopener noreferrer" class="link">Instagram</a>
+          <a href="https://instagram.com/juapalzt" target="_blank" rel="noopener noreferrer" class="link" aria-label="Perfil Instagram">Instagram</a>
           <span class="sep">·</span>
-          <a href="https://angular.io/" target="_blank" rel="noopener noreferrer" class="link">Angular</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="link" aria-label="Perfil LinkedIn">LinkedIn</a>
           <span class="sep">·</span>
-          <a href="https://wa.me/573195844475" target="_blank" rel="noopener noreferrer" class="link">WhatsApp</a>
+          <a href="https://wa.me/573195844475" target="_blank" rel="noopener noreferrer" class="link" aria-label="WhatsApp directo">WhatsApp</a>
         </div>
 
-        <div class="contact-lines" style="margin-top:0.35rem;">
-          <a href="tel:+573195844475" class="link">+57 319 584 4475</a>
+        <!-- Segunda línea: datos de contacto directo (teléfono y emails) -->
+        <div class="contact-lines contact-details">
+          <a href="tel:+573195844475" class="link" aria-label="Llamar al +57 319 584 4475">+57-3195844475</a>
           <span class="sep">·</span>
-          <a href="mailto:juapalzt&#64;gmail.com" class="link">juapalzt&#64;gmail.com</a>
+          <a href="mailto:juapalzt&#64;gmail.com" class="link" aria-label="Enviar email a juapalzt@gmail.com">juapalzt&#64;gmail.com</a>
           <span class="sep">·</span>
-          <a href="mailto:jprodtap&#64;gmail.com" class="link">jprodtap&#64;gmail.com</a>
+          <a href="mailto:jprodtap&#64;gmail.com" class="link" aria-label="Enviar email a jprodtap@gmail.com">jprodtap&#64;gmail.com</a>
         </div>
       </div>
     </div>

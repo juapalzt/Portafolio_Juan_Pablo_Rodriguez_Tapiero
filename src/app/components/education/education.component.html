@@ -1,0 +1,34 @@
+<!-- ========================================
+  COMPONENTE: Formación Académica
+  
+  Sección que muestra:
+  - Educación académica
+  - Instituciones y grados
+  - Fechas y estado (Egresado, Cursando)
+  - Accesibilidad: ARIA labels
+======================================== -->
+
+<section id="education" class="container education-section" role="region" aria-labelledby="education-title">
+  <!-- Encabezado -->
+  <header class="section-header">
+    <h2 id="education-title">Formación Académica</h2>
+    <p class="section-subtitle muted">Educación y certificaciones profesionales</p>
+  </header>
+
+  <!-- Lista de educación -->
+  <div class="education-list">
+    <div *ngFor="let edu of education" class="education-item">
+      <div class="edu-icon">🎓</div>
+      <div class="edu-content">
+        <h3 class="degree-title">{{ edu.degree }}</h3>
+        <p class="institution">{{ edu.institution }}</p>
+        <div class="edu-footer">
+          <span class="edu-status" [ngClass]="'status-' + edu.status.toLowerCase()">
+            {{ edu.status }}
+          </span>
+          <time class="edu-date">{{ edu.date }}</time>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

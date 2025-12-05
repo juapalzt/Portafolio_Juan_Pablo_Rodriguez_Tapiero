@@ -7,7 +7,7 @@
   <!-- Encabezado de la sección -->
   <header class="section-header">
     <h2 id="contact-title">Contacto</h2>
-    <p class="section-subtitle muted">¡Hablemos! Envíame un mensaje o conéctate por redes sociales</p>
+    <p class="section-subtitle muted">¡Hablemos! Envíame un mensaje o conéctate por whatsapp</p>
   </header>
 
   <!-- Grid: formulario + tarjeta lateral de contacto rápido -->
@@ -101,7 +101,7 @@
 
         <div class="contact-quick">
           <a class="quick-btn whatsapp-quick" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
-          <a class="quick-btn mail-quick" href="mailto:juapalzt@gmail.com">✉️ Enviar correo</a>
+          <a class="quick-btn mail-quick" [href]="'mailto:' + personalData.contact.emails[0]">✉️ Enviar correo</a>
         </div>
 
         <div class="contact-note">

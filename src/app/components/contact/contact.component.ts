@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
+import { PERSONAL_DATA, PersonalDataHelper } from '../../config/personal-data.config';
 
 /**
  * ========================================
@@ -12,6 +13,7 @@ import { ContactService } from '../../services/contact.service';
  * - Integración dinámica con WhatsApp
  * - Mensajes de error/éxito inline
  * - Accesibilidad (aria-live, aria-invalid, aria-busy)
+ * - Datos centralizados desde personal-data.config
  * ========================================
  */
 @Component({
@@ -41,12 +43,15 @@ export class ContactComponent {
   /** Expone encodeURIComponent para que las plantillas puedan usarlo de forma segura */
   encodeURIComponent = (s: string) => encodeURIComponent(s);
 
+  /** Datos personales centralizados */
+  personalData = PERSONAL_DATA;
+
   // ========== Propiedades Getter ==========
   /**
    * Genera dinámicamente el href de WhatsApp usando valores del formulario.
    * 
    * Construye un mensaje con nombre y mensaje del usuario, codificado en URL.
-   * Si hay error, retorna URL base a WhatsApp (+57 3195844475).
+   * Si hay error, retorna URL base a WhatsApp del archivo de configuración.
    * 
    * @returns URL de WhatsApp con parámetro "text" prellenado
    */
@@ -54,15 +59,15 @@ export class ContactComponent {
     try {
       const name = (this.form?.get('name')?.value || '').toString().trim();
       const message = (this.form?.get('message')?.value || '').toString().trim();
-      const base = 'https://wa.me/573195844475?text=';
+      const base = `https://wa.me/${this.personalData.contact.phoneRaw}?text=`;
       const textParts: string[] = [];
-      if (name) textParts.push(`Hola Juan Pablo, soy ${name}.`);
-      else textParts.push('Hola Juan Pablo');
+      if (name) textParts.push(`Hola ${this.personalData.fullName.split(' ')[0]}, soy ${name}.`);
+      else textParts.push(`Hola ${this.personalData.fullName.split(' ')[0]}`);
       if (message) textParts.push(message);
       else textParts.push('Quisiera hablar sobre tu portafolio.');
       return base + encodeURIComponent(textParts.join(' '));
     } catch {
-      return 'https://wa.me/573195844475';
+      return this.personalData.socialLinks.whatsapp.url;
     }
   }
 

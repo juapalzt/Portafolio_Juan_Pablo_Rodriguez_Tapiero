@@ -32,15 +32,16 @@
 /* ========== Formulario de Contacto ========== */
 /* Contenedor del formulario con efecto glass-morphism */
 .contact-form{
-  display:flex;
-  flex-direction:column;
-  gap:1.5rem;
-  background:rgba(255,255,255,.02);
-  padding:2rem;
-  border-radius:12px;
-  border:1px solid rgba(15,111,191,.08);
-  backdrop-filter:blur(10px);
-  max-width:820px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: rgba(255,255,255,.02);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(15,111,191,.08);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  min-width: 0; /* evita overflow en grid */
 }
 
 /* ========== Campos del Formulario ========== */
@@ -83,12 +84,23 @@
 
 /* ========== Acciones del Formulario ========== */
 /* Contenedor para botones: flex con gap, responsive en móvil */
-.form-actions{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
-@media(max-width:480px){.form-actions{flex-direction:column}}
+.form-actions{
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@media (max-width: 480px) {
+  .form-actions{flex-direction:column;gap:.75rem}
+  .form-actions .btn{width:100%;justify-content:center}
+}
 
 /* ========== Botones Generales ========== */
 /* Estilos base para todos los botones: padding, radio, sombra, transiciones */
-.btn{padding:.7rem 1.2rem;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:600;cursor:pointer;border:none;transition:all 200ms ease;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.btn{padding:.85rem 1.25rem;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;font-weight:700;cursor:pointer;border:none;transition:all 200ms ease;box-shadow:0 4px 14px rgba(0,0,0,.06)}
 
 /* Hover: levanta el botón, aumenta sombra */
 .btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.12)}
@@ -96,12 +108,12 @@
 /* Active: presiona el botón sin transformación */
 .btn:active:not(:disabled){transform:translateY(0)}
 
-/* Botón de envío: gradiente azul, ancho mínimo para legibilidad */
-.submit-btn{background:linear-gradient(135deg,var(--accent),#0a4a8f);color:#fff;min-width:180px}
+/* Botón de envío: gradiente azul, tamaño cómodo para interacción táctil */
+.submit-btn{background:linear-gradient(135deg,var(--accent),#0a4a8f);color:#fff;min-width:200px;padding:.9rem 1.4rem;border-radius:12px}
 .submit-btn:hover{background:linear-gradient(135deg,#0f6fbf,#0a4a8f);filter:brightness(1.05)}
 
 /* Botón WhatsApp: gradiente verde característico de WhatsApp */
-.whatsapp-cta{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none}
+.whatsapp-cta{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;padding:.85rem 1.05rem;border-radius:12px}
 .whatsapp-cta:hover:not(.disabled){filter:brightness(.95)}
 
 /* ===================== Nueva estructura: grid y columna lateral ===================== */

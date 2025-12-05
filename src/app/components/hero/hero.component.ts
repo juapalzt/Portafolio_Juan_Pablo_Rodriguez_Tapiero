@@ -89,28 +89,36 @@ import { CvViewerComponent } from '../cv-viewer/cv-viewer.component';
 })
 export class HeroComponent {
   /**
+   * Importar configuración centralizada de datos personales
+   */
+  private personalData = null as any;
+
+  constructor() {
+    // Importación dinámica para evitar circular dependencies
+    import('../../config/personal-data.config').then(module => {
+      this.personalData = module.PERSONAL_DATA;
+    });
+  }
+
+  /**
    * Controla la visibilidad del visor de CV
    * @type {boolean}
    */
   showCv = false;
 
   /**
-   * Ruta al archivo PDF del CV
+   * Ruta al archivo PDF del CV - desde configuración centralizada
    * @type {string}
    */
-  cvSrc = 'Hoja de vida - Juan Pablo Rodriguez Tapiero.pdf';
+  get cvSrc(): string {
+    return this.personalData?.documents?.cv || 'Hoja de vida - Juan Pablo Rodriguez Tapiero.pdf';
+  }
 
   /**
    * Controla la visibilidad del modal de vista previa de imagen
    * @type {boolean}
    */
   showImagePreview = false;
-
-  /**
-   * Constructor del componente
-   * Inicializa propiedades y prepara el componente para rendering
-   */
-  constructor() {}
 
   /**
    * Alterna la visualización del CV (modal/inline dependiendo del componente)

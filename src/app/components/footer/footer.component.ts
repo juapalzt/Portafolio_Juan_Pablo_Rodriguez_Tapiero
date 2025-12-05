@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { PERSONAL_DATA, PersonalDataHelper } from '../../config/personal-data.config';
 
 /**
  * ========================================
@@ -16,6 +17,7 @@ import { RouterLink } from '@angular/router';
  * - Enlaces a políticas de privacidad y términos
  * - Responsive: stack vertical en móvil
  * - Accesibilidad: aria-live, rel="noopener noreferrer"
+ * - Datos centralizados desde personal-data.config
  * ========================================
  */
 @Component({
@@ -32,4 +34,10 @@ export class FooterComponent {
    * el copyright siempre actualizado sin necesidad de mantenimiento manual.
    */
   year = new Date().getFullYear();
+
+  /**
+   * Datos personales centralizados
+   */
+  personalData = PERSONAL_DATA;
+  dataHelper = PersonalDataHelper;
 }

@@ -1,0 +1,194 @@
+<!-- ========================================
+  COMPONENTE: CV (Currículum Vitae)
+  
+  Secciones:
+  - Perfil profesional
+  - Habilidades técnicas
+  - Experiencia laboral
+  - Formación académica
+  - Referencias
+  - Accesibilidad: ARIA labels y estructura semántica
+======================================== -->
+
+<section id="cv" class="container cv-section" role="region" aria-labelledby="cv-title">
+  <!-- Encabezado -->
+  <header class="section-header">
+    <h2 id="cv-title">Currículum Vitae</h2>
+    <p class="section-subtitle muted">Educación, experiencia y referencias profesionales</p>
+  </header>
+
+  <!-- Contenedor principal con tabs/acordeones -->
+  <div class="cv-container">
+    
+    <!-- ========== PERFIL PROFESIONAL ========== -->
+    <article class="cv-section-card">
+      <h3 class="cv-section-title">📋 Perfil Profesional</h3>
+      <div class="cv-section-content">
+        <p class="profile-text">{{ personalData.workProfile }}</p>
+        <div class="profile-stats">
+          <div class="stat">
+            <span class="stat-number">{{ yearsOfExperience }}+</span>
+            <span class="stat-label">Años de Experiencia</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">{{ workExperience.length }}</span>
+            <span class="stat-label">Empresas</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">{{ dataHelper.getAllTechnicalSkills().length }}</span>
+            <span class="stat-label">Habilidades</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ========== HABILIDADES TÉCNICAS ========== -->
+    <article class="cv-section-card">
+      <h3 class="cv-section-title">⚙️ Habilidades Técnicas</h3>
+      <div class="cv-section-content">
+        <div class="skills-grid">
+          <!-- Entornos de Desarrollo -->
+          <div class="skill-category">
+            <h4 class="category-title">Entornos de Desarrollo</h4>
+            <ul class="skill-list">
+              <li *ngFor="let skill of technicalSkills.developmentEnv" class="skill-item">{{ skill }}</li>
+            </ul>
+          </div>
+
+          <!-- Lenguajes y Tecnologías -->
+          <div class="skill-category">
+            <h4 class="category-title">Lenguajes y Tecnologías</h4>
+            <ul class="skill-list">
+              <li *ngFor="let skill of technicalSkills.languages" class="skill-item">{{ skill }}</li>
+            </ul>
+          </div>
+
+          <!-- Bases de Datos -->
+          <div class="skill-category">
+            <h4 class="category-title">Bases de Datos</h4>
+            <ul class="skill-list">
+              <li *ngFor="let skill of technicalSkills.databases" class="skill-item">{{ skill }}</li>
+            </ul>
+          </div>
+
+          <!-- Herramientas de Prueba -->
+          <div class="skill-category">
+            <h4 class="category-title">Herramientas de Pruebas</h4>
+            <ul class="skill-list">
+              <li *ngFor="let skill of technicalSkills.testingTools" class="skill-item">{{ skill }}</li>
+            </ul>
+          </div>
+
+          <!-- Herramientas de Automatización -->
+          <div class="skill-category">
+            <h4 class="category-title">Automatización & IA</h4>
+            <ul class="skill-list">
+              <li *ngFor="let skill of technicalSkills.automationTools" class="skill-item">{{ skill }}</li>
+            </ul>
+          </div>
+
+          <!-- Gestión de Proyectos -->
+          <div class="skill-category">
+            <h4 class="category-title">Gestión de Proyectos</h4>
+            <ul class="skill-list">
+              <li *ngFor="let skill of technicalSkills.projectManagement" class="skill-item">{{ skill }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ========== EXPERIENCIA LABORAL ========== -->
+    <article class="cv-section-card">
+      <h3 class="cv-section-title">💼 Experiencia Laboral</h3>
+      <div class="cv-section-content">
+        <div class="experience-list">
+          <div *ngFor="let job of workExperience" class="experience-item">
+            <div class="experience-header">
+              <h4 class="job-title">{{ job.position }}</h4>
+              <span class="job-company">{{ job.company }}</span>
+              <div class="job-dates">
+                <time>{{ job.startDate }}</time>
+                <span class="date-sep">—</span>
+                <time>{{ job.endDate }}</time>
+              </div>
+            </div>
+            <ul class="responsibilities-list">
+              <li *ngFor="let responsibility of job.responsibilities" class="responsibility">
+                {{ responsibility }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ========== FORMACIÓN ACADÉMICA ========== -->
+    <article class="cv-section-card">
+      <h3 class="cv-section-title">🎓 Formación Académica</h3>
+      <div class="cv-section-content">
+        <div class="education-list">
+          <div *ngFor="let edu of education" class="education-item">
+            <div class="edu-header">
+              <h4 class="degree-title">{{ edu.degree }}</h4>
+              <span class="institution">{{ edu.institution }}</span>
+              <div class="edu-meta">
+                <span class="edu-status" [ngClass]="'status-' + edu.status.toLowerCase()">{{ edu.status }}</span>
+                <time class="edu-date">{{ edu.date }}</time>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ========== REFERENCIAS ========== -->
+    <article class="cv-section-card">
+      <h3 class="cv-section-title">👥 Referencias</h3>
+      <div class="cv-section-content">
+        <!-- Referencias Profesionales -->
+        <div class="references-group" *ngIf="references.professional && references.professional.length">
+          <h4 class="ref-group-title">Referencias Profesionales</h4>
+          <div class="references-grid">
+            <div *ngFor="let ref of references.professional" class="reference-card professional">
+              <div class="ref-name">{{ ref.name }}</div>
+              <div class="ref-position">{{ ref.position }}</div>
+              <a [href]="'tel:+57' + ref.phone" class="ref-phone" [attr.aria-label]="'Llamar a ' + ref.name">
+                📞 {{ ref.phone }}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Referencias Personales -->
+        <div class="references-group" *ngIf="references.personal && references.personal.length">
+          <h4 class="ref-group-title">Referencias Personales</h4>
+          <div class="references-grid">
+            <div *ngFor="let ref of references.personal" class="reference-card personal">
+              <div class="ref-name">{{ ref.name }}</div>
+              <div class="ref-position">{{ ref.position }}</div>
+              <a [href]="'tel:+57' + ref.phone" class="ref-phone" [attr.aria-label]="'Llamar a ' + ref.name">
+                📞 {{ ref.phone }}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Referencias Familiares -->
+        <div class="references-group" *ngIf="references.family && references.family.length">
+          <h4 class="ref-group-title">Referencias Familiares</h4>
+          <div class="references-grid">
+            <div *ngFor="let ref of references.family" class="reference-card family">
+              <div class="ref-name">{{ ref.name }}</div>
+              <div class="ref-position">{{ ref.position }}</div>
+              <a [href]="'tel:+57' + ref.phone" class="ref-phone" [attr.aria-label]="'Llamar a ' + ref.name">
+                📞 {{ ref.phone }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>

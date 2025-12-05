@@ -6,12 +6,13 @@ import { ExperienceComponent } from '../../components/experience/experience.comp
 import { ProjectsComponent } from '../../components/projects/projects.component';
 import { SkillsComponent } from '../../components/skills/skills.component';
 import { CertificationsComponent } from '../../components/certifications/certifications.component';
+import { EducationComponent } from '../../components/education/education.component';
 import { ContactComponent } from '../../components/contact/contact.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HeroComponent, AboutComponent, ExperienceComponent, ProjectsComponent, SkillsComponent, CertificationsComponent, ContactComponent],
+  imports: [CommonModule, HeroComponent, AboutComponent, ExperienceComponent, ProjectsComponent, SkillsComponent, CertificationsComponent, EducationComponent, ContactComponent],
   templateUrl: './home.page.html'
 })
 export class HomePage {}

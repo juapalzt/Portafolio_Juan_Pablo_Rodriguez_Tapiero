@@ -11,22 +11,31 @@
 <section id="education" class="container education-section" role="region" aria-labelledby="education-title">
   <!-- Encabezado -->
   <header class="section-header">
-    <h2 id="education-title">Formación Académica</h2>
-    <p class="section-subtitle muted">Educación y certificaciones profesionales</p>
+    <div class="header-wrapper">
+      <h2 id="education-title">Formación Académica</h2>
+      <div class="accent-line"></div>
+    </div>
+    <p class="section-subtitle">Educación y certificaciones profesionales</p>
   </header>
 
-  <!-- Lista de educación -->
-  <div class="education-list">
-    <div *ngFor="let edu of education" class="education-item">
-      <div class="edu-icon">🎓</div>
-      <div class="edu-content">
-        <h3 class="degree-title">{{ edu.degree }}</h3>
-        <p class="institution">{{ edu.institution }}</p>
-        <div class="edu-footer">
-          <span class="edu-status" [ngClass]="'status-' + edu.status.toLowerCase()">
-            {{ edu.status }}
-          </span>
-          <time class="edu-date">{{ edu.date }}</time>
+  <!-- Timeline de educación -->
+  <div class="education-timeline">
+    <div *ngFor="let edu of education; let i = index" class="timeline-item">
+      <div class="timeline-marker" [attr.aria-label]="'Educación ' + (i + 1) + ' de ' + education.length"></div>
+      <div class="timeline-content">
+        <div class="edu-card">
+          <div class="edu-header">
+            <div class="edu-type-badge" [ngClass]="getTypeBadgeClass(edu.type)">{{ edu.type }}</div>
+            <time class="edu-year">{{ edu.date }}</time>
+          </div>
+          <h3 class="degree-title">{{ edu.degree }}</h3>
+          <p class="institution-name">{{ edu.institution }}</p>
+          <div class="edu-footer">
+            <span class="edu-status" [ngClass]="'status-' + edu.status.toLowerCase()" [attr.aria-label]="'Estado: ' + edu.status">
+              <span class="status-dot"></span>
+              {{ edu.status }}
+            </span>
+          </div>
         </div>
       </div>
     </div>

@@ -17,7 +17,13 @@
       <form [formGroup]="form" (ngSubmit)="submit()" class="contact-form" novalidate>
         <div class="form-row">
           <div class="form-group">
-            <label for="contact-name" class="form-label"><span class="form-icon">👤</span> Nombre</label>
+            <label for="contact-name" class="form-label">
+              <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              Nombre
+            </label>
             <input
               id="contact-name"
               #contactName
@@ -32,7 +38,13 @@
           </div>
 
           <div class="form-group">
-            <label for="contact-email" class="form-label"><span class="form-icon">✉️</span> Correo</label>
+            <label for="contact-email" class="form-label">
+              <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+              Correo
+            </label>
             <input
               id="contact-email"
               type="email"
@@ -50,7 +62,12 @@
         </div>
 
         <div class="form-group">
-          <label for="contact-message" class="form-label"><span class="form-icon">💬</span> Mensaje</label>
+          <label for="contact-message" class="form-label">
+            <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            Mensaje
+          </label>
           <textarea
             id="contact-message"
             formControlName="message"
@@ -74,10 +91,25 @@
             class="btn btn-primary submit-btn"
             [attr.aria-busy]="sending"
             aria-label="Enviar formulario de contacto">
-            <span *ngIf="!sending">📤 Enviar Mensaje</span>
-            <span *ngIf="sending">⏳ Enviando...</span>
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="1"></circle>
+              <path d="M5 12a7 7 0 1 0 14 0 7 7 0 0 0-14 0"></path>
+              <path d="m12 12 3-3-3 3 3 3-3-3-3-3 3 3-3 3"></path>
+            </svg>
+            <span *ngIf="!sending">Enviar Mensaje</span>
+            <span *ngIf="sending">
+              <svg class="spinner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg>
+              Enviando...
+            </span>
           </button>
-          <a class="btn whatsapp-cta" [href]="whatsappHref" target="_blank" rel="noopener noreferrer" aria-label="Escribirme por WhatsApp" [attr.aria-disabled]="sending" [class.disabled]="sending">💬 WhatsApp</a>
+          <a class="btn whatsapp-cta" [href]="whatsappHref" target="_blank" rel="noopener noreferrer" aria-label="Escribirme por WhatsApp" [attr.aria-disabled]="sending" [class.disabled]="sending">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-3.055 2.2-4.82 5.591-4.82 9.328 0 3.7 1.76 7.131 4.84 9.327 1.54 1.109 3.338 1.854 5.259 2.143.981.149 1.997.118 3.003-.099.944-.203 1.857-.52 2.693-1.005l.55 3.237c.038.224.265.383.496.35l2.447-.522c.232-.049.387-.253.35-.485l-1.023-6.002.002-.004a9.897 9.897 0 001.323-6.948c-.596-3.431-3.236-6.334-6.592-6.975a10.007 10.007 0 00-1.463-.115zm0 1.802a8.067 8.067 0 014.667 1.402c2.52 1.81 3.996 4.616 3.996 7.698 0 3.082-1.476 5.888-3.996 7.698a8.066 8.066 0 01-4.667 1.402 8.066 8.066 0 01-4.667-1.402c-2.52-1.81-3.996-4.616-3.996-7.698 0-3.082 1.476-5.888 3.996-7.698a8.067 8.067 0 014.667-1.402z"></path>
+            </svg>
+            WhatsApp
+          </a>
         </div>
 
         <!-- Estado del formulario -->
@@ -92,7 +124,11 @@
     <aside class="contact-side-col" aria-label="Contacto rápido">
       <div class="contact-card">
         <div class="contact-card-header">
-          <div class="avatar">📬</div>
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
           <div>
             <h3 class="card-title">Contacto Rápido</h3>
             <p class="card-sub">WhatsApp o correo directo</p>
@@ -100,8 +136,19 @@
         </div>
 
         <div class="contact-quick">
-          <a class="quick-btn whatsapp-quick" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
-          <a class="quick-btn mail-quick" [href]="'mailto:' + personalData.contact.emails[0]">✉️ Enviar correo</a>
+          <a class="quick-btn whatsapp-quick" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+            <svg class="quick-btn-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-3.055 2.2-4.82 5.591-4.82 9.328 0 3.7 1.76 7.131 4.84 9.327 1.54 1.109 3.338 1.854 5.259 2.143.981.149 1.997.118 3.003-.099.944-.203 1.857-.52 2.693-1.005l.55 3.237c.038.224.265.383.496.35l2.447-.522c.232-.049.387-.253.35-.485l-1.023-6.002.002-.004a9.897 9.897 0 001.323-6.948c-.596-3.431-3.236-6.334-6.592-6.975a10.007 10.007 0 00-1.463-.115zm0 1.802a8.067 8.067 0 014.667 1.402c2.52 1.81 3.996 4.616 3.996 7.698 0 3.082-1.476 5.888-3.996 7.698a8.066 8.066 0 01-4.667 1.402 8.066 8.066 0 01-4.667-1.402c-2.52-1.81-3.996-4.616-3.996-7.698 0-3.082 1.476-5.888 3.996-7.698a8.067 8.067 0 014.667-1.402z"></path>
+            </svg>
+            WhatsApp
+          </a>
+          <a class="quick-btn mail-quick" [href]="'mailto:' + personalData.contact.emails[0]">
+            <svg class="quick-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            Enviar correo
+          </a>
         </div>
 
         <div class="contact-note">

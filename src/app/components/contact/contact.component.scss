@@ -49,8 +49,8 @@
 .form-group{display:flex;flex-direction:column;gap:.7rem}
 /* Etiqueta del campo con icono */
 .form-label{font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:.5rem;color:var(--text-color)}
-/* Icono dentro de la etiqueta (emoji) */
-.form-icon{font-size:1.1rem;opacity:.8}
+/* Icono dentro de la etiqueta (SVG) */
+.form-icon{width:20px;height:20px;color:var(--accent);opacity:.8;flex-shrink:0}
 
 /* ========== Inputs y Textareas ========== */
 /* Estilos base: bordes 2px, background semi-transparente, transiciones suaves */
@@ -109,11 +109,18 @@
 .btn:active:not(:disabled){transform:translateY(0)}
 
 /* Botón de envío: gradiente azul, tamaño cómodo para interacción táctil */
-.submit-btn{background:linear-gradient(135deg,var(--accent),#0a4a8f);color:#fff;min-width:200px;padding:.9rem 1.4rem;border-radius:12px}
+.submit-btn{background:linear-gradient(135deg,var(--accent),#0a4a8f);color:#fff;min-width:200px;padding:.9rem 1.4rem;border-radius:12px;gap:.7rem}
 .submit-btn:hover{background:linear-gradient(135deg,#0f6fbf,#0a4a8f);filter:brightness(1.05)}
 
+/* Ícono dentro de botones */
+.btn-icon{width:20px;height:20px;flex-shrink:0}
+
+/* Spinner animado para envío */
+.spinner-icon{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
 /* Botón WhatsApp: gradiente verde característico de WhatsApp */
-.whatsapp-cta{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;padding:.85rem 1.05rem;border-radius:12px}
+.whatsapp-cta{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;padding:.85rem 1.05rem;border-radius:12px;gap:.7rem}
 .whatsapp-cta:hover:not(.disabled){filter:brightness(.95)}
 
 /* ===================== Nueva estructura: grid y columna lateral ===================== */
@@ -138,14 +145,18 @@
 }
 
 .contact-card-header{display:flex;gap:0.75rem;align-items:center;margin-bottom:1rem}
-.avatar{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:linear-gradient(135deg,rgba(15,111,191,.08),rgba(237,9,9,.06));border:1px solid rgba(15,111,191,.08)}
+.avatar{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:linear-gradient(135deg,rgba(15,111,191,.08),rgba(237,9,9,.06));border:1px solid rgba(15,111,191,.08);color:var(--accent);flex-shrink:0}
+.avatar svg{width:28px;height:28px}
 .card-title{margin:0;font-size:1.05rem;font-weight:700}
 .card-sub{margin:0;color:var(--muted);font-size:.9rem}
 
 .contact-quick{display:flex;flex-direction:column;gap:0.6rem;margin-top:0.5rem}
-.quick-btn{display:inline-flex;align-items:center;justify-content:center;padding:.65rem 0.9rem;border-radius:10px;font-weight:700;text-decoration:none}
+.quick-btn{display:inline-flex;align-items:center;justify-content:center;padding:.65rem 0.9rem;border-radius:10px;font-weight:700;text-decoration:none;gap:.6rem;transition:all 200ms ease}
+.quick-btn-icon{width:18px;height:18px;flex-shrink:0}
 .whatsapp-quick{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff}
+.whatsapp-quick:hover{filter:brightness(.95)}
 .mail-quick{background:rgba(15,111,191,.06);color:var(--text-color);border:1px solid rgba(15,111,191,.06)}
+.mail-quick:hover{background:rgba(15,111,191,.12);border-color:rgba(15,111,191,.15)}
 
 .contact-note{margin-top:0.9rem;color:var(--muted);font-size:.92rem}
 

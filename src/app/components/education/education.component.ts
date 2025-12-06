@@ -29,4 +29,11 @@ export class EducationComponent {
   get education() {
     return this.personalData.education;
   }
+
+  /**
+   * Convierte el tipo de educación a clase CSS válida
+   */
+  getTypeBadgeClass(type: string): string {
+    return 'type-' + type.toLowerCase().replace(/\s+/g, '-');
+  }
 }

@@ -1,194 +1,384 @@
 /* ========================================
   ESTILOS: Education Component
   
-  Componente que muestra:
+  Diseño profesional con timeline vertical
   - Formación académica
-  - Instituciones y grados
-  - Fechas y estado
-  
-  Características:
-  - Diseño modular en cards
-  - Animaciones suaves
-  - Responsive
-  - Accesibilidad
+  - Timeline interactivo
+  - Badges de tipo y estado
+  - Animaciones elegantes
+  - Accesibilidad mejorada
 ======================================== */
 
 :host { display: block; }
 
 /* ========== Sección Principal de Educación ========== */
 .education-section {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   padding: 0;
   background: transparent;
 }
 
-/* Encabezado de la sección */
+/* ========== Encabezado de la sección ========== */
 .section-header {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+}
+
+.header-wrapper {
+  position: relative;
+  margin-bottom: 0.75rem;
 }
 
 .section-header h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0 0 0.5rem 0;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0;
   color: var(--text-color);
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: -0.5px;
 }
 
-@media (max-width: 768px) {
-  .section-header h2 {
-    font-size: 1.6rem;
+.accent-line {
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 2px;
+  animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 60px;
+    opacity: 1;
   }
 }
 
 .section-subtitle {
   font-size: 0.95rem;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--muted);
-  margin: 0.25rem 0 0 0;
+  margin: 0;
+  margin-top: 1rem;
 }
 
-/* ========== Lista de Educación ========== */
-.education-list {
+/* ========== Timeline de Educación ========== */
+.education-timeline {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0;
 }
 
-.education-item {
+/* Línea vertical del timeline */
+.education-timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 40px;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2), transparent);
+  opacity: 0.3;
+}
+
+/* ========== Items del Timeline ========== */
+.timeline-item {
+  position: relative;
+  padding-left: 60px;
+  padding-bottom: 2.5rem;
   display: flex;
-  gap: 1rem;
-  padding: 1.25rem;
-  background: rgba(15, 111, 191, 0.04);
-  border: 1px solid rgba(15, 111, 191, 0.08);
-  border-radius: 12px;
-  transition: all 250ms ease;
+  flex-direction: column;
 }
 
-.education-item:hover {
-  background: rgba(15, 111, 191, 0.06);
-  border-color: rgba(15, 111, 191, 0.12);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+.timeline-item:last-child {
+  padding-bottom: 0;
 }
 
-/* Icono */
-.edu-icon {
-  font-size: 2rem;
-  min-width: 3rem;
+/* Marcador del timeline */
+.timeline-marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  background: var(--card);
+  border: 3px solid var(--accent);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 0 4px rgba(15, 111, 191, 0.1);
+  transition: all 300ms ease;
+  z-index: 2;
 }
 
-/* Contenido */
-.edu-content {
+.timeline-item:hover .timeline-marker {
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 6px rgba(15, 111, 191, 0.2),
+              0 4px 12px rgba(15, 111, 191, 0.15);
+  transform: scale(1.15);
+}
+
+/* Contenido del timeline */
+.timeline-content {
   flex: 1;
+}
+
+/* Card de educación */
+.edu-card {
+  background: var(--card);
+  border: 1px solid rgba(15, 111, 191, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 300ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.edu-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms ease;
+}
+
+.timeline-item:hover .edu-card::before {
+  transform: scaleX(1);
+}
+
+.timeline-item:hover .edu-card {
+  border-color: rgba(15, 111, 191, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+/* Header de la educación */
+.edu-header {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
 }
 
-.degree-title {
-  font-size: 1.05rem;
+/* Badge de tipo */
+.edu-type-badge {
+  display: inline-block;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
   font-weight: 700;
-  color: var(--text-color);
-  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  background: rgba(15, 111, 191, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(15, 111, 191, 0.2);
 }
 
-.institution {
+.type-pregrado {
+  background: rgba(147, 51, 234, 0.1);
+  color: #9333ea;
+  border-color: rgba(147, 51, 234, 0.2);
+}
+
+.type-técnico {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.type-complementaria {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border-color: rgba(34, 197, 94, 0.2);
+}
+
+.type-idioma {
+  background: rgba(249, 115, 22, 0.1);
+  color: #f97316;
+  border-color: rgba(249, 115, 22, 0.2);
+}
+
+.type-bachillerato {
+  background: rgba(236, 72, 153, 0.1);
+  color: #ec4899;
+  border-color: rgba(236, 72, 153, 0.2);
+}
+
+/* Año/Fecha */
+.edu-year {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(15, 111, 191, 0.08);
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+}
+
+/* Título del grado */
+.degree-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0.75rem 0 0.5rem 0;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+/* Nombre de institución */
+.institution-name {
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--accent);
-  margin: 0;
+  margin: 0 0 0.75rem 0;
 }
 
+/* Footer */
 .edu-footer {
   display: flex;
-  gap: 0.75rem;
   align-items: center;
-  margin-top: 0.25rem;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
 }
 
+/* Estado */
 .edu-status {
-  display: inline-block;
-  padding: 0.35rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  background: rgba(15, 111, 191, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(15, 111, 191, 0.2);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .status-egresado {
-  background: rgba(34, 197, 94, 0.15);
+  background: rgba(34, 197, 94, 0.1);
   color: #22c55e;
-  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-color: rgba(34, 197, 94, 0.2);
 }
 
 .status-cursando {
-  background: rgba(15, 111, 191, 0.15);
+  background: rgba(15, 111, 191, 0.1);
   color: var(--accent);
-  border: 1px solid rgba(15, 111, 191, 0.3);
-}
-
-.edu-date {
-  font-size: 0.85rem;
-  color: var(--muted);
-  opacity: 0.8;
+  border-color: rgba(15, 111, 191, 0.2);
 }
 
 /* ========== Responsive ========== */
 @media (max-width: 768px) {
   .education-section {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
   }
 
   .section-header h2 {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
 
-  .education-item {
-    padding: 1rem;
-    gap: 0.75rem;
+  .education-timeline::before {
+    left: 11px;
+    top: 36px;
+    width: 2px;
   }
 
-  .edu-icon {
-    font-size: 1.5rem;
-    min-width: 2.5rem;
+  .timeline-item {
+    padding-left: 50px;
+    padding-bottom: 2rem;
+  }
+
+  .timeline-marker {
+    width: 28px;
+    height: 28px;
+    border-width: 2.5px;
+  }
+
+  .edu-card {
+    padding: 1.25rem;
+  }
+
+  .edu-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .edu-year {
+    order: -1;
   }
 
   .degree-title {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .education-item {
-    flex-direction: column;
-    padding: 0.875rem;
+  .section-header h2 {
+    font-size: 1.5rem;
   }
 
-  .edu-icon {
-    font-size: 1.25rem;
+  .education-timeline::before {
+    left: 9px;
+  }
+
+  .timeline-item {
+    padding-left: 42px;
+    padding-bottom: 1.75rem;
+  }
+
+  .timeline-marker {
+    width: 24px;
+    height: 24px;
+    border-width: 2px;
+  }
+
+  .edu-card {
+    padding: 1rem;
   }
 
   .degree-title {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
   }
 
-  .institution {
+  .institution-name {
     font-size: 0.85rem;
   }
 
-  .edu-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  .edu-type-badge {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.65rem;
   }
 }

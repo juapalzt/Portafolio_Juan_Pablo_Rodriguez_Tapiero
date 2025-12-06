@@ -41,17 +41,17 @@
 }
 
 .theme-light {
-  /* Tema claro con colores sólidos y gradiente suave de fondo */
-  --bg: #f8f9fc; /* Fondo blanco cálido */
-  --card: #ffffff; /* Tarjetas blancas puras */
-  --muted: #070707; /* Texto secundario gris medio */
-  --accent: #0f6fbf; /* Mantener azul principal */
-  --text-color: #1e293b; /* Texto oscuro legible */
-  --accent-2: #b71c1c; /* Rojo oscuro igual que dark theme */
+  /* Tema claro con colores sólidos, modernos y profesionales */
+  --bg: #f5f7fa; /* Fondo gris muy claro, más amigable que blanco puro */
+  --card: #ffffff; /* Tarjetas blancas puras para máximo contraste */
+  --muted: #64748b; /* Gris medio para textos secundarios */
+  --accent: #0f6fbf; /* Azul principal intenso */
+  --text-color: #0f172a; /* Texto oscuro casi negro para legibilidad */
+  --accent-2: #dc2626; /* Rojo más vibrante para el tema light */
 
-  /* Glass effect: traslúcido oscuro sutil para tema claro */
-  --glass: rgba(15, 23, 42, 0.05);
-  --glass-2: rgba(15, 23, 42, 0.03);
+  /* Glass effect: muy sutil para tema claro */
+  --glass: rgba(15, 23, 42, 0.04);
+  --glass-2: rgba(15, 23, 42, 0.02);
   
   /* Nota: colores sólidos y claros para máxima legibilidad.
      Gradientes aplicados globalmente en html/body para efecto visual consistente. */
@@ -95,7 +95,6 @@ main {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   border: 1px solid rgba(255,255,255,0.04);
   backdrop-filter: blur(8px);
-  padding:1rem;
   border-radius: var(--radius);
 }
 
@@ -106,14 +105,22 @@ main {
   backdrop-filter: none;
 }
 
-/* En tema light: todas las secciones y contenedores deben ser opacos */
-.theme-light [class*="section"],
-.theme-light [class*="container"],
+/* En tema light: todas las secciones y contenedores deben ser opacos (excepto education, projects y footer) */
+.theme-light [class*="section"]:not(.education-section):not(.projects-section),
+.theme-light [class*="container"]:not(.footer-inner),
 .theme-light [class*="card"],
 .theme-light [class*="panel"],
 .theme-light [class*="card-item"],
 .theme-light [class*="item"] {
   background: var(--card) !important;
+  backdrop-filter: none !important;
+}
+
+/* Mantener educación, proyectos y footer transparentes en tema light */
+.theme-light .education-section,
+.theme-light .projects-section,
+.theme-light .footer-inner {
+  background: transparent !important;
   backdrop-filter: none !important;
 }
 

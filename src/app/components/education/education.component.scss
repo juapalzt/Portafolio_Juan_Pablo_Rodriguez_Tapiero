@@ -35,6 +35,19 @@
   margin: 0;
   color: var(--text-color);
   letter-spacing: -0.5px;
+
+  @media (max-width: 768px) {
+    font-size: 1.7rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.4rem;
+  }
+
+  @media (max-width: 412px) {
+    font-size: 1.2rem;
+    letter-spacing: 0;
+  }
 }
 
 .accent-line {
@@ -94,6 +107,16 @@
   padding-bottom: 2.5rem;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 480px) {
+    padding-left: 50px;
+    padding-bottom: 2rem;
+  }
+
+  @media (max-width: 412px) {
+    padding-left: 45px;
+    padding-bottom: 1.75rem;
+  }
 }
 
 .timeline-item:last-child {
@@ -119,7 +142,7 @@
 }
 
 .timeline-item:hover .timeline-marker {
-  border-color: var(--accent-2);
+  border-color: red;
   box-shadow: 0 0 0 6px rgba(15, 111, 191, 0.2),
               0 4px 12px rgba(15, 111, 191, 0.15);
   transform: scale(1.15);
@@ -189,9 +212,9 @@
 }
 
 .type-pregrado {
-  background: rgba(147, 51, 234, 0.1);
-  color: #9333ea;
-  border-color: rgba(147, 51, 234, 0.2);
+  background: rgba(88, 234, 51, 0.2);
+  color: #67ea33;
+  border-color: rgba(88, 234, 51, 0.2);
 }
 
 .type-técnico {
@@ -207,15 +230,15 @@
 }
 
 .type-idioma {
-  background: rgba(249, 115, 22, 0.1);
-  color: #f97316;
-  border-color: rgba(249, 115, 22, 0.2);
+  background: rgba(249, 132, 22, 0.2);
+  color: #f95e16;
+  border-color: rgba(249, 132, 22, 0.2);
 }
 
 .type-bachillerato {
-  background: rgba(236, 72, 153, 0.1);
-  color: #ec4899;
-  border-color: rgba(236, 72, 153, 0.2);
+  background: rgba(0, 225, 255, 0.171);
+  color: #00aeff;
+  border-color:  rgba(0, 225, 255, 0.171);
 }
 
 /* Año/Fecha */

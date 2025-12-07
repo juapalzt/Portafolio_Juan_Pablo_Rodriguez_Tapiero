@@ -35,7 +35,7 @@
   --muted: #070707;
   --accent: #0f6fbf;
   --text-color: #e6eef8;
-  --accent-2: #b71c1c; /* rojo más oscuro para mejor legibilidad */
+  --accent-2: #ff0707; /* rojo más oscuro para mejor legibilidad */
   --glass: rgba(255,255,255,0.06);
   --glass-2: rgba(255,255,255,0.04);
 }
@@ -47,7 +47,7 @@
   --muted: #64748b; /* Gris medio para textos secundarios */
   --accent: #0f6fbf; /* Azul principal intenso */
   --text-color: #0f172a; /* Texto oscuro casi negro para legibilidad */
-  --accent-2: #dc2626; /* Rojo más vibrante para el tema light */
+  --accent-2: #fd0b0b; /* Rojo más vibrante para el tema light */
 
   /* Glass effect: muy sutil para tema claro */
   --glass: rgba(15, 23, 42, 0.04);
@@ -84,11 +84,49 @@ main {
 .container {
   width: min(1100px, 92%);
   margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Mobile-first: ajustes para dispositivos pequeños (412px) */
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    padding: 0 0.75rem;
+  }
+}
+
+@media (max-width: 412px) {
+  .container {
+    padding: 0 0.5rem;
+  }
 }
 
 /* Utilidades simples */
-.flex { display:flex; gap:1rem; }
-.center { display:flex; align-items:center; justify-content:center; }
+.flex { 
+  display: flex; 
+  gap: 1rem; 
+  flex-wrap: wrap;
+}
+.center { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+/* Grid responsive con mobile-first */
+.grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+  gap: 1rem; 
+}
+
+@media (max-width: 480px) {
+  .flex { gap: 0.75rem; }
+  .grid { 
+    grid-template-columns: 1fr; 
+    gap: 0.75rem; 
+  }
+}
 
 /* Tarjeta 'glass' (efecto vidrio) */
 .card {

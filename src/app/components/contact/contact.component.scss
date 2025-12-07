@@ -14,20 +14,62 @@
 
 /* ========== Sección Principal de Contacto ========== */
 /* Contenedor con gradiente de fondo sutil y bordes redondeados */
-.contact-section{
-  margin-top:2rem;
-  padding:1.5rem;
-  background:linear-gradient(135deg,rgba(15,111,191,0.02),rgba(15,111,191,0.01));
-  border-radius:12px;
+.contact-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(15,111,191,0.02), rgba(15,111,191,0.01));
+  border-radius: 12px;
+
+  @media (max-width: 480px) {
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 412px) {
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 10px;
+  }
 }
 
 /* ========== Encabezado de Sección ========== */
-.section-header{margin-bottom:2rem}
+.section-header { 
+  margin-bottom: 2rem;
+}
+
 /* Título con gradiente azul: acepto → acepto-2 */
-.section-header h2{margin-bottom:.8rem;font-size:2rem;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-@media(max-width:768px){.section-header h2{font-size:1.6rem}}
+.section-header h2 {
+  margin-bottom: 0.8rem;
+  font-size: 2rem;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  @media(max-width: 768px) {
+    font-size: 1.6rem;
+  }
+
+  @media(max-width: 480px) {
+    font-size: 1.35rem;
+  }
+
+  @media(max-width: 412px) {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+}
+
 /* Subtítulo con opacidad reducida */
-.section-subtitle{font-size:.95rem;font-weight:500;opacity:.9}
+.section-subtitle {
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 0.9;
+
+  @media(max-width: 412px) {
+    font-size: 0.85rem;
+  }
+}
 
 /* ========== Formulario de Contacto ========== */
 /* Contenedor del formulario con efecto glass-morphism */
@@ -42,15 +84,58 @@
   backdrop-filter: blur(10px);
   width: 100%;
   min-width: 0; /* evita overflow en grid */
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 412px) {
+    padding: 1.25rem 1rem;
+    gap: 1rem;
+  }
 }
 
 /* ========== Campos del Formulario ========== */
 /* Contenedor de cada campo (label + input + error) */
-.form-group{display:flex;flex-direction:column;gap:.7rem}
+.form-group { 
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+
+  @media (max-width: 412px) {
+    gap: 0.6rem;
+  }
+}
+
 /* Etiqueta del campo con icono */
-.form-label{font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:.5rem;color:var(--text-color)}
+.form-label{
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-color);
+
+  @media (max-width: 412px) {
+    font-size: 0.9rem;
+    gap: 0.4rem;
+  }
+}
+
 /* Icono dentro de la etiqueta (SVG) */
-.form-icon{width:20px;height:20px;color:var(--accent);opacity:.8;flex-shrink:0}
+.form-icon{
+  width: 20px;
+  height: 20px;
+  color: var(--accent);
+  opacity: 0.8;
+  flex-shrink: 0;
+
+  @media (max-width: 412px) {
+    width: 18px;
+    height: 18px;
+  }
+}
 
 /* ========== Inputs y Textareas ========== */
 /* Estilos base: bordes 2px, background semi-transparente, transiciones suaves */
@@ -64,6 +149,11 @@
   font-size:.95rem;
   transition:all 250ms cubic-bezier(.4,0,.2,1);
   box-shadow:0 2px 8px rgba(0,0,0,.06);
+
+  @media (max-width: 412px) {
+    padding: 0.85rem;
+    font-size: 0.9rem;
+  }
 }
 
 /* Estados de focus: levanta el elemento, cambia color de borde, añade glow */
@@ -80,7 +170,14 @@
 
 /* Textarea específico: altura mínima con soporte responsive */
 .form-textarea{resize:vertical;min-height:140px}
-@media(max-width:480px){.form-textarea{min-height:110px}}
+
+@media(max-width:480px){
+  .form-textarea{min-height:110px}
+}
+
+@media (max-width: 412px) {
+  .form-textarea{min-height:100px}
+}
 
 /* ========== Acciones del Formulario ========== */
 /* Contenedor para botones: flex con gap, responsive en móvil */
@@ -98,30 +195,120 @@
   .form-actions .btn{width:100%;justify-content:center}
 }
 
+@media (max-width: 412px) {
+  .form-actions {
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
 /* ========== Botones Generales ========== */
 /* Estilos base para todos los botones: padding, radio, sombra, transiciones */
-.btn{padding:.85rem 1.25rem;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;font-weight:700;cursor:pointer;border:none;transition:all 200ms ease;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.btn {
+  padding: 0.85rem 1.25rem;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 200ms ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,.06);
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+
+  @media (max-width: 412px) {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
 
 /* Hover: levanta el botón, aumenta sombra */
-.btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,.12);
+}
 
 /* Active: presiona el botón sin transformación */
-.btn:active:not(:disabled){transform:translateY(0)}
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+}
 
 /* Botón de envío: gradiente azul, tamaño cómodo para interacción táctil */
-.submit-btn{background:linear-gradient(135deg,var(--accent),#0a4a8f);color:#fff;min-width:200px;padding:.9rem 1.4rem;border-radius:12px;gap:.7rem}
-.submit-btn:hover{background:linear-gradient(135deg,#0f6fbf,#0a4a8f);filter:brightness(1.05)}
+.submit-btn {
+  background: linear-gradient(135deg,var(--accent),#0a4a8f);
+  color: #fff;
+  min-width: 200px;
+  padding: 0.9rem 1.4rem;
+  border-radius: 12px;
+  gap: 0.7rem;
+
+  @media (max-width: 480px) {
+    min-width: auto;
+    width: 100%;
+  }
+
+  @media (max-width: 412px) {
+    padding: 0.8rem 1rem;
+    min-width: 100%;
+  }
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg,#0f6fbf,#0a4a8f);
+  filter: brightness(1.05);
+}
 
 /* Ícono dentro de botones */
-.btn-icon{width:20px;height:20px;flex-shrink:0}
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+
+  @media (max-width: 412px) {
+    width: 18px;
+    height: 18px;
+  }
+}
 
 /* Spinner animado para envío */
-.spinner-icon{animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
+.spinner-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
 
 /* Botón WhatsApp: gradiente verde característico de WhatsApp */
-.whatsapp-cta{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;padding:.85rem 1.05rem;border-radius:12px;gap:.7rem}
-.whatsapp-cta:hover:not(.disabled){filter:brightness(.95)}
+.whatsapp-cta {
+  background: linear-gradient(135deg,#25D366,#128C7E);
+  color: #fff;
+  border: none;
+  padding: 0.85rem 1.05rem;
+  border-radius: 12px;
+  gap: 0.7rem;
+
+  @media (max-width: 412px) {
+    padding: 0.75rem 0.9rem;
+  }
+}
+
+.whatsapp-cta:hover:not(.disabled) {
+  filter: brightness(.95);
+}
 
 /* ===================== Nueva estructura: grid y columna lateral ===================== */
 .contact-grid{
@@ -129,6 +316,19 @@
   grid-template-columns:1fr 320px;
   gap:1.25rem;
   align-items:start;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+  }
+
+  @media (max-width: 412px) {
+    gap: 0.75rem;
+  }
 }
 
 .contact-form-col{display:flex;justify-content:flex-start}
@@ -142,23 +342,145 @@
   padding:1.25rem;
   border:1px solid rgba(15,111,191,.06);
   box-shadow:0 8px 24px rgba(0,0,0,.04);
+
+  @media (max-width: 412px) {
+    padding: 1rem;
+    border-radius: 10px;
+  }
 }
 
-.contact-card-header{display:flex;gap:0.75rem;align-items:center;margin-bottom:1rem}
-.avatar{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:linear-gradient(135deg,rgba(15,111,191,.08),rgba(237,9,9,.06));border:1px solid rgba(15,111,191,.08);color:var(--accent);flex-shrink:0}
-.avatar svg{width:28px;height:28px}
-.card-title{margin:0;font-size:1.05rem;font-weight:700}
-.card-sub{margin:0;color:var(--muted);font-size:.9rem}
+.contact-card-header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1rem;
 
-.contact-quick{display:flex;flex-direction:column;gap:0.6rem;margin-top:0.5rem}
-.quick-btn{display:inline-flex;align-items:center;justify-content:center;padding:.65rem 0.9rem;border-radius:10px;font-weight:700;text-decoration:none;gap:.6rem;transition:all 200ms ease}
-.quick-btn-icon{width:18px;height:18px;flex-shrink:0}
-.whatsapp-quick{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff}
-.whatsapp-quick:hover{filter:brightness(.95)}
-.mail-quick{background:rgba(15,111,191,.06);color:var(--text-color);border:1px solid rgba(15,111,191,.06)}
-.mail-quick:hover{background:rgba(15,111,191,.12);border-color:rgba(15,111,191,.15)}
+  @media (max-width: 412px) {
+    gap: 0.6rem;
+  }
+}
 
-.contact-note{margin-top:0.9rem;color:var(--muted);font-size:.92rem}
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  background: linear-gradient(135deg,rgba(15,111,191,.08),rgba(237,9,9,.06));
+  border: 1px solid rgba(15,111,191,.08);
+  color: var(--accent);
+  flex-shrink: 0;
+
+  @media (max-width: 412px) {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+}
+
+.avatar svg {
+  width: 28px;
+  height: 28px;
+
+  @media (max-width: 412px) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+
+  @media (max-width: 412px) {
+    font-size: 0.95rem;
+  }
+}
+
+.card-sub {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+
+  @media (max-width: 412px) {
+    font-size: 0.8rem;
+  }
+}
+
+.contact-quick {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+
+  @media (max-width: 412px) {
+    gap: 0.5rem;
+  }
+}
+
+.quick-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 0.9rem;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  gap: 0.6rem;
+  transition: all 200ms ease;
+  font-size: 0.95rem;
+
+  @media (max-width: 412px) {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+}
+
+.quick-btn-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+
+  @media (max-width: 412px) {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.whatsapp-quick {
+  background: linear-gradient(135deg,#25D366,#128C7E);
+  color: #fff;
+}
+
+.whatsapp-quick:hover {
+  filter: brightness(.95);
+}
+
+.mail-quick {
+  background: rgba(15,111,191,.06);
+  color: var(--text-color);
+  border: 1px solid rgba(15,111,191,.06);
+}
+
+.mail-quick:hover {
+  background: rgba(15,111,191,.12);
+  border-color: rgba(15,111,191,.15);
+}
+
+.contact-note {
+  margin-top: 0.9rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+
+  @media (max-width: 412px) {
+    font-size: 0.8rem;
+    margin-top: 0.7rem;
+  }
+}
 
 /* ========== Sección de Enlaces de Contacto ========== */
 /* Contenedor de contacto rápido: separado por borde superior */

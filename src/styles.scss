@@ -106,12 +106,9 @@ main {
 }
 
 /* En tema light: todas las secciones y contenedores deben ser opacos (excepto education, projects y footer) */
-.theme-light [class*="section"]:not(.education-section):not(.projects-section),
-.theme-light [class*="container"]:not(.footer-inner),
 .theme-light [class*="card"],
 .theme-light [class*="panel"],
-.theme-light [class*="card-item"],
-.theme-light [class*="item"] {
+.theme-light [class*="card-item"] {
   background: var(--card) !important;
   backdrop-filter: none !important;
 }

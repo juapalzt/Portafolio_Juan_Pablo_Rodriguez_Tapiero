@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CvViewerComponent } from '../cv-viewer/cv-viewer.component';
+import { PERSONAL_DATA } from '../../config/personal-data.config';
 
 /**
  * ========================================================
@@ -19,29 +20,18 @@ import { CvViewerComponent } from '../cv-viewer/cv-viewer.component';
  *   • Descargar CV (Primary): descarga PDF directa
  *   • Contáctame (Secondary): enlace ancla a sección contacto
  *   • Ver CV (Secondary): abre visor integrado
- * - Foto de perfil clickeable:
- *   • Imagen responsiva con lazy loading
- *   • Overlay con icono de zoom en hover
- *   • Abre modal fullscreen al hacer clic
- * - Modal de vista previa de imagen:
- *   • Imagen ampliada con backdrop blur
- *   • Botón cerrar con animación suave
- *   • Cierra al presionar ESC o clic fuera
+ * - Foto de perfil clickeable con lazy loading
+ * - Modal de vista previa de imagen ampliada
  * - Visor de CV integrado (CvViewerComponent)
- * - Animaciones suaves: hover effects, transiciones
+ * - Datos centralizados desde personal-data.config.ts
+ * - Animaciones suaves y transiciones
  * - Soporte completo para temas oscuro y claro
  * - Accesibilidad completa: ARIA roles, keyboard navigation
  * 
- * ESTRUCTURA DE DATOS:
- * - showCv: boolean - controla visibilidad del visor de CV
- * - cvSrc: string - ruta al archivo PDF del CV
- * - showImagePreview: boolean - controla visibilidad del modal de imagen
- * 
  * ESTILOS Y ANIMACIONES:
- * - Gradientes: Título con gradient de acento1→acento2
- * - Hover: Imagen elevación -8px, sombra expandida
- * - Overlay: Opacidad 0→1, icono con animación pulse
- * - Transiciones: 280ms cubic-bezier(0.2, 0.9, 0.3, 1)
+ * - Gradientes: Título con gradient de acento
+ * - Hover: Imagen elevación, sombra expandida
+ * - Overlay: Opacidad 0→1 en hover
  * - Responsive: Row (desktop) → Column (mobile)
  * 
  * ACCESIBILIDAD:
@@ -50,35 +40,8 @@ import { CvViewerComponent } from '../cv-viewer/cv-viewer.component';
  * - aria-label en botones e imagen
  * - role="toolbar" en grupo de acciones
  * - role="dialog" en modal de imagen
- * - Soporta navegación con Enter y Space en imagen
+ * - Soporta navegación con Enter y Space
  * - Focus-visible en botones y controles
- * 
- * RESPONSIVE DESIGN:
- * - Desktop (>768px): Layout horizontal (row)
- * - Tablet (768px-480px): Ajustes de espaciado
- * - Mobile (<480px): Layout vertical (column), botones fullwidth
- * - Imagen redimensionada para cada breakpoint
- * 
- * TEMA LIGHT:
- * - Overlay gradient más claro
- * - Botones con colores ajustados
- * - Mayor contraste en texto
- * 
- * EJEMPLOS DE USO:
- * <app-hero></app-hero>
- * 
- * MÉTODOS PÚBLICOS:
- * - toggleCv(): Alterna visibilidad del visor de CV
- * - openImagePreview(): Abre modal de vista previa de imagen
- * - closeImagePreview(): Cierra modal de vista previa
- * 
- * MEJORAS FUTURAS:
- * - Agregar descarga de foto en alta resolución
- * - Integrar social media links (GitHub, LinkedIn, Twitter)
- * - Animaciones on-scroll (AOS)
- * - Cargar datos desde servicio (HeroService)
- * - Soporte para múltiples idiomas (i18n)
- * - Integrar redes sociales con QR code
  */
 @Component({
   selector: 'app-hero',
@@ -88,17 +51,7 @@ import { CvViewerComponent } from '../cv-viewer/cv-viewer.component';
   styleUrls: ['./hero.component.scss']
 })
 export class HeroComponent {
-  /**
-   * Importar configuración centralizada de datos personales
-   */
-  private personalData = null as any;
-
-  constructor() {
-    // Importación dinámica para evitar circular dependencies
-    import('../../config/personal-data.config').then(module => {
-      this.personalData = module.PERSONAL_DATA;
-    });
-  }
+  personalData = PERSONAL_DATA;
 
   /**
    * Controla la visibilidad del visor de CV

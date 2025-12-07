@@ -23,8 +23,8 @@
   <!-- Timeline contenedor: lista semántica con rol="list" -->
   <div class="experience-timeline" role="list" aria-label="Timeline de experiencia profesional">
     
-    <!-- Elemento 1: QA Automation Engineer -->
-    <article class="experience-item" role="listitem">
+    <!-- Iteración sobre experiencia laboral desde datos centralizados -->
+    <article *ngFor="let job of personalData.workExperience; let i = index" class="experience-item" role="listitem">
       <!-- Indicador visual del timeline (círculo) -->
       <div class="timeline-marker" aria-hidden="true"></div>
       
@@ -33,51 +33,18 @@
         <!-- Encabezado: empresa, cargo y duración -->
         <header class="experience-header">
           <div class="experience-title-group">
-            <h3 class="experience-company">Empresa A</h3>
-            <p class="experience-role">QA Automation Engineer</p>
+            <h3 class="experience-company">{{ job.company }}</h3>
+            <p class="experience-role">{{ job.position }}</p>
           </div>
-          <time class="experience-duration" datetime="2022-01/2024-12">
-            <span class="duration-badge">2022 - Presente</span>
+          <time class="experience-duration" [attr.datetime]="job.startDate + '/' + job.endDate">
+            <span class="duration-badge">{{ job.startDate }} - {{ job.endDate }}</span>
           </time>
         </header>
 
         <!-- Descripción y responsabilidades -->
         <div class="experience-body">
-          <p class="experience-description">Liderazgo en automatización de pruebas y garantía de calidad.</p>
           <ul class="experience-tasks" aria-label="Responsabilidades y logros">
-            <li>Diseño de frameworks de automatización con Selenium y Appium.</li>
-            <li>Implementación de pipelines CI/CD para pruebas automáticas.</li>
-            <li>Mentoría a equipos en buenas prácticas de QA.</li>
-          </ul>
-        </div>
-      </div>
-    </article>
-
-    <!-- Elemento 2: Full Stack Developer -->
-    <article class="experience-item" role="listitem">
-      <!-- Indicador visual del timeline (círculo) -->
-      <div class="timeline-marker" aria-hidden="true"></div>
-      
-      <!-- Contenedor del contenido -->
-      <div class="experience-content">
-        <!-- Encabezado: empresa, cargo y duración -->
-        <header class="experience-header">
-          <div class="experience-title-group">
-            <h3 class="experience-company">Empresa B</h3>
-            <p class="experience-role">Full Stack Developer</p>
-          </div>
-          <time class="experience-duration" datetime="2019-06/2022-05">
-            <span class="duration-badge">2019 - 2022</span>
-          </time>
-        </header>
-
-        <!-- Descripción y responsabilidades -->
-        <div class="experience-body">
-          <p class="experience-description">Desarrollo full stack de aplicaciones empresariales escalables.</p>
-          <ul class="experience-tasks" aria-label="Responsabilidades y logros">
-            <li>Desarrollo de microservicios en Spring y frontends en Angular.</li>
-            <li>Integración de bases de datos (PostgreSQL, MongoDB).</li>
-            <li>Despliegue en AWS y dockerización de aplicaciones.</li>
+            <li *ngFor="let responsibility of job.responsibilities">{{ responsibility }}</li>
           </ul>
         </div>
       </div>

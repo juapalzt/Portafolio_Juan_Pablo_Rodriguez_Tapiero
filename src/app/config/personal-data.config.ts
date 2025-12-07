@@ -17,6 +17,7 @@ export const PERSONAL_DATA = {
   // ========== DATOS PERSONALES BÁSICOS ==========
   fullName: 'Juan Pablo Rodríguez Tapiero',
   profession: 'QA Automation Engineer & Full Stack Developer',
+  bio: 'Diseño y desarrollo soluciones robustas con enfoque en calidad, automatización y despliegue continuo. Combinando testing avanzado, arquitectura limpia y best practices.',
   title: 'Tecnólogo en Análisis y Desarrollo de Sistemas de Información',
   
   // ========== INFORMACIÓN DE CONTACTO ==========
@@ -67,9 +68,34 @@ export const PERSONAL_DATA = {
 
   // ========== PERFIL LABORAL ==========
   workProfile: `Tecnólogo en Análisis y Desarrollo de Sistemas de Información con sólidos conocimientos en desarrollo web y backend, complementados con experiencia en metodologías ágiles como Scrum. Poseo más de dos años de experiencia en automatización de pruebas, especializado en la optimización de procesos, la mejora de la eficiencia operativa y el aseguramiento de la calidad en entornos de desarrollo.
+
 Cuento con habilidades avanzadas en automatización utilizando Virtuoso QA, Selenium, Appium, JUnit, TestNG y Cucumber, además de experiencia en pruebas de APIs con Postman, SoapUI y Apache JMeter, garantizando una cobertura integral y precisa. Mi enfoque está orientado al pensamiento lógico, la capacidad de abstracción y la resolución efectiva de problemas complejos.
+
 Estoy certificado en Lean Six Sigma, Scrum Foundation y Postman, lo que me permite aplicar enfoques estructurados y estratégicos para la mejora continua de los procesos de QA. Adicionalmente, he fortalecido mis conocimientos en herramientas y metodologías basadas en inteligencia artificial, incluyendo estructuración de prompts y su aplicación para mejorar el desarrollo, la automatización y la optimización de procesos.
+
 Me destaco por la documentación minuciosa de casos de prueba, el análisis de datos y el liderazgo técnico dentro de equipos QA, fomentando la colaboración, la calidad y la mejora constante mediante la reducción de tiempos de ejecución y la automatización de procesos.`,
+
+  // ========== CERTIFICACIONES ==========
+  certifications: [
+    {
+      name: 'Lean Six Sigma',
+      issuer: 'Certificación Internacional',
+      date: 'Certificado',
+      status: 'Activo'
+    },
+    {
+      name: 'Scrum Foundation',
+      issuer: 'Certificación Internacional',
+      date: 'Certificado',
+      status: 'Activo'
+    },
+    {
+      name: 'Postman API Testing',
+      issuer: 'Postman',
+      date: 'Certificado',
+      status: 'Activo'
+    }
+  ],
 
   // ========== FORMACIÓN ACADÉMICA ==========
   education: [
@@ -172,57 +198,13 @@ Me destaco por la documentación minuciosa de casos de prueba, el análisis de d
   // ========== HABILIDADES TÉCNICAS ==========
   technicalSkills: {
     developmentEnv: ['Netbeans', 'Visual Studio 2019', 'Visual Studio Code', 'Eclipse', 'Sublime Text'],
-    languages: ['Java', 'JavaScript', 'ASP.NET MVC', 'SQL', 'HTML', 'CSS', 'Bootstrap', 'PHP', 'JSF', 'XML'],
-    databases: ['MySQL', 'Microsoft SQL Server', 'XAMPP'],
-    testingTools: ['Selenium', 'Postman', 'SoapUI', 'Apache JMeter', 'TestLink', 'Mantis', 'ALM'],
-    automationTools: ['Maven', 'Virtuoso QA', 'Appium', 'JUnit', 'TestNG', 'Cucumber'],
+    languages: ['Java', 'JavaScript', 'ASP.NET MVC', 'SQL', 'Maven', 'HTML', 'CSS', 'Bootstrap', 'PHP', 'JSF', 'XML'],
+    databases: ['XAMPP', 'MySQL', 'MySQL Workbench', 'Microsoft SQL Server Management Studio'],
+    testingTools: ['Selenium', 'Postman', 'SoapUI', 'Apache JMeter', 'TestLink', 'Mantis', 'ALM (Application Lifecycle Management)'],
+    automationTools: ['Maven', 'Virtuoso QA', 'Appium', 'JUnit', 'TestNG', 'Cucumber', 'XAMPP'],
     projectManagement: ['ALM', 'Jira', 'Mantis', 'Git'],
-    aiTools: ['Copilot'],
-    others: ['Microsoft Office', 'Kleopatra']
-  },
-
-  // ========== REFERENCIAS ==========
-  references: {
-    family: [
-      {
-        name: 'José Luis Rodriguez Tapiero',
-        position: 'Analista',
-        relationship: 'Hermano',
-        phone: '3115955713'
-      },
-      {
-        name: 'Jilmar Alexis Rodriguez Tapiero',
-        position: 'Coordinador de Almacén',
-        relationship: 'Hermano',
-        phone: '3045214694'
-      }
-    ],
-    personal: [
-      {
-        name: 'Mileidy Cespedes Delgado',
-        position: 'Asesor Comercial',
-        phone: '3115955713'
-      },
-      {
-        name: 'Santiago Ramírez',
-        position: 'QA Tester Junior',
-        phone: '3138956954'
-      }
-    ],
-    professional: [
-      {
-        name: 'Bruno Isaac Gomez',
-        position: 'Líder Automatización',
-        relationship: 'Líder',
-        phone: '3015001215'
-      },
-      {
-        name: 'Cristian Ovaller',
-        position: 'Analista de Software Senior',
-        relationship: 'Líder',
-        phone: '3143143195'
-      }
-    ]
+    aiTools: ['Copilot', 'Virtuoso QA'],
+    others: ['Microsoft Office (Word, Excel, PowerPoint, Access)', 'Kleopatra (cifrado de archivos)']
   },
 
   // ========== DATOS ADICIONALES (para futuro uso) ==========
@@ -315,28 +297,9 @@ export class PersonalDataHelper {
   }
 
   /**
-   * Obtiene referencias profesionales
-   */
-  static getProfessionalReferences() {
-    return PERSONAL_DATA.references.professional || [];
-  }
-
-  /**
-   * Obtiene todas las referencias
-   */
-  static getAllReferences() {
-    return {
-      professional: PERSONAL_DATA.references.professional || [],
-      personal: PERSONAL_DATA.references.personal || [],
-      family: PERSONAL_DATA.references.family || []
-    };
-  }
-
-  /**
-   * Obtiene certificaciones (si existen en futuro)
+   * Obtiene certificaciones
    */
   static getCertifications() {
-    // Placeholder para futuras certificaciones
-    return [];
+    return PERSONAL_DATA.certifications || [];
   }
 }

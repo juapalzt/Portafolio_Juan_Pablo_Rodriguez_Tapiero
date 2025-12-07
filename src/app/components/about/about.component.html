@@ -26,12 +26,10 @@
     <p class="section-subtitle">Desarrollador Full Stack y especialista en QA Automation con pasión por la calidad</p>
   </header>
 
-  <!-- Descripción principal: párrafo ejecutivo -->
-  <p class="about-intro">
-    Soy <strong>QA Automation Engineer</strong> y <strong>Full Stack Developer</strong> apasionado por garantizar la calidad 
-    en cada línea de código. Con experiencia en pruebas automatizadas, integración continua y desarrollo web, 
-    me especializo en crear pipelines de QA robustos que permiten entregas rápidas, seguras y confiables.
-  </p>
+  <!-- Descripción principal: párrafo ejecutivo con párrafos separados -->
+  <div class="about-intro">
+    <p *ngFor="let paragraph of getProfileParagraphs()">{{ paragraph }}</p>
+  </div>
 
   <!-- Grid de especialidades: cards grandes con iconos y detalles -->
   <div class="about-grid" role="list">
@@ -146,7 +144,7 @@
     <!-- Card 3: Quality & Best Practices -->
     <article class="about-item" role="listitem" aria-labelledby="quality-title">
       <div class="item-icon-container">
-        <span class="item-icon" aria-hidden="true">⭐</span>
+        <span class="item-icon" aria-hidden="true">✔</span>
       </div>
       
       <div class="item-content">

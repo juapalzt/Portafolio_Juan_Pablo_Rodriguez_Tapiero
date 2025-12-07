@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PERSONAL_DATA } from '../../config/personal-data.config';
 
 /**
  * Componente: ExperienceComponent
@@ -15,15 +16,15 @@ import { CommonModule } from '@angular/common';
  * - Soporta tema oscuro y claro con variables CSS
  * - Completamente responsivo: desktop → tablet → mobile
  * - Accesibilidad completa: ARIA labels, semantic HTML, focus-visible
- * - Sin lógica: datos se pasan via plantilla o input (actualmente hardcoded)
+ * - Datos centralizados desde personal-data.config.ts
  * 
- * Estructura de datos esperada:
+ * Estructura de datos:
  * Cada experiencia tiene:
  *   - company: string (nombre de empresa)
- *   - role: string (puesto/cargo)
- *   - duration: string (ej: "2022 - Presente")
- *   - description: string (descripción del rol)
- *   - tasks: string[] (lista de responsabilidades/logros)
+ *   - position: string (puesto/cargo)
+ *   - startDate: string (fecha inicio)
+ *   - endDate: string (fecha fin)
+ *   - responsibilities: string[] (lista de responsabilidades/logros)
  * 
  * Estilos asociados:
  * - experience.component.scss: contiene toda la presentación visual
@@ -40,10 +41,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./experience.component.scss']
 })
 export class ExperienceComponent {
+  personalData = PERSONAL_DATA;
+
   /**
    * Constructor
-   * Actualmente vacío; los datos de experiencia están en la plantilla HTML.
-   * En el futuro, se pueden cargar desde un servicio o input.
    */
   constructor() {}
 }

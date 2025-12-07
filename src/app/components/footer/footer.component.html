@@ -13,21 +13,21 @@
 <footer role="contentinfo">
   <div class="container">
     <div class="footer-inner">
-
       <!-- Branding area -->
+      <div class="branding" aria-hidden="false">
+         <div class="meta muted" aria-live="polite">
+          <span class="copyright">© {{ year }}</span>
+          <span class="sep">—</span>
+          <!-- Branding area -->
       <div class="branding" aria-hidden="false">
         <strong class="brand-name">{{ personalData.fullName }}</strong>
         <div class="muted brand-sub">{{ personalData.profession }}</div>
       </div>
+        </div>
+      </div>
 
       <!-- Center metadata + policies -->
       <div class="center-block">
-        <div class="meta muted" aria-live="polite">
-          <span class="copyright">© {{ year }}</span>
-          <span class="sep">—</span>
-          <span>Hecho con <a href="https://angular.io/" target="_blank" rel="noopener noreferrer" aria-label="Sitio web de Angular" class="link">Angular</a></span>
-        </div>
-
         <div class="policies muted" aria-hidden="false">
           <small>Todos los derechos reservados.</small>
           <small class="policy-links">&nbsp;·&nbsp;
@@ -48,12 +48,6 @@
             <span class="visually-hidden">GitHub</span>
           </a>
 
-          <a class="social-link" [href]="personalData.socialLinks.instagram.url" target="_blank" rel="noopener noreferrer" [attr.aria-label]="personalData.socialLinks.instagram.label">
-            <!-- Instagram SVG -->
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.2a4.8 4.8 0 1 0 .001 9.601A4.8 4.8 0 0 0 12 8.2zM18.4 6.6a1.2 1.2 0 1 1 0 2.399 1.2 1.2 0 0 1 0-2.399z" fill="currentColor"/></svg>
-            <span class="visually-hidden">Instagram</span>
-          </a>
-
           <a class="social-link" [href]="personalData.socialLinks.linkedin.url" target="_blank" rel="noopener noreferrer" [attr.aria-label]="personalData.socialLinks.linkedin.label">
             <!-- LinkedIn SVG -->
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4.98 3.5a2.5 2.5 0 11-.002 5.001A2.5 2.5 0 014.98 3.5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.7-1.8 3.5-1.8 3.7 0 4.4 2.4 4.4 5.5V21H17v-5.2c0-1.2 0-2.8-1.7-2.8-1.7 0-1.9 1.3-1.9 2.7V21H9V9z" fill="currentColor"/></svg>
@@ -66,15 +60,19 @@
             <span class="visually-hidden">WhatsApp</span>
           </a>
         </nav>
-
-        <!-- Contact details -->
+        <!-- Contact details with emojis -->
         <address class="contact-details">
-          <a class="link" [href]="'tel:+' + personalData.contact.phoneRaw" [attr.aria-label]="'Llamar al ' + personalData.contact.phone">{{ personalData.contact.phone }}</a>
+          <a class="link-contact" [href]="'tel:+' + personalData.contact.phoneRaw" [attr.aria-label]="'Llamar al ' + personalData.contact.phone">
+            <span class="icon">📱</span>
+            <span>{{ personalData.contact.phone }}</span>
+          </a>
           <span class="sep">·</span>
-          <a class="link" [href]="'mailto:' + personalData.contact.emails[0]" [attr.aria-label]="'Enviar email a ' + personalData.contact.emails[0]">{{ personalData.contact.emails[0] }}</a>
+          <a class="link-contact" [href]="'mailto:' + personalData.contact.emails[0]" [attr.aria-label]="'Enviar email a ' + personalData.contact.emails[0]">
+            <span class="icon">✉️</span>
+            <span>{{ personalData.contact.emails[0] }}</span>
+          </a>
         </address>
       </div>
-
     </div>
   </div>
 </footer>

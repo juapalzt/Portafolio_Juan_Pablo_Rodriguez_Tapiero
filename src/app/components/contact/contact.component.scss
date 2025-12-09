@@ -211,14 +211,15 @@
 /* ========== Botones Generales ========== */
 /* Estilos base para todos los botones: padding, radio, sombra, transiciones */
 .btn {
-  padding: 0.85rem 1.25rem;
-  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
   font-weight: 700;
+  font-size: 1rem;
   cursor: pointer;
   border: none;
   transition: all 200ms ease;
@@ -230,8 +231,8 @@
   overflow-wrap: anywhere;
 
   @media (max-width: 412px) {
-    padding: 0.75rem 1rem;
-    font-size: 0.9rem;
+    padding: 0.95rem 1.1rem;
+    font-size: 0.96rem;
   }
 }
 
@@ -250,10 +251,11 @@
 .submit-btn {
   background: linear-gradient(135deg,var(--accent),#0a4a8f);
   color: #fff;
-  min-width: 200px;
-  padding: 0.9rem 1.4rem;
-  border-radius: 12px;
-  gap: 0.7rem;
+  min-width: 220px;
+  padding: 1rem 1.6rem;
+  border-radius: 14px;
+  gap: 0.8rem;
+  font-size: 1rem;
 
   @media (max-width: 480px) {
     min-width: auto;
@@ -261,8 +263,9 @@
   }
 
   @media (max-width: 412px) {
-    padding: 0.8rem 1rem;
+    padding: 0.9rem 1rem;
     min-width: 100%;
+    font-size: 0.98rem;
   }
 }
 
@@ -297,12 +300,13 @@
   background: linear-gradient(135deg,#25D366,#128C7E);
   color: #fff;
   border: none;
-  padding: 0.85rem 1.05rem;
+  padding: 1rem 1.25rem;
   border-radius: 12px;
-  gap: 0.7rem;
+  gap: 0.8rem;
+  font-size: 1rem;
 
   @media (max-width: 412px) {
-    padding: 0.75rem 0.9rem;
+    padding: 0.9rem 1rem;
   }
 }
 
@@ -425,18 +429,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.65rem 0.9rem;
-  border-radius: 10px;
+  padding: 0.95rem 1.1rem;
+  border-radius: 12px;
   font-weight: 700;
   text-decoration: none;
-  gap: 0.6rem;
+  gap: 0.75rem;
   transition: all 200ms ease;
-  font-size: 0.95rem;
+  font-size: 1rem;
 
   @media (max-width: 412px) {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.85rem;
-    border-radius: 8px;
+    padding: 0.85rem 0.95rem;
+    font-size: 0.96rem;
+    border-radius: 10px;
   }
 }
 

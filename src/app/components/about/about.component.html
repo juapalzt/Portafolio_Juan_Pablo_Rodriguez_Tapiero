@@ -19,20 +19,27 @@
 -->
 
 <!-- Sección "Sobre mí" con información profesional -->
-<section id="about" class="about-section card" role="region" aria-labelledby="about-title">
-  <!-- Encabezado: título con subtítulo descriptivo -->
-  <header class="section-header">
-    <h2 id="about-title">Sobre mí</h2>
-    <p class="section-subtitle">Desarrollador Full Stack y especialista en QA Automation con pasión por la calidad</p>
-  </header>
-
-  <!-- Descripción principal: párrafo ejecutivo con párrafos separados -->
-  <div class="about-intro">
-    <p *ngFor="let paragraph of getProfileParagraphs()">{{ paragraph }}</p>
-  </div>
+<section id="about" class="about-section" role="region" aria-labelledby="about-title">
+  
 
   <!-- Grid de especialidades: cards grandes con iconos y detalles -->
   <div class="about-grid" role="list">
+    
+
+     <!-- Card 1: QA Automation Specialist -->
+    <article class="about-item" role="listitem">
+      <!-- Icono representativo con contenedor destacado -->
+     
+      
+      <!-- Título y descripción -->
+      <div class="item-content">
+        <div class="item-header">
+          <h3 id="Sobremí-title" class="item-title">PERFIL LABORAL</h3>
+        </div>
+        <p *ngFor="let paragraph of getProfileParagraphs()">{{ paragraph }}</p>
+      </div>
+    </article>
+    
     <!-- Card 1: QA Automation Specialist -->
     <article class="about-item" role="listitem" aria-labelledby="qa-title">
       <!-- Icono representativo con contenedor destacado -->

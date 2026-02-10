@@ -38,34 +38,64 @@
   ============================================================
   ENCABEZADO
   ============================================================
-  Título principal con subt ítulo descriptivo y gradiente
+  Título principal con subtítulo descriptivo y gradiente
 */
 .section-header {
   margin-bottom: 2rem;
   text-align: center;
+}
+
+.header-wrapper {
+  position: relative;
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título principal con gradient de acento1 a acento2 */
+.section-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   
-  /* Título principal con gradient de acento1 a acento2 */
-  h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0 0 0.5rem 0;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    
-    @media (max-width: 768px) {
-      font-size: 1.5rem;
-    }
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
   }
-  
-  /* Subt ítulo descriptivo con color muted */
-  .section-subtitle {
-    font-size: 0.95rem;
-    color: var(--muted);
-    margin: 0;
-    line-height: 1.5;
+}
+
+.accent-line {
+  position: relative;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 2px;
+  animation: slideInLeft 0.8s ease-out;
+  margin-top: 0.5rem;
+}
+
+@keyframes slideInLeft {
+  from {
+    width: 0;
+    opacity: 0;
   }
+  to {
+    width: 60px;
+    opacity: 1;
+  }
+}
+
+/* Subtítulo descriptivo con color muted */
+.section-subtitle {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0;
+  margin-top: 1rem;
+  line-height: 1.5;
 }
 
 /* 

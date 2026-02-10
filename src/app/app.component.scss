@@ -1,0 +1,24 @@
+/* ============================================================================
+   APP COMPONENT STYLES
+   ============================================================================
+   Estilos generales de la aplicación principal.
+   Proporciona padding-top para compensar el header fixed.
+   ========================================================================== */
+
+:host {
+  display: block;
+  padding-top: 70px; /* ~header height + padding */
+}
+
+/* Responsive: Ajustar padding en diferentes tamaños de pantalla */
+@media (max-width: 768px) {
+  :host {
+    padding-top: 65px;
+  }
+}
+
+@media (max-width: 480px) {
+  :host {
+    padding-top: 60px;
+  }
+}

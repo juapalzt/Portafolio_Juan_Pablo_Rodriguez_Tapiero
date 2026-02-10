@@ -15,21 +15,17 @@
     <div class="footer-inner">
       <!-- Branding area -->
       <div class="branding" aria-hidden="false">
-         <div class="meta muted" aria-live="polite">
-          <span class="copyright">© {{ year }}</span>
-          <span class="sep">—</span>
-          <!-- Branding area -->
-      <div class="branding" aria-hidden="false">
         <strong class="brand-name">{{ personalData.fullName }}</strong>
         <div class="muted brand-sub">{{ personalData.profession }}</div>
-      </div>
-        </div>
       </div>
 
       <!-- Center metadata + policies -->
       <div class="center-block">
+        <div class="meta muted" aria-live="polite">
+          <span class="copyright">© {{ year }}</span>
+          <small>— Todos los derechos reservados.</small>
+        </div>
         <div class="policies muted" aria-hidden="false">
-          <small>Todos los derechos reservados.</small>
           <small class="policy-links">&nbsp;·&nbsp;
             <a routerLink="/privacy" class="link">Política de privacidad</a>
             &nbsp;·&nbsp;

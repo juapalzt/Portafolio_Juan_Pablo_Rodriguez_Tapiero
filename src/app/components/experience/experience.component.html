@@ -1,54 +1,46 @@
-<!-- 
-  ===================================
-  COMPONENTE: Experience (Experiencia Profesional)
-  ===================================
-  Muestra el historial laboral en formato timeline moderno con:
-  - Logo/icono de empresa (placeholder)
-  - Nombre de empresa, cargo y duración
-  - Período de empleo con indicador visual (fechas)
-  - Lista de responsabilidades/logros principales
-  - Estructura semántica (section, article, time) y ARIA para accesibilidad
-  - Responsive: layout horizontal en desktop, vertical en móvil
-  - Tema claro/oscuro: colores adaptativos con variables CSS
--->
+<!-- ========================================
+  COMPONENTE: Experiencia Profesional
+  
+  Sección que muestra:
+  - Timeline de experiencia laboral
+  - Empresa, cargo y duración
+  - Responsabilidades principales
+  - Accesibilidad: ARIA labels
+======================================== -->
 
-<!-- Sección principal de Experiencia Profesional -->
 <section id="experience" class="experience-section" role="region" aria-labelledby="exp-title">
-  <!-- Encabezado de sección con título principal -->
+  <!-- Encabezado -->
   <header class="section-header">
-    <h2 id="exp-title">Experiencia Profesional</h2>
+    <div class="header-wrapper">
+      <h2 id="exp-title">Experiencia Profesional</h2>
+      <div class="accent-line"></div>
+    </div>
     <p class="section-subtitle">Historial laboral y roles destacados</p>
   </header>
 
-  <!-- Timeline contenedor: lista semántica con rol="list" -->
-  <div class="experience-timeline" role="list" aria-label="Timeline de experiencia profesional">
-    
-    <!-- Iteración sobre experiencia laboral desde datos centralizados -->
-    <article *ngFor="let job of personalData.workExperience; let i = index" class="experience-item" role="listitem">
-      <!-- Indicador visual del timeline (círculo) -->
-      <div class="timeline-marker" aria-hidden="true"></div>
-      
-      <!-- Contenedor del contenido -->
-      <div class="experience-content">
-        <!-- Encabezado: empresa, cargo y duración -->
-        <header class="experience-header">
-          <div class="experience-title-group">
-            <h3 class="experience-company">{{ job.company }}</h3>
-            <p class="experience-role">{{ job.position }}</p>
+  <!-- Timeline de experiencia -->
+  <div class="experience-timeline">
+    <div *ngFor="let job of personalData.workExperience; let i = index" class="timeline-item">
+      <div class="timeline-marker" [attr.aria-label]="'Experiencia ' + (i + 1) + ' de ' + personalData.workExperience.length"></div>
+      <div class="timeline-content">
+        <div class="job-card">
+          <div class="job-header">
+            <div class="job-info">
+              <h3 class="company-title">{{ job.company }}</h3>
+              <p class="job-position">{{ job.position }}</p>
+            </div>
+            <time class="job-date" [attr.datetime]="job.startDate + '/' + job.endDate">
+              {{ job.startDate }} - {{ job.endDate }}
+            </time>
           </div>
-          <time class="experience-duration" [attr.datetime]="job.startDate + '/' + job.endDate">
-            <span class="duration-badge">{{ job.startDate }} - {{ job.endDate }}</span>
-          </time>
-        </header>
-
-        <!-- Descripción y responsabilidades -->
-        <div class="experience-body">
-          <ul class="experience-tasks" aria-label="Responsabilidades y logros">
-            <li *ngFor="let responsibility of job.responsibilities">{{ responsibility }}</li>
-          </ul>
+          
+          <div class="job-body">
+            <ul class="job-tasks" aria-label="Responsabilidades y logros">
+              <li *ngFor="let responsibility of job.responsibilities">{{ responsibility }}</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </article>
-
+    </div>
   </div>
 </section>

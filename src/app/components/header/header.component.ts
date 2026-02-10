@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isDark = true;
   mobileMenuOpen = false;
   actionsMenuOpen = false;
+  showScrollToTop = false;
   @ViewChild('mobileMenuRef', { static: false }) mobileMenuRef?: ElementRef<HTMLElement>;
   @ViewChild('mobileBackdropRef', { static: false }) mobileBackdropRef?: ElementRef<HTMLElement>;
 
@@ -181,6 +182,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (ev.ctrlKey && (ev.key === 'd' || ev.key === 'D')) {
       ev.preventDefault();
       this.toggleDevButtonVisibility();
+    }
+  }
+
+  /**
+   * Listener para detectar scroll y mostrar/ocultar botón "Scroll to Top"
+   * Se activa cuando el usuario hace scroll más de 200px hacia abajo
+   */
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollTop = typeof window !== 'undefined' ? window.pageYOffset || document.documentElement.scrollTop : 0;
+    this.showScrollToTop = scrollTop > 200;
+  }
+
+  /**
+   * Desplazamiento suave hacia el inicio de la página
+   * Utiliza comportamiento smooth nativo del navegador
+   */
+  scrollToTop() {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     }
   }
 

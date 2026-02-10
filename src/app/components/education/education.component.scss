@@ -22,18 +22,25 @@
 /* ========== Encabezado de la sección ========== */
 .section-header {
   margin-bottom: 3rem;
+  text-align: center;
 }
 
 .header-wrapper {
   position: relative;
   margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .section-header h2 {
   font-size: 2.2rem;
   font-weight: 800;
   margin: 0;
-  color: var(--text-color);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   letter-spacing: -0.5px;
 
   @media (max-width: 768px) {
@@ -51,14 +58,13 @@
 }
 
 .accent-line {
-  position: absolute;
-  bottom: -0.5rem;
-  left: 0;
+  position: relative;
   width: 60px;
   height: 4px;
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   border-radius: 2px;
   animation: slideInLeft 0.8s ease-out;
+  margin-top: 0.5rem;
 }
 
 @keyframes slideInLeft {
@@ -326,6 +332,14 @@
   .education-section {
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .section-header {
+    text-align: center;
   }
 
   .section-header h2 {

@@ -67,10 +67,10 @@
     <figure class="hero-image-container">
       <!-- Imagen de perfil con lazy loading -->
       <img 
-        src="Foto.jpg" 
+        src="/assets/img/Foto.jpg" 
         alt="Foto de perfil de Juan Pablo Rodríguez Tapiero"
         class="profile-img" 
-        loading="lazy"
+        loading="eager"
         decoding="async"
         (click)="openImagePreview()"
         role="button"
@@ -109,7 +109,7 @@
     
     <!-- Imagen ampliada en el modal -->
     <img 
-      src="Foto.jpg" 
+      src="/assets/img/Foto.jpg" 
       alt="Vista previa ampliada de foto de perfil" 
       class="modal-image"
       loading="lazy"

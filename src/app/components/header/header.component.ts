@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit, HostBinding, HostListener, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-header',
@@ -34,9 +33,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   /**
    * @param document Inyectamos `DOCUMENT` para manipular las clases/variables CSS en el elemento raíz.
-   * @param languageService Servicio de idiomas para inicializar/cambiar el idioma.
    */
-  constructor(@Inject(DOCUMENT) private document: Document, private languageService: LanguageService) {}
+  constructor(@Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit(): void {
     // Inicialización del componente: detectar tema guardado y aplicar variables.
@@ -211,14 +209,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // cleanup moved nodes if component is destroyed
     this._removeMovedMobileNodes();
-  }
-
-  // Language helpers
-  get currentLanguage() { return this.languageService?.language || 'es'; }
-
-  setLanguage(lang: 'es'|'en') {
-    // Cambia el idioma a través del servicio de idiomas.
-    try { this.languageService.changeLanguage(lang); } catch { /* ignore */ }
   }
 
   private applyTheme(theme: 'dark'|'light') {

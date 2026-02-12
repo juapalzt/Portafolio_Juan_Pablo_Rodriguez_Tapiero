@@ -1,0 +1,63 @@
+/* ============================================================================
+   HOME PAGE STYLES
+   ============================================================================
+   Estilos de la página principal incluyendo el botón flotante scroll-to-top.
+   ========================================================================== */
+
+/* --- BOTÓN FLOTANTE SCROLL TO TOP --- */
+.scroll-to-top-btn {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(15, 111, 191, 0.3);
+  transition: all 300ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(calc(-50% - 20px)) scale(0.8);
+  z-index: 99;
+}
+
+.scroll-to-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
+}
+
+.scroll-to-top-btn:hover {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 8px 24px rgba(15, 111, 191, 0.4);
+}
+
+.scroll-to-top-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Responsive: Ajustar tamaño en móviles */
+@media (max-width: 768px) {
+  .scroll-to-top-btn {
+    width: 45px;
+    height: 45px;
+    right: 15px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-to-top-btn {
+    width: 42px;
+    height: 42px;
+    right: 12px;
+    font-size: 1.1rem;
+  }
+}

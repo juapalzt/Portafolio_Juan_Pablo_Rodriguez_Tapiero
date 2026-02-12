@@ -16,14 +16,6 @@
           <li><a href="#contact" (click)="closeMobileMenu()">Contacto</a></li>
           <li><a href="Hoja_de_vida_Juan_Pablo_Rodriguez.pdf" download class="card" style="padding:0.4rem 0.8rem;">Descargar CV</a></li>
 
-          <!-- Selector de idioma-->
-           <!--<li>
-            <div style="display:flex;gap:0.35rem;align-items:center">
-              <button (click)="setLanguage('es')" [class.active]="currentLanguage==='es'" class="theme-toggle-btn" aria-label="Cambiar a Español">ES</button>
-              <button (click)="setLanguage('en')" [class.active]="currentLanguage==='en'" class="theme-toggle-btn" aria-label="Change to English">EN</button>
-            </div>
-          </li> -->
-
           <!-- Cambiar tema -->
           <li>
             <button (click)="toggleTheme()" class="theme-toggle-btn" aria-label="Cambiar tema">
@@ -64,17 +56,8 @@
       <!-- Divisor visual -->
       <hr class="mobile-menu-divider">
 
-      <!-- Sección de controles (idioma y tema) -->
+      <!-- Sección de controles (tema) -->
       <div class="mobile-menu-controls">
-        <!-- Selector de idioma -->
-        <div class="control-group">
-          <span class="control-label">Idioma:</span>
-          <div class="language-buttons">
-            <button (click)="setLanguage('es'); closeMobileMenu()" [class.active]="currentLanguage==='es'" class="theme-toggle-btn" aria-label="Cambiar a Español">ES</button>
-            <button (click)="setLanguage('en'); closeMobileMenu()" [class.active]="currentLanguage==='en'" class="theme-toggle-btn" aria-label="Change to English">EN</button>
-          </div>
-        </div>
-
         <!-- Cambiar de tema -->
         <div class="control-group">
           <span class="control-label">Tema:</span>

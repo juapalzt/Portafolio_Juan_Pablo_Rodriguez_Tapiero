@@ -24,14 +24,14 @@ export class ProjectsService {
         description: 'Framework de pruebas E2E con Selenium e integración CI.',
         technologies: ['Selenium', 'Java', 'GitHub Actions'],
         repo: `https://github.com/${githubUser}/automation-suite`,
-        image: '/assets/img/project-1.svg'
+        image: '/assets/img/github.png'
       },
       {
         title: 'Angular Portfolio',
         description: 'Portafolio moderno construido con Angular y SCSS.',
         technologies: ['Angular', 'SCSS', 'Vercel'],
         repo: `https://github.com/${githubUser}/mi-portafolio`,
-        image: '/assets/img/project-2.svg'
+        image: '/assets/img/Foto.jpg'
       }
     ];
   }
